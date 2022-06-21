@@ -2,7 +2,7 @@ const { Router } = require('express');
 const {Product} = require('../db')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {orderName} = require('../controllers/orders')
+const {priceOrder} = require('../controllers/priceOrder')
 
 
 const router = Router();
@@ -43,6 +43,6 @@ router.put("/ProductDetail/:idProduct", async (req, res) => {
     }
 })
 
-router.get('/order/:nameOrder', orderName)
+router.get('/order/:priceOrder', priceOrder)
 
 module.exports = router;
