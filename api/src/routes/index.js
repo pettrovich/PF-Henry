@@ -2,6 +2,7 @@ const { Router } = require('express');
 const {Product} = require('../db')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
+const {orderName} = require('../controllers/orders')
 
 
 const router = Router();
@@ -41,5 +42,7 @@ router.put("/ProductDetail/:idProduct", async (req, res) => {
         res.status(404).send("No se pudo actualizar el producto")
     }
 })
+
+router.get('/order/nameOrder', orderName)
 
 module.exports = router;
