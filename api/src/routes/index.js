@@ -43,6 +43,6 @@ router.put("/ProductDetail/:idProduct", async (req, res) => {
     }
 })
 
-router.get('/order/nameOrder', orderName)
+router.get('/order/:nameOrder', orderName)
 
 module.exports = router;
