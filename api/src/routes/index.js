@@ -7,6 +7,7 @@ const {filterCategories} = require('../controllers/filterCategories')
 const {getProduct} = require("../controllers/getProductByName");
 const { createProduct } = require('../controllers/createProduct');
 const { updateProduct } = require('../controllers/updateProduct');
+const { getProductById } = require('../controllers/getProductById');
 
 
 const router = Router();
@@ -15,6 +16,8 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 
 router.post("/CreateProduct", createProduct)
+
+router.get("/ProductDetail/:idProduct", getProductById)
 
 router.put("/ProductDetail/:idProduct", updateProduct)
 
