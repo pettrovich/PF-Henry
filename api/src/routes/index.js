@@ -4,6 +4,7 @@ const {Product} = require('../db')
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/priceOrder')
 const {filterCategories} = require('../controllers/filterCategories')
+const {getProduct} = require("../controllers/getProductByName")
 
 
 const router = Router();
@@ -47,5 +48,7 @@ router.put("/ProductDetail/:idProduct", async (req, res) => {
 router.get('/order/:priceOrder', priceOrder)
 
 router.get('/filter/:filterCategory', filterCategories)
+
+router.get("/Catalog", getProduct)
 
 module.exports = router;
