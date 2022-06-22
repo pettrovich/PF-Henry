@@ -3,6 +3,7 @@ const {Product} = require('../db')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/priceOrder')
+const {filterCategories} = require('../controllers/filterCategories')
 
 
 const router = Router();
@@ -44,5 +45,7 @@ router.put("/ProductDetail/:idProduct", async (req, res) => {
 })
 
 router.get('/order/:priceOrder', priceOrder)
+
+router.get('/filter/:filterCategory', filterCategories)
 
 module.exports = router;
