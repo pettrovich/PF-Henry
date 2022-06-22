@@ -15,7 +15,8 @@ module.exports = (sequelize) => {
     },
     dni: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     email: {
         type: DataTypes.STRING,
@@ -26,7 +27,7 @@ module.exports = (sequelize) => {
         unique: true
       },
     celphone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false
     },
     isAdmin: {
@@ -42,5 +43,8 @@ module.exports = (sequelize) => {
         type: DataTypes.TEXT,
         allowNull: false,
     },
+    description: {
+      type: DataTypes.TEXT,
+    }
   });
 };
