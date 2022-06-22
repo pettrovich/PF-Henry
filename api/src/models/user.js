@@ -42,9 +42,6 @@ module.exports = (sequelize) => {
     password: {
         type: DataTypes.TEXT,
         allowNull: false,
-    },
-    description: {
-      type: DataTypes.TEXT,
     }
   });
 };

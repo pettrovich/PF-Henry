@@ -24,6 +24,9 @@ module.exports = (sequelize) => {
     },
     apartment: {
       type: DataTypes.STRING
+    },
+    description: {
+      type: DataTypes.TEXT,
     }
   });
 };
