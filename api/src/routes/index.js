@@ -1,15 +1,17 @@
-const { Router } = require('express');
+const {Router} = require('express');
 const {Product} = require('../db')
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/priceOrder')
 const {filterCategories} = require('../controllers/filterCategories')
-
-
-const router = Router();
+const usersRoute = require ('./users');
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use("/users", usersRoute);
+
+const router = Router();
 
 router.post("/CreateProduct", async (req, res) => {
     const {name, image, price, description, categories, stock} = req.body
