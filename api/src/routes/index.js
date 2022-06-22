@@ -7,6 +7,8 @@ const {filterCategories} = require('../controllers/filterCategories')
 const {getProduct} = require("../controllers/getProductByName");
 const { createProduct } = require('../controllers/createProduct');
 const { updateProduct } = require('../controllers/updateProduct');
+const { getProductById } = require('../controllers/getProductById');
+const {userPost} = require('../controllers/userPost')
 
 
 const router = Router();
@@ -16,6 +18,8 @@ const router = Router();
 
 router.post("/CreateProduct", createProduct)
 
+router.get("/ProductDetail/:idProduct", getProductById)
+
 router.put("/ProductDetail/:idProduct", updateProduct)
 
 router.get('/order/:priceOrder', priceOrder)
@@ -23,5 +27,7 @@ router.get('/order/:priceOrder', priceOrder)
 router.get('/filter/:filterCategory', filterCategories)
 
 router.get("/Catalog", getProduct)
+
+router.post('/user', userPost)
 
 module.exports = router;
