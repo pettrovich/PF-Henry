@@ -41,7 +41,7 @@ User.belongsToMany(Product, {through: "Cart"})
 Product.belongsToMany(User, {through: "Favourite"})
 User.belongsToMany(Product, {through: "Favourite"})
 
-User.hasOne(Address)
+User.hasOne(Address, {onDelete: 'CASCADE'})
 Address.belongsTo(User)
 
 module.exports = {
