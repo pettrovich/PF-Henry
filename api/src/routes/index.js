@@ -9,14 +9,13 @@ const { createProduct } = require('../controllers/createProduct');
 const { updateProduct } = require('../controllers/updateProduct');
 const { getProductById } = require('../controllers/getProductById');
 const {userPost} = require('../controllers/userPost')
-
 const usersRoute = require ('./users');
-router.use("/users", usersRoute);
 
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use("/users", usersRoute);
 
 router.post("/CreateProduct", createProduct)
 
