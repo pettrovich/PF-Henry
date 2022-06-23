@@ -4,7 +4,7 @@ import Navbar from './components/navbar/Navbar';
 import Products from './components/products/Products';
 import Carrito from './components/carrito/Carrito';
 import LandingPage from './components/landingPage/LandingPage';
-import DetailProduct from './components/detallesDelProducto/DetallesDelProducto';
+import DetailProduct from './components/DetallesDelProducto/DetallesDelProducto';
 
 function App() {
   return (

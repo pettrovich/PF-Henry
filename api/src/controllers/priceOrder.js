@@ -1,8 +1,8 @@
-const {product} = require('../db')
+const {Product} = require('../db')
 
 const priceOrder = async (req, res) => {
     let priceOrder = req.params.priceOrder;
-    const allProducts = await product.findAll()
+    const allProducts = await Product.findAll()
 
     try {
         if(priceOrder === 'ASC')
