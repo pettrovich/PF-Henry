@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-//import { getUserByName } from "../../redux/actions";
-import style from '../Buscador/Buscador.module.css';
+import { getProductByName } from "../../redux/actions";
+import style from './Buscador.module.css';
 
 const Buscador = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Buscador = () => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(Buscador(producto));
+    dispatch(getProductByName(producto));
     setProducto("");
   }
   return (
