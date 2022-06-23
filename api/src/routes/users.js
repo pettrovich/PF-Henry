@@ -58,6 +58,17 @@ router.get('/:username/address', async (req,res) => {
     }
 });
 
+router.get('/:username/favourites', async (req,res) => {
+    // const {username} = req.params;
+    // try {
+    //     const address= await getAddressByUsername(username,res);
+    //     return res.json(address);
+    // }
+    // catch (err) {
+    //     res.status(404).send(`No se pudo cargar la información de la dirección (${err})`)
+    // }
+});
+
 router.put('/:username', async (req,res) => {
     const {username} = req.params;
     const userData = req.body;
@@ -92,3 +103,5 @@ router.delete('/:username', async (req,res) => {
         res.status(404).send(`No se pudo eliminar el usuario (${err})`)
     }
 });
+
+module.exports = router;
