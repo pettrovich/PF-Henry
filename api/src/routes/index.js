@@ -28,6 +28,6 @@ router.get('/filter/:filterCategory', filterCategories)
 
 router.get("/Catalog", getProduct)
 
-//router.post('/user', userPost)
+router.post('/user', userPost)
 
 module.exports = router;
