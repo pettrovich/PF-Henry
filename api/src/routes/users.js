@@ -7,7 +7,7 @@ router.post('/', async (req,res) => {
     const {address, number, zipCode, country, houseType} = req.body;
     const {name, lastName, dni, email, celphone, username, password} = req.body;
     try {
-        const userAddress = await createAddress(address, number, zipCode, country, houseType);
+        const userAddress = await createAddress(address, number, zipCode, province, location, apartment, description);
         const user = await createUser(name, lastName, dni, email, celphone, username, password, false, userAddress);
         return res.status(201).json(user);
     }
@@ -58,6 +58,17 @@ router.get('/:username/address', async (req,res) => {
     }
 });
 
+router.get('/:username/favourites', async (req,res) => {
+    // const {username} = req.params;
+    // try {
+    //     const address= await getAddressByUsername(username,res);
+    //     return res.json(address);
+    // }
+    // catch (err) {
+    //     res.status(404).send(`No se pudo cargar la información de la dirección (${err})`)
+    // }
+});
+
 router.put('/:username', async (req,res) => {
     const {username} = req.params;
     const userData = req.body;
@@ -92,3 +103,5 @@ router.delete('/:username', async (req,res) => {
         res.status(404).send(`No se pudo eliminar el usuario (${err})`)
     }
 });
+
+module.exports = router;

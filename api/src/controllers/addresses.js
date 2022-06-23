@@ -1,15 +1,15 @@
 const {Address} = require('../db');
 
-async function createAddress (address, number, zipCode, country, houseType) {
-    if (!(address && number && zipCode && country && houseType))
+async function createAddress (address, number, zipCode, province, location, apartment, description) {
+    if (!(address && zipCode && province))
         throw new Error('Falta enviar datos obligatorios de la dirección');
-    const newAddress = await Address.create({address, number, zipCode, country, houseType});
+    const newAddress = await Address.create({address, number, zipCode, province, location, apartment, description});
     return newAddress;
 }
 
 async function getAddressByUsername(username) {
     const where = {username};
-    const attributes = ['address','number', 'zipcode', 'country', 'housetype'];
+    const attributes = ['address', 'number', 'zipCode', 'province', 'location', 'apartment', 'description'];
     const userAddress = await User.findOne({
         where,
         include: {
@@ -22,7 +22,7 @@ async function getAddressByUsername(username) {
 
 async function updateAdress(username,addressData) {
     const userAddress = getAddressByUsername(username);
-    await userAddress.update(userData);
+    await userAddress.update(addressData);
     return userAddress;
 }
 
