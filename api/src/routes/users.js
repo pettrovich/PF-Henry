@@ -7,7 +7,7 @@ router.post('/', async (req,res) => {
     const {address, number, zipCode, country, houseType} = req.body;
     const {name, lastName, dni, email, celphone, username, password} = req.body;
     try {
-        const userAddress = await createAddress(address, number, zipCode, country, houseType);
+        const userAddress = await createAddress(address, number, zipCode, province, location, apartment, description);
         const user = await createUser(name, lastName, dni, email, celphone, username, password, false, userAddress);
         return res.status(201).json(user);
     }
