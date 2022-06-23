@@ -10,6 +10,8 @@ const { updateProduct } = require('../controllers/updateProduct');
 const { getProductById } = require('../controllers/getProductById');
 const {userPost} = require('../controllers/userPost')
 
+const usersRoute = require ('./users');
+router.use("/users", usersRoute);
 
 const router = Router();
 
