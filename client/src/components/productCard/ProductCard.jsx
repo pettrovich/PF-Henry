@@ -1,7 +1,7 @@
 import React from 'react';
 import { addProductCarrito } from '../../redux/actions/carritoA';
 import { connect, useSelector } from 'react-redux';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import style from './assets/ProductCard.module.css'
 
 function ProductCard({ name, image, price, description, category, stock, id, addProductCarrito }) {
@@ -25,10 +25,10 @@ function ProductCard({ name, image, price, description, category, stock, id, add
     return (
         <div id={id} className={style.card}>
             {/* <div className={style.cardImg}> */}
-            <img src={image} className={style.cardImg} alt='Imagen producto' max-width='170px' />
+            <Link className={style.linkTo} to={`/detail/${id}`}><img src={image} className={style.cardImg} alt='Imagen producto' max-width='170px' /></Link>
             {/* </div> */}
             <div className={style.cardInfo}>
-                <p className={style.textTitle}>{name}</p>
+                <Link to={`/detail/${id}`} className={style.linkTo}><p className={style.textTitle}>{name}</p></Link>
                 <p className={style.textBody}>{description}</p>
             </div>
             <div className={style.footer}>
@@ -45,7 +45,6 @@ function ProductCard({ name, image, price, description, category, stock, id, add
             {/* <p>Categoría: {category}</p>
             <p>Stock: {stock}</p> */}
             {/* <button onClick={handleCarrito}>Añadir a carrito</button> */}
-            {/* <Link to={`/detail/${id}`}>Detail product</Link> */}
         </div>
     )
 }

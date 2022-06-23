@@ -70,3 +70,8 @@ svg {
     border: 1px solid #ffcaa6;
     background-color: var(--navbar-bg-color);
 }
+
+.linkTo {
+    text-decoration: none;
+    color: black;
+}
