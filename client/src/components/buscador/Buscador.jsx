@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { getProductByName } from "../../redux/actions/productName";
-import style from './Buscador.module.css';
+import style from './assets/Buscador.module.css';
 
 const Buscador = () => {
   const location = useLocation();
@@ -25,8 +25,6 @@ const Buscador = () => {
     setProducto("");
   }
 
-
-  // console.log(location.pathname)
   function isInProducts(e) {
     if (location.pathname !== '/products') {
       return (
