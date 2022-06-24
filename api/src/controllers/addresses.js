@@ -9,21 +9,15 @@ async function createAddress (address, number, zipCode, province, location, apar
 
 async function getAddress(username) {
     const where = {username};
-    const attributes = ['address', 'number', 'zipCode', 'province', 'location', 'apartment', 'description'];
-    const userAddress = await User.findOne({
-        where,
-        include: {
-            model: Address,
-            attributes: attributes
-        }
-    });
-    return userAddress;
+    const user = await User.findOne({where});
+    if (!user) throw new Error('El usuario no existe en la base de datos.');
+    return user.getAddress();
 }
 
 async function updateAddress(username,addressData) {
-    const userAddress = getAddressByUsername(username);
-    await userAddress.update(addressData);
-    return userAddress;
+    const userAddress = getAddress(username);
+    userAddress.set(addressData);
+    return await userAddress.save();
 }
 
 module.exports={
