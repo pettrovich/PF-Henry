@@ -1,10 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-<<<<<<< HEAD
 import { NavLink, useLocation, Link } from 'react-router-dom';
-=======
-import { NavLink, useLocation, Link } from 'react-router-dom';
->>>>>>> 534d19d6a5d75e88d8a8592094963296d39b593d
 import Buscador from '../buscador/Buscador'
 import style from './assets/Navbar.module.css';
 import shopCart from './assets/shop-cart.svg'
