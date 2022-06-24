@@ -2,12 +2,17 @@ const {Product} = require("../db")
 const {Op} = require('sequelize')
 
 async function getProductByName (name) {
-    let products = await Product.findAll({ 
+    let products = await Product.findAll({
         where: {
-            disabled: false,
-            name:{
-                [Op.substring]:`${name}`
-            }
+            [Op.and]: [
+                {stock: {
+                    [Op.ne]: 0,
+                }},
+                {disabled: false},
+                {name:{
+                    [Op.iLike]:`%${name}%`
+                }}
+            ]
         },
     })
     return products
@@ -22,7 +27,12 @@ const getProduct = async (req, res) =>{
     }
     let products = await Product.findAll({
         where: {
-            disabled: false
+            [Op.and]: [
+                {stock: {
+                    [Op.ne]: 0,
+                }},
+                {disabled: false},
+            ]
         }
     })
     res.json(products)        
