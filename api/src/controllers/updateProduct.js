@@ -10,7 +10,11 @@ const updateProduct = async (req, res) => {
                 id: idProduct
             }
         }))
-        res.send(`Producto actualizado`)
+        if(product.disabled === true){
+            res.send(`Producto Deshabilitado`)
+        }else{
+            res.send(`Producto actualizado`)
+        }
     } catch (error) {
         res.status(404).send("No se pudo actualizar el producto")
     }
