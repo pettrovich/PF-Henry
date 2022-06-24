@@ -35,11 +35,11 @@ const { Product, User, Address } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Product.belongsToMany(User, {through: "Cart"})
-User.belongsToMany(Product, {through: "Cart"})
+Product.belongsToMany(User, {as: 'cartUser', through: "Cart"})
+User.belongsToMany(Product, {as: 'cartProduct', through: "Cart"})
 
-Product.belongsToMany(User, {through: "Favourite"})
-User.belongsToMany(Product, {through: "Favourite"})
+Product.belongsToMany(User, {as: 'favouriteUser', through: "Favourite"})
+User.belongsToMany(Product, {as: 'favouriteProduct', through: "Favourite"})
 
 User.hasOne(Address, {onDelete: 'CASCADE'})
 Address.belongsTo(User)
