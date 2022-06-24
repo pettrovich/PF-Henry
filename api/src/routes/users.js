@@ -1,5 +1,6 @@
 const {Router} = require('express');
-const {createAddress, getAddressByUsername, updateAddress} = require("../controllers/addresses");
+const {addFavourite, getFavourites} = require("../controllers/favourites");
+const {createAddress, getAddress, updateAddress} = require("../controllers/addresses");
 const {createUser, getAdminUsers, getNonAdminUsers, getUserByUsername,updateUser} = require("../controllers/users");
 const router = Router();
 
@@ -12,7 +13,7 @@ router.post('/', async (req,res) => {
         return res.status(201).json(user);
     }
     catch (err) {
-        res.status(404).send(`No se pudo crear el usuario (${err})`)
+        return res.status(404).send(`No se pudo crear el usuario (${err})`);
     }
 });
 
@@ -22,7 +23,7 @@ router.get('/', async (req,res) => {
         return res.json(userList);
     }
     catch (err) {
-        res.status(404).send(`No se pudo cargar la lista de usuarios (${err})`)
+        return res.status(404).send(`No se pudo cargar la lista de usuarios (${err})`);
     }
 });
 
@@ -32,7 +33,7 @@ router.get('/admin', async (req,res) => {
         return res.json(adminList);
     }
     catch (err) {
-        res.status(404).send(`No se pudo cargar la lista de usuarios (${err})`)
+        return res.status(404).send(`No se pudo cargar la lista de usuarios (${err})`);
     }
 });
 
@@ -43,30 +44,43 @@ router.get('/:username', async (req,res) => {
         return res.json(user);
     }
     catch (err) {
-        res.status(404).send(`No se pudo cargar la información del usuario (${err})`)
+        return res.status(404).send(`No se pudo cargar la información del usuario (${err})`);
     }
 });
 
 router.get('/:username/address', async (req,res) => {
     const {username} = req.params;
     try {
-        const address= await getAddressByUsername(username,res);
+        const address= await getAddress(username,res);
         return res.json(address);
     }
     catch (err) {
-        res.status(404).send(`No se pudo cargar la información de la dirección (${err})`)
+        return res.status(404).send(`No se pudo cargar la información de la dirección (${err})`);
     }
 });
 
 router.get('/:username/favourites', async (req,res) => {
-    // const {username} = req.params;
-    // try {
-    //     const address= await getAddressByUsername(username,res);
-    //     return res.json(address);
-    // }
-    // catch (err) {
-    //     res.status(404).send(`No se pudo cargar la información de la dirección (${err})`)
-    // }
+    const {username} = req.params;
+    try {
+        const favourites= await getFavourites(username,res);
+        return res.json(favourites);
+    }
+    catch (err) {
+        return res.status(404).send(`No se pudo cargar la información de productos favoritos (${err})`);
+    }
+});
+
+router.post('/:username/addFavourite', async (req,res) => {
+    const {username} = req.params;
+    const {productId} = req.query;
+    try {
+        if (!productId) return res.status(404).send('No se seleccionó ningún producto');
+        // const favourites = await addFavourite(username,res);
+        // return res.json(favourites);
+    }
+    catch (err) {
+        return res.status(404).send(`No se pudo agregar el producto a favoritos (${err})`);
+    }
 });
 
 router.put('/:username', async (req,res) => {
@@ -77,7 +91,7 @@ router.put('/:username', async (req,res) => {
         return res.json(user);
     }
     catch (err) {
-        res.status(404).send(`No se pudo modificar la información del usuario (${err})`)
+        return res.status(404).send(`No se pudo modificar la información del usuario (${err})`);
     }
 });
 
@@ -89,7 +103,7 @@ router.put('/:username/address', async (req,res) => {
         return res.json(address);
     }
     catch (err) {
-        res.status(404).send(`No se pudo modificar la información de la dirección (${err})`)
+        return res.status(404).send(`No se pudo modificar la información de la dirección (${err})`);
     }
 });
 
@@ -100,7 +114,7 @@ router.delete('/:username', async (req,res) => {
         return res.status(204).json(`${rows} usuario eliminado`);
     }
     catch (err) {
-        res.status(404).send(`No se pudo eliminar el usuario (${err})`)
+        return res.status(404).send(`No se pudo eliminar el usuario (${err})`);
     }
 });
 
