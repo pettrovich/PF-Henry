@@ -11,6 +11,7 @@ const {userPost} = require('../controllers/userPost')
 const usersRoute = require ('./users');
 const { adminProducts } = require('../controllers/adminProducts');
 const {filterShipping} = require('../controllers/filterShipping')
+const {filterBrand} = require('../controllers/filterBrand');
 
 const router = Router();
 
@@ -35,5 +36,7 @@ router.post('/user', userPost)
 router.get("/Admin/Catalog", adminProducts)
 
 router.get('/filterShipping/:filterShipping', filterShipping)
+
+router.get('/filterBrand/:filterBrand', filterBrand)
 
 module.exports = router;
