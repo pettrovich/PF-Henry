@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux'
-import './DetallesDelProducto.module.css';
+import style from './assets/DetallesDelProducto.module.css';
 import { getOneProduct } from '../../redux/actions/detailProductA';
 
 
@@ -18,12 +18,12 @@ function Producto({ getOneProduct }) {
 
 
     return (
-        <div className='ProductCard'>
-            <h1 className='NombreProducto'>Producto: {productDetail.name}</h1>
-            <img className='Img' src={productDetail.image} alt='Not found' />
-            <h4 className='Precio'>Precio: {productDetail.price}</h4>
-            <p className='Descripcion'>{productDetail.description}</p>
-            <h5 className='Stock'>Quedan en stock:{productDetail.stock}</h5>
+        <div className={style.ProductCard}>
+            <h1 className={style.NombreProducto}>Producto: {productDetail.name}</h1>
+            <img className={style.Img} src={productDetail.image} alt='Not found' />
+            <h4 className={style.Precio}>Precio: {productDetail.price}</h4>
+            <p className={style.Descripcion}>{productDetail.description}</p>
+            <h5 className={style.Stock}>Quedan en stock:{productDetail.stock}</h5>
             <br />
         </div>
     )
