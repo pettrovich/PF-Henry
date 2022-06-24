@@ -1,15 +1,15 @@
-const {product} = require('../db')
+const {Product} = require('../db')
 
 const filterCategories = async (req, res) => {
     let filterCategory = req.params.filterCategory
     try {
+    let allProducts = await Product.findAll({
+        where: {
+            categories : filterCategory
+        }
+    })
 
-        let allProducts = await product.findAll()
-        const categoriesArr = []
-        allProducts.forEach(e => {
-            if(e.hasOwnProperty('categories') && e.categories.includes(filterCategory)) categoriesArr.push(e)
-        })
-        return res.send(categoriesArr)
+    res.send(allProducts)
     } catch(e) {
         console.log(e)
     }
