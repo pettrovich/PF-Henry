@@ -1,4 +1,4 @@
-const {Address,User} = require('../db');
+const {User} = require('../db');
 
 async function createUser (name, lastName, dni, email, celphone, username, password, isAdmin, userAddress) {
     if (!(name && lastName && dni && email && celphone && username && password))
@@ -6,7 +6,7 @@ async function createUser (name, lastName, dni, email, celphone, username, passw
 
     const user = await User.create({name, lastName, dni, email, celphone, username, password, isAdmin});
     await user.setAddress(userAddress);
-    return user;
+    return await user.save();
 }
 
 async function getAdminUsers() {
@@ -44,11 +44,13 @@ async function updateUser(username,userData) {
     const where = {username};
     let user =  await User.findOne({where});
     if (!user) throw new Error('El usuario no existe en la base de datos.');
-    return user.set(userData);;
+    user.set(userData);
+    return await user.save();
 }
 
 async function deleteUser(username) {
     const where = {username};
+    let user =  await User.findOne({where});
     if (!user) throw new Error('El usuario no existe en la base de datos.');
     return await User.destroy({where});
 }
