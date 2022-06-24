@@ -7,7 +7,7 @@ async function createAddress (address, number, zipCode, province, location, apar
     return newAddress;
 }
 
-async function getAddressByUsername(username) {
+async function getAddress(username) {
     const where = {username};
     const attributes = ['address', 'number', 'zipCode', 'province', 'location', 'apartment', 'description'];
     const userAddress = await User.findOne({
@@ -20,7 +20,7 @@ async function getAddressByUsername(username) {
     return userAddress;
 }
 
-async function updateAdress(username,addressData) {
+async function updateAddress(username,addressData) {
     const userAddress = getAddressByUsername(username);
     await userAddress.update(addressData);
     return userAddress;
@@ -28,6 +28,6 @@ async function updateAdress(username,addressData) {
 
 module.exports={
     createAddress,
-    getAddressByUsername,
-    updateAdress
+    getAddress,
+    updateAddress
 };
