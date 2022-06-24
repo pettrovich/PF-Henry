@@ -1,10 +1,15 @@
 const {Product} = require("../db")
+const {Op} = require('sequelize')
 
 async function getProductByName (name) {
-    let product = await Product.findOne({ 
-        where: {name}
+    let products = await Product.findAll({ 
+        where: {
+            name:{
+                [Op.substring]:`${name}`
+            }
+        },
     })
-    return product
+    return products
 }
 
 const getProduct = async (req, res) =>{
