@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const ORDER_PRICE = 'ORDER_PRICE';
+export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 
 export const getAllProducts = () => {
     return async function (dispatch) {
@@ -15,5 +16,12 @@ export const orderByPrice = (data) => {
         if (data === 'ASC') response = (await axios.get(`/order/${data}`)).data;
         if (data === 'DESC') response = ((await axios.get(`/order/ASC`)).data).reverse()
         return dispatch({ type: ORDER_PRICE, payload: response })
+    }
+}
+
+export const getByCategory = (data) => {
+    return async function (dispatch) {
+        const response = (await axios.get(`/filter/${data}`)).data;
+        return dispatch({ type: FILTER_CATEGORY, payload: response })
     }
 }
