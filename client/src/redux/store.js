@@ -4,13 +4,15 @@ import thunk from 'redux-thunk';
 import carrito from './reducers/carritoR';
 import products from './reducers/productsR';
 import detailProduct from './reducers/detailProductR';
-import productName from './reducers/productNameR';
+import productoscreados from './reducers/createProductR';
+import users from './reducers/createUsers'
 
 const reducer = combineReducers({
     carrito,
     products,
     detailProduct,
-    productName
+    productoscreados,
+    users
 })
 
 export const store = createStore(
