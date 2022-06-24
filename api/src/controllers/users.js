@@ -36,17 +36,20 @@ async function getUserByUsername(username) {
         where,
         attributes
     });
+    if (!user) throw new Error('El usuario no existe en la base de datos.');
     return user;
 }
 
 async function updateUser(username,userData) {
     const where = {username};
-    let user = await User.update(userData, {where});
-    return user;
+    let user =  await User.findOne({where});
+    if (!user) throw new Error('El usuario no existe en la base de datos.');
+    return user.set(userData);;
 }
 
 async function deleteUser(username) {
     const where = {username};
+    if (!user) throw new Error('El usuario no existe en la base de datos.');
     return await User.destroy({where});
 }
 
