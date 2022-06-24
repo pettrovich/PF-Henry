@@ -29,6 +29,7 @@ export default function Navbar() {
     return (
         <>
             <div className={style.navbar}>
+                <NavLink to='/'><div className={style.logo}>LOGO</div></NavLink>
                 <NavLink to='/products' className={style.active}><p className={style.btnProducts}>PRODUCTOS</p></NavLink>
                 <NavLink to='/favoritos' className={style.active}><p className={style.btnProducts}>FAVORITOS</p></NavLink>
                 <Buscador />

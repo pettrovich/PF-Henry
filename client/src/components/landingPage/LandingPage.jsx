@@ -2,7 +2,7 @@ import React from 'react';
 import Carousel from './Carousel';
 import style from './assets/LandingPage.module.css'
 
-const images = ['imagen1.jpg', 'imagen2.jpg', 'imagen3.jpg', 'imagen4.jpg'];
+const images = ['./assets/imagen1.jpg', './assets/imagen2.jpg', './assets/imagen3.jpg', './assets/imagen4.jpg'];
 
 export default function LandingPage() {
     return (
