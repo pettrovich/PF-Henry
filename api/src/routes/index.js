@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const {Product} = require('../db')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/priceOrder')
@@ -10,6 +9,7 @@ const { updateProduct } = require('../controllers/updateProduct');
 const { getProductById } = require('../controllers/getProductById');
 const {userPost} = require('../controllers/userPost')
 const usersRoute = require ('./users');
+const { adminProducts } = require('../controllers/adminProducts');
 
 const router = Router();
 
@@ -30,5 +30,7 @@ router.get('/filter/:filterCategory', filterCategories)
 router.get("/Catalog", getProduct)
 
 router.post('/user', userPost)
+
+router.get("/Admin/Catalog", adminProducts)
 
 module.exports = router;
