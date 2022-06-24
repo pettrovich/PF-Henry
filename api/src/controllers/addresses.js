@@ -16,7 +16,8 @@ async function getAddress(username) {
 
 async function updateAddress(username,addressData) {
     const userAddress = getAddress(username);
-    return await userAddress.set(addressData);
+    userAddress.set(addressData);
+    return await userAddress.save();
 }
 
 module.exports={

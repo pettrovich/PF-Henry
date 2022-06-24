@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const {addFavourite, getFavourites} = require("../controllers/favourites");
+const {addFavourite, getFavourites, removeFavourite} = require("../controllers/favourites");
 const {createAddress, getAddress, updateAddress} = require("../controllers/addresses");
 const {createUser, getAdminUsers, getNonAdminUsers, getUserByUsername,updateUser} = require("../controllers/users");
 const router = Router();
@@ -40,7 +40,7 @@ router.get('/admin', async (req,res) => {
 router.get('/:username', async (req,res) => {
     const {username} = req.params;
     try {
-        const user= await getUserByUsername(username,res);
+        const user= await getUserByUsername(username);
         return res.json(user);
     }
     catch (err) {
@@ -51,7 +51,7 @@ router.get('/:username', async (req,res) => {
 router.get('/:username/address', async (req,res) => {
     const {username} = req.params;
     try {
-        const address= await getAddress(username,res);
+        const address= await getAddress(username);
         return res.json(address);
     }
     catch (err) {
@@ -62,7 +62,7 @@ router.get('/:username/address', async (req,res) => {
 router.get('/:username/favourites', async (req,res) => {
     const {username} = req.params;
     try {
-        const favourites= await getFavourites(username,res);
+        const favourites= await getFavourites(username);
         return res.json(favourites);
     }
     catch (err) {
@@ -75,11 +75,37 @@ router.post('/:username/addFavourite', async (req,res) => {
     const {productId} = req.query;
     try {
         if (!productId) return res.status(404).send('No se seleccionó ningún producto');
-        // const favourites = await addFavourite(username,res);
-        // return res.json(favourites);
+        const product = await addFavourite(username);
+        return res.json(product);
     }
     catch (err) {
         return res.status(404).send(`No se pudo agregar el producto a favoritos (${err})`);
+    }
+});
+
+router.post('/:username/addFavourite', async (req,res) => {
+    const {username} = req.params;
+    const {productId} = req.query;
+    try {
+        if (!productId) return res.status(404).send('No se seleccionó ningún producto');
+        const favourites = await addFavourite(username);
+        return res.json(favourites);
+    }
+    catch (err) {
+        return res.status(404).send(`No se pudo agregar el producto a favoritos (${err})`);
+    }
+});
+
+router.post('/:username/removeFavourite', async (req,res) => {
+    const {username} = req.params;
+    const {productId} = req.query;
+    try {
+        if (!productId) return res.status(404).send('No se seleccionó ningún producto');
+        const favourites = await removeFavourite(username);
+        return res.json(favourites);
+    }
+    catch (err) {
+        return res.status(404).send(`No se pudo eliminar el producto de los favoritos (${err})`);
     }
 });
 
