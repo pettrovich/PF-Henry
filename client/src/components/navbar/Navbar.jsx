@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import Buscador from '../Buscador/Buscador'
+import Buscador from '../buscador/Buscador'
 import style from './assets/Navbar.module.css';
 import shopCart from './assets/shop-cart.svg'
 import account from './assets/account-circle.svg'
