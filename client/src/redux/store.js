@@ -5,12 +5,14 @@ import carrito from './reducers/carritoR';
 import products from './reducers/productsR';
 import detailProduct from './reducers/detailProductR';
 import productoscreados from './reducers/createProductR';
+import users from './reducers/createUsers'
 
 const reducer = combineReducers({
     carrito,
     products,
     detailProduct,
-    productoscreados
+    productoscreados,
+    users
 })
 
 export const store = createStore(
