@@ -6,7 +6,7 @@ export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 
 export const getAllProducts = () => {
     return async function (dispatch) {
-        const response = (await axios.get('/Catalog')).data;
+        const response = (await axios.get('/catalog')).data;
         return dispatch({ type: GET_ALL_PRODUCTS, payload: response })
     }
 }
