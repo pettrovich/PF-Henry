@@ -4,7 +4,7 @@ import { useSelector, connect } from 'react-redux';
 import { getAllProducts } from '../../redux/actions/productsA';
 import style from './assets/Products.module.css';
 import Filtrado from './Filtrado'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function Products({ getAllProducts }) {
     const products = useSelector((state) => state.products.products);
@@ -19,8 +19,8 @@ function Products({ getAllProducts }) {
         <div className={style.body}>
             <div className={style.container}>
                 <h1>Products</h1>
-                <Filtrado />
-                <Link to='/createProduct'><button>Crear producto</button></Link>
+                <div className={style.containerFilter}><Filtrado /></div>
+                {/* <Link to='/createProduct'><button>Crear producto</button></Link> */}
                 <div className={style.containerCards}>
                     {products.map(e => {
                         return (
