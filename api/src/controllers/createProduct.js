@@ -1,7 +1,7 @@
 const {Product} = require("../db")
 
 const createProduct = async (req, res) => {
-    const {name, image, price, description, categories, stock, freeShipping, brand} = req.body
+    const {name, image, price, description, categories, stock, disabled, freeShipping, brand} = req.body
     try {
         await Product.create({
             name,
@@ -10,6 +10,7 @@ const createProduct = async (req, res) => {
             description,
             categories,
             stock,
+            disabled,
             freeShipping,
             brand
         })
