@@ -15,6 +15,7 @@ const {filterBrand} = require('../controllers/filterBrand');
 const {filterStockProduct} = require('../controllers/filterStockProducts')
 const {filterDisabled} = require('../controllers/filterDisabled')
 const {filterEyS} = require('../controllers/filterEyS')
+const {filterPriceRange} = require('../controllers/filterPriceRange')
 
 
 const router = Router();
@@ -48,6 +49,8 @@ router.get('/filterStock/:filterStock', filterStockProduct)
 router.get('/filterDisabled/:filterDisabled', filterDisabled)
 
 router.get('/filterEyS/:filterEyS', filterEyS)
+
+router.get('/filterPriceRange/:filterPrice', filterPriceRange)
 
 
 
