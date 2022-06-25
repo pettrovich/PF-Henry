@@ -8,6 +8,7 @@ import DetailProduct from './components/detallesDelProducto/DetallesDelProducto'
 import CreateProduct from './components/createProduct/CreateProduct';
 import Login from "./components/login/Login";
 import CreateAccount from "./components/createAccount/CreateAccount";
+import PerfilDelUsuario from "./components/PerfilDelUsuario/PerfilDelUsuario";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
         <Route path="carrito" element={<Carrito />} />
         <Route path="/detail/:id" element={<DetailProduct />} />
         <Route path="createProduct" element={<CreateProduct />} />
-          <Route path="login" element={<Login />} />
-          <Route path="/createAccount" element={<CreateAccount />} />
+        <Route path="login" element={<Login />} />
+        <Route path="/createAccount" element={<CreateAccount />} />
+        <Route path= "/username/:username"  component = {<PerfilDelUsuario />}/>
       </Routes>
     </div>
   );
