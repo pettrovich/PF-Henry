@@ -97,10 +97,6 @@ svg {
 }
 
 .favorite {
-    /* position: relative;
-    width: 18px;
-    top: -410px;
-    left: 130px; */
     position: absolute;
     width: 18px;
     top: 10px;
@@ -108,10 +104,25 @@ svg {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 1630px) {
+@media only screen and (max-width: 1669px) {
 
     .btnDetail {
         left: 20px;
+    }
+
+    .favorite {
+        left: 90%;
+    }
+}
+
+@media only screen and (max-width: 1116px) {
+
+    .btnDetail {
+        left: 20px;
+    }
+
+    .favorite {
+        left: 90%;
     }
 }
 
