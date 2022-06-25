@@ -39,6 +39,9 @@ module.exports = (sequelize) => {
     brand: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    discount: {
+      type: DataTypes.INTEGER,
     }
   });
 };

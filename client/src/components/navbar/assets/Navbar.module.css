@@ -59,3 +59,9 @@
     width: 30px;
     right: 20px;
 }
+
+/* @media only screen and (max-width: 760px) {
+    .navbar {
+        flex-direction: column;
+    }
+} */
