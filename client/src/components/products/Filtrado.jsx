@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { orderByPrice, getByCategory } from '../../redux/actions/productsA';
+import { orderByPrice, getByCategory, rangoByPrice, byDiscount, byEnvios, getByMarcas } from '../../redux/actions/productsA';
 import style from './assets/Filtrado.module.css';
+import BuscadorMarcas from "./BuscadorMarcas";
 
-function Filtrado({ orderByPrice, getByCategory }) {
+
+function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount }) {
     const [state, setState] = useState({
         price: '',
-        categoria: ''
+        categoria: '',
+        rango: "",
+        discount:"",
+        envio: "",
+        marcas: "",
     })
 
     useEffect(() => {
         if (state.price.length > 2) orderByPrice(state.price)
         if (state.categoria.length > 2) getByCategory(state.categoria)
+        if (state.rango.length > 2) rangoByPrice(state.rango)////////
+        if (state.discount.length > 2) byDiscount(state.discount)////////
+        if (state.envio.length > 2) byEnvios(state.envio)////////
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])
 
@@ -50,9 +60,42 @@ function Filtrado({ orderByPrice, getByCategory }) {
                         <option value='Refrigeración'>Refrigeración</option>
                     </select>
                 </label>
+
+                <label htmlFor='byEnvios'>
+                    <select value={state.envio} onChange={(e) => setState({ ...state, envio: e.target.value })}>
+                        <option value={''}>Envíos</option>
+                        <option value='false'>Envíos con costo</option>
+                        <option value='true'>Envío Gratis</option>
+                    </select>
+                </label> 
+
+
+                <label htmlFor='rangoPrecio'>
+                    <select value={state.rango} onChange={(e) => setState({ ...state, rango: e.target.value })}>
+                        <option value={''}>Rango de precio</option>
+                        <option value='-10mil'>-$10mil</option>
+                        <option value='+10mil'>$10mil-$50mil</option>
+                        <option value='+50mil'>+$50mil</option>
+                        
+                    </select>
+                </label>
+
+                {/* <label htmlFor='byDiscount'>
+                    <select value={state.discount} onChange={(e) => setState({ ...state, discount: e.target.value })}>
+                        <option value={''}>Descuentos</option>
+                        <option value='+5%'>+5%</option>
+                        <option value='+15%'>+15%</option>
+                        <option value='+25%'>+25%</option>
+                        <option value='+35%'>+35%</option>
+                        <option value='+45%'>+45%</option>
+                    </select>
+                </label> */}
+
+                <BuscadorMarcas/>
+
             </form>
         </div>
     )
 }
 
-export default connect(null, { orderByPrice, getByCategory })(Filtrado)
+export default connect(null, { orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount, })(Filtrado)

@@ -16,6 +16,8 @@ const {filterStockProduct} = require('../controllers/filterStockProducts')
 const {filterDisabled} = require('../controllers/filterDisabled')
 const {filterEyS} = require('../controllers/filterEyS')
 const {filterPriceRange} = require('../controllers/filterPriceRange')
+const {filterDiscount} = require('../controllers/filterDiscount');
+const {adminProductsCounter} = require('../controllers/adminProductsCounter')
 
 
 const router = Router();
@@ -40,6 +42,8 @@ router.post('/user', userPost)
 
 router.get("/Admin/Catalog", adminProducts)
 
+router.get("/Admin/Counter", adminProductsCounter)
+
 router.get('/filterShipping/:filterShipping', filterShipping)
 
 router.get('/filterBrand/:filterBrand', filterBrand)
@@ -51,6 +55,8 @@ router.get('/filterDisabled/:filterDisabled', filterDisabled)
 router.get('/filterEyS/:filterEyS', filterEyS)
 
 router.get('/filterPriceRange/:filterPrice', filterPriceRange)
+
+router.get('/filterDiscount/:discount', filterDiscount)
 
 
 
