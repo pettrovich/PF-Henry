@@ -21,7 +21,9 @@ const Buscador = () => {
     if (location.pathname !== '/products') {
       navigate("/products")
     }
-    dispatch(getProductByName(producto));
+    setTimeout(() => {
+      dispatch(getProductByName(producto));
+    }, 500);
     setProducto("");
   }
 

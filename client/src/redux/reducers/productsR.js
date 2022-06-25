@@ -5,7 +5,7 @@ const initialState = {
     products: [],
 }
 
-const carritoR = (state = initialState, { type, payload }) => {
+const productsR = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_ALL_PRODUCTS:
             return {
@@ -27,9 +27,10 @@ const carritoR = (state = initialState, { type, payload }) => {
                 ...state,
                 products: payload
             }
+
         default:
             return state;
     }
 }
 
-export default carritoR;
+export default productsR;

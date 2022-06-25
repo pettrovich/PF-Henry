@@ -1,41 +1,47 @@
-const {Product} = require('../db')
-const {Op} = require('sequelize')
+const { Product } = require('../db')
+const { Op } = require('sequelize')
 
 const filterPriceRange = async (req, res) => {
     let filterPrice = req.params.filterPrice
 
     try {
-        if(filterPrice === '-10mil') {
-            let allProducts = await Product.findAll({
-                where: {
-                    price: {
-                        [Op.lt]: 10000
+
+        switch (filterPrice) {
+            case "-10mil":
+                let productFiltered1 = await Product.findAll({
+                    where: {
+                        price: {
+                            [Op.lt]: 10000
+                        }
                     }
-                }
-            })
-            res.send(allProducts)
-        }
-        if(filterPrice === '+10mil') {
-            let allProducts = await Product.findAll({
-                where: {
-                    price: {
-                        [Op.between]: [10001, 50000]
+                })
+                return res.send(productFiltered1)
+
+            case '+10mil':
+                let Productfiltered2 = await Product.findAll({
+                    where: {
+                        price: {
+                            [Op.between]: [10000.01, 50000]
+                        }
                     }
-                }
-            })
-            res.send(allProducts)
+                })
+                return res.send(Productfiltered2)
+
+            case '+50mil': 
+            let productFiltered3 = await Product.findAll({
+                        where: {
+                            price: {
+                                [Op.gt]: 50000
+                            }
+                        }
+                    })
+                    return res.send(productFiltered3)
+            default:
+                    let allProducts = await Product.findAll()
+                    return res.send(allProducts)
         }
-        if(filterPrice === '+50mil') {
-            let allProducts = await Product.findAll({
-                where: {
-                    price: {
-                        [Op.gt]: 50000
-                    }
-                }
-            })
-            res.send(allProducts)
-        }
-    } catch(e) {
+
+    } catch (e) {
         console.log(e)
     }
 }
