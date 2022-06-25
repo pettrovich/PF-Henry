@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, ORDER_PRICE } from "../actions/productsA";
+import { GET_ALL_PRODUCTS, ORDER_PRICE, FILTER_CATEGORY } from "../actions/productsA";
 import { GET_PRODUCT_BY_NAME } from '../actions/productName';
 
 const initialState = {
@@ -18,6 +18,11 @@ const carritoR = (state = initialState, { type, payload }) => {
                 products: payload
             }
         case GET_PRODUCT_BY_NAME:
+            return {
+                ...state,
+                products: payload
+            }
+        case FILTER_CATEGORY:
             return {
                 ...state,
                 products: payload

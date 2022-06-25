@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const {Product} = require('../db')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/priceOrder')
@@ -10,6 +9,13 @@ const { updateProduct } = require('../controllers/updateProduct');
 const { getProductById } = require('../controllers/getProductById');
 const {userPost} = require('../controllers/userPost')
 const usersRoute = require ('./users');
+const { adminProducts } = require('../controllers/adminProducts');
+const {filterShipping} = require('../controllers/filterShipping')
+const {filterBrand} = require('../controllers/filterBrand');
+const {filterStockProduct} = require('../controllers/filterStockProducts')
+const {filterDisabled} = require('../controllers/filterDisabled')
+const {filterEyS} = require('../controllers/filterEyS')
+
 
 const router = Router();
 
@@ -25,10 +31,24 @@ router.put("/ProductDetail/:idProduct", updateProduct)
 
 router.get('/order/:priceOrder', priceOrder)
 
-router.get('/filter/:filterCategory', filterCategories)
+router.get('/filterCategory/:filterCategory', filterCategories)
 
 router.get("/Catalog", getProduct)
 
 router.post('/user', userPost)
+
+router.get("/Admin/Catalog", adminProducts)
+
+router.get('/filterShipping/:filterShipping', filterShipping)
+
+router.get('/filterBrand/:filterBrand', filterBrand)
+
+router.get('/filterStock/:filterStock', filterStockProduct)
+
+router.get('/filterDisabled/:filterDisabled', filterDisabled)
+
+router.get('/filterEyS/:filterEyS', filterEyS)
+
+
 
 module.exports = router;
