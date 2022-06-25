@@ -31,6 +31,14 @@ module.exports = (sequelize) => {
     disabled: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    freeShipping: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   });
 };
