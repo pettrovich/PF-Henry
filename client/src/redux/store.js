@@ -6,13 +6,15 @@ import products from './reducers/productsR';
 import detailProduct from './reducers/detailProductR';
 import productoscreados from './reducers/createProductR';
 import users from './reducers/createUsers'
+import favoritos from './reducers/favoritosR';
 
 const reducer = combineReducers({
     carrito,
     products,
     detailProduct,
     productoscreados,
-    users
+    users,
+    favoritos
 })
 
 export const store = createStore(

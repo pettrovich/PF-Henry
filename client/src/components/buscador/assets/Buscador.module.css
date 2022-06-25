@@ -24,3 +24,9 @@
     width: 1.3em;
     fill: #b4b4b4;
 }
+
+@media only screen and (max-width: 880px) {
+    .inputSearch {
+        width: 19vw;
+    }
+}
