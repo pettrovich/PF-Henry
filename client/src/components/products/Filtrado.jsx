@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { orderByPrice, getByCategory, rangoByPrice, byDiscount, byEnvios, getByMarcas } from '../../redux/actions/productsA';
+import { orderByPrice, getByCategory, rangoByPrice, byDiscount, byEnvios } from '../../redux/actions/productsA';
 import style from './assets/Filtrado.module.css';
 import BuscadorMarcas from "./BuscadorMarcas";
 
