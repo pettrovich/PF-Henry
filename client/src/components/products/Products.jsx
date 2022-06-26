@@ -35,7 +35,7 @@ function Products({ getAllProducts }) {
     return (
         <div className={style.body}>
             <div className={style.container}>
-                <h1>Products</h1>
+                <h1>PRODUCTOS</h1>
                 <div className={style.containerFilter}><Filtrado /></div>
                 {/* <Link to='/createProduct'><button>Crear producto</button></Link> */}
                 <div className={style.containerCards}>

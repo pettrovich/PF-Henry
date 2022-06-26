@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux'
 import style from './assets/DetallesDelProducto.module.css';
 import { getOneProduct } from '../../redux/actions/detailProductA';
+import noImage from './assets/no-image.jpg'
 
 
 function Producto({ getOneProduct }) {
@@ -16,15 +17,26 @@ function Producto({ getOneProduct }) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    function stockDisponible() {
+        if (productDetail.stock > 0) return (<p>Stock disponible</p>)
+        else return (<p> Stock no disponible </p>)
+    }
 
     return (
-        <div className={style.ProductCard}>
-            <h1 className={style.NombreProducto}>Producto: {productDetail.name}</h1>
-            <img className={style.Img} src={productDetail.image} alt='Not found' />
-            <h4 className={style.Precio}>Precio: {productDetail.price}</h4>
-            <p className={style.Descripcion}>{productDetail.description}</p>
-            <h5 className={style.Stock}>Quedan en stock:{productDetail.stock}</h5>
-            <br />
+        <div className={style.body}>
+            <div className={style.productCard}>
+                <img src={productDetail.image} className={style.cardImg} alt='Imagen producto' onError={({ currentTarget }) => {
+                    currentTarget.onerror = null; // prevents looping
+                    currentTarget.src = `${noImage}`;
+                }} />
+                <div className={style.subContainer}>
+                    <h1 className={style.nombreProducto}>{productDetail.name}</h1>
+                    <p className={style.descripcion}>{productDetail.description}</p>
+                    {stockDisponible()}
+                    <p className={style.precio}>${productDetail.price}</p>
+                    <br />
+                </div>
+            </div>
         </div>
     )
 }

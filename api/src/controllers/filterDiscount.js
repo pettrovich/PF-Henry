@@ -6,7 +6,7 @@ const filterDiscount = async (req, res) => {
 
     try {
         switch (discount) {
-            case '+5':
+            case '+05':
                 let productFilter1 = await Product.findAll({
                     where: {
                         discount: {

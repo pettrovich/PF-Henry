@@ -10,7 +10,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
         price: '',
         categoria: '',
         rango: "",
-        discount:"",
+        discount: "",
         envio: "",
         marcas: "",
     })
@@ -67,7 +67,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                         <option value='false'>Envíos con costo</option>
                         <option value='true'>Envío Gratis</option>
                     </select>
-                </label> 
+                </label>
 
 
                 <label htmlFor='rangoPrecio'>
@@ -76,24 +76,25 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                         <option value='-10mil'>-$10mil</option>
                         <option value='+10mil'>$10mil-$50mil</option>
                         <option value='+50mil'>+$50mil</option>
-                        
+
                     </select>
                 </label>
 
-                {/* <label htmlFor='byDiscount'>
+                <label htmlFor='byDiscount'>
                     <select value={state.discount} onChange={(e) => setState({ ...state, discount: e.target.value })}>
                         <option value={''}>Descuentos</option>
-                        <option value='+5%'>+5%</option>
-                        <option value='+15%'>+15%</option>
-                        <option value='+25%'>+25%</option>
-                        <option value='+35%'>+35%</option>
-                        <option value='+45%'>+45%</option>
+                        <option value='+05'>+5%</option>
+                        <option value='+10'>+10%</option>
+                        <option value='+15'>+15%</option>
+                        <option value='+20'>+20%</option>
+                        <option value='+25'>+25%</option>
+                        <option value='+30'>+30%</option>
                     </select>
-                </label> */}
+                </label>
 
-                <BuscadorMarcas/>
 
             </form>
+            <BuscadorMarcas />
         </div>
     )
 }

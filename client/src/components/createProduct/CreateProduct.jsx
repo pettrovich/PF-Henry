@@ -42,6 +42,10 @@ export default function CreateProduct() {
         if (!input.discount || !/^[0-9]\d*(\.\d+)?$/.test(input.discount)) { 
             errors.discount = 'Coloca un numero, cero o más.';
         }
+        if (input.discount > 100 ) { 
+            errors.discount = 'No se puede hacer un descuento mayor al 100%';
+        }
+        
 
         return errors
 
@@ -59,6 +63,8 @@ export default function CreateProduct() {
             && input.categories !== "All"
             && input.categories
             && !errors.hasOwnProperty("stock")
+            && input.freeShipping !== "All"
+            && input.freeShipping
         ) {
             dispatch(postProducto(input))
             alert("Producto creado con exito")
@@ -225,7 +231,7 @@ export default function CreateProduct() {
                 </div>
 
                 <br />
-                <select onChange={e => handlefreeShipping(e)} className={style.categorias} >
+                <select onChange={e => handlefreeShipping(e)} className={style.envio} >
 
                 <option value="All">¿Envio gratis?</option>
 
@@ -268,8 +274,9 @@ export default function CreateProduct() {
 
 
                 <button className={style.boton1} type='submit'>Crear Producto</button>
-
-                <Link to="/"><button className={style.volver}>Volver</button></Link>
+                <br /><br />
+                <Link to="/"><button className={style.volver}>Ir al home</button></Link>
+                <Link to="/products"><button className={style.volver}>Ir a productos</button></Link>
             </form>
         </div>
     )
