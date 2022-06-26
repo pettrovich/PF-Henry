@@ -19,7 +19,7 @@ export default function SearchBar(){
 
         if(brand !== ""){
         dispatch(getbrand(brand));
-        setName("");
+        setBrand("");
     }
 
         else{

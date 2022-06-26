@@ -80,16 +80,17 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                     </select>
                 </label>
 
-                {/* <label htmlFor='byDiscount'>
+                <label htmlFor='byDiscount'>
                     <select value={state.discount} onChange={(e) => setState({ ...state, discount: e.target.value })}>
                         <option value={''}>Descuentos</option>
-                        <option value='+5%'>+5%</option>
-                        <option value='+15%'>+15%</option>
-                        <option value='+25%'>+25%</option>
-                        <option value='+35%'>+35%</option>
-                        <option value='+45%'>+45%</option>
+                        <option value='+05'>+5%</option>
+                        <option value='+10'>+10%</option>
+                        <option value='+15'>+15%</option>
+                        <option value='+20'>+20%</option>
+                        <option value='+25'>+25%</option>
+                        <option value='+30'>+30%</option>
                     </select>
-                </label> */}
+                </label>
 
                 <BuscadorMarcas/>
 

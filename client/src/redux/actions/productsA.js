@@ -43,7 +43,7 @@ export function rangoByPrice (payload){
 
 export function byDiscount (payload){
     return async function (dispatch) {
-      var json = await axios.get (`http://localhost:3001/VER FILTRO DE DESCUENTO!!!!!!!/${payload}`);
+      var json = await axios.get (`/filterDiscount/${payload}`);
             return dispatch ({
                 type: DISCOUNT,
                 payload: json.data
