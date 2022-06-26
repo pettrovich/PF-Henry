@@ -10,7 +10,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
         price: '',
         categoria: '',
         rango: "",
-        discount:"",
+        discount: "",
         envio: "",
         marcas: "",
     })
@@ -67,7 +67,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                         <option value='false'>Envíos con costo</option>
                         <option value='true'>Envío Gratis</option>
                     </select>
-                </label> 
+                </label>
 
 
                 <label htmlFor='rangoPrecio'>
@@ -76,7 +76,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                         <option value='-10mil'>-$10mil</option>
                         <option value='+10mil'>$10mil-$50mil</option>
                         <option value='+50mil'>+$50mil</option>
-                        
+
                     </select>
                 </label>
 
@@ -92,9 +92,9 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                     </select>
                 </label>
 
-                <BuscadorMarcas/>
 
             </form>
+            <BuscadorMarcas />
         </div>
     )
 }

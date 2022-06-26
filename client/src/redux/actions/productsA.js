@@ -26,54 +26,54 @@ export const orderByPrice = (data) => {
 
 export const getByCategory = (data) => {
     return async function (dispatch) {
-        const response = (await axios.get(`/filter/${data}`)).data;
+        const response = (await axios.get(`/filterCategory/${data}`)).data;
         return dispatch({ type: FILTER_CATEGORY, payload: response })
     }
 }
-export function rangoByPrice (payload){
+export function rangoByPrice(payload) {
     return async function (dispatch) {
-      var json = await axios.get (`http://localhost:3001/filterPriceRange/${payload}`);
-            return dispatch ({
-                type: RANGO_PRICE,
-                payload: json.data
-            })
+        var json = await axios.get(`/filterPriceRange/${payload}`);
+        return dispatch({
+            type: RANGO_PRICE,
+            payload: json.data
+        })
     }
 }
 
 
-export function byDiscount (payload){
+export function byDiscount(payload) {
     return async function (dispatch) {
-      var json = await axios.get (`/filterDiscount/${payload}`);
-            return dispatch ({
-                type: DISCOUNT,
-                payload: json.data
-            })
+        var json = await axios.get(`/filterDiscount/${payload}`);
+        return dispatch({
+            type: DISCOUNT,
+            payload: json.data
+        })
     }
 }
 
-export function byEnvios (payload){
+export function byEnvios(payload) {
     return async function (dispatch) {
-      var json = await axios.get (`http://localhost:3001/filterShipping/${payload}`);
-            return dispatch ({
-                type: ENVIOS,
-                payload: json.data
-            })
+        var json = await axios.get(`/filterShipping/${payload}`);
+        return dispatch({
+            type: ENVIOS,
+            payload: json.data
+        })
     }
 }
 
-export function getbrand(payload){
-    return async function (dispatch){
-        try{
-            var json = await axios.get (`http://localhost:3001/filterBrand/${payload}`);
+export function getbrand(payload) {
+    return async function (dispatch) {
+        try {
+            var json = await axios.get(`/filterBrand/${payload}`);
             return dispatch({
                 type: GET_BRAND,
                 payload: json.data
 
             })
-        }catch (error){
-            
-            alert ("No tenemos esa marca.")
-      
+        } catch (error) {
+
+            alert("No tenemos esa marca.")
+
+        }
     }
-}
 }
