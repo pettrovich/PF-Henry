@@ -9,6 +9,7 @@ import CreateProduct from './components/createProduct/CreateProduct';
 import Login from "./components/login/Login";
 import CreateAccount from "./components/createAccount/CreateAccount";
 import PerfilDelUsuario from "./components/PerfilDelUsuario/PerfilDelUsuario";
+import Favoritos from './components/favoritos/Favoritos';
 
 function App() {
   return (
@@ -22,10 +23,13 @@ function App() {
         <Route path="createProduct" element={<CreateProduct />} />
         <Route path="login" element={<Login />} />
         <Route path="/createAccount" element={<CreateAccount />} />
-        <Route path= "/username/:username"  component = {<PerfilDelUsuario />}/>
+        <Route path="/username/:username" component={<PerfilDelUsuario />} />
+        <Route path="/favoritos" element={<Favoritos />} />
       </Routes>
     </div>
   );
 }
 
 export default App;
+
+
