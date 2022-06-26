@@ -1,7 +1,7 @@
 const {Product} = require("../db")
 
 const createProduct = async (req, res) => {
-    const {name, image, price, description, categories, stock} = req.body
+    const {name, image, price, description, categories, stock, disabled, freeShipping, brand, discount} = req.body
     try {
         await Product.create({
             name,
@@ -9,11 +9,15 @@ const createProduct = async (req, res) => {
             price,
             description,
             categories,
-            stock
+            stock,
+            disabled,
+            freeShipping,
+            brand,
+            discount
         })
         res.send(`Producto ${name} creado exitosamente`)
     } catch (error) {
-        res.send("No se pudo crear el producto")
+        res.status(404).send("No se pudo crear el producto")
     }
 }
 

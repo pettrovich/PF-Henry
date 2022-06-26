@@ -4,7 +4,7 @@ const initialState = {
     product: [],
 }
 
-const carritoR = (state = initialState, { type, payload }) => {
+const detailProductR = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_PRODUCT_ID:
             return {
@@ -16,4 +16,4 @@ const carritoR = (state = initialState, { type, payload }) => {
     }
 }
 
-export default carritoR;
+export default detailProductR;

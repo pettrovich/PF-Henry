@@ -27,6 +27,21 @@ module.exports = (sequelize) => {
     stock: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    freeShipping: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
+    brand: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    discount: {
+      type: DataTypes.INTEGER,
     }
   });
 };

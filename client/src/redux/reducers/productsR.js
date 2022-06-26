@@ -1,11 +1,11 @@
-import { GET_ALL_PRODUCTS, ORDER_PRICE } from "../actions/productsA";
+import { GET_ALL_PRODUCTS, ORDER_PRICE, FILTER_CATEGORY, RANGO_PRICE, DISCOUNT, ENVIOS, GET_BRAND} from "../actions/productsA";
 import { GET_PRODUCT_BY_NAME } from '../actions/productName';
 
 const initialState = {
     products: [],
 }
 
-const carritoR = (state = initialState, { type, payload }) => {
+const productsR = (state = initialState, { type, payload }) => {
     switch (type) {
         case GET_ALL_PRODUCTS:
             return {
@@ -22,9 +22,37 @@ const carritoR = (state = initialState, { type, payload }) => {
                 ...state,
                 products: payload
             }
+        case FILTER_CATEGORY:
+            return {
+                ...state,
+                products: payload
+            }
+            case RANGO_PRICE: 
+            return {
+                ...state,
+                products: payload
+            }
+        
+        case DISCOUNT: 
+             return {
+            ...state,
+            products: payload
+            }
+
+        case ENVIOS: 
+        return {
+            ...state,
+            products: payload
+        }
+
+        case GET_BRAND: 
+        return {
+            ...state,
+            products: payload
+        }
         default:
             return state;
     }
 }
 
-export default carritoR;
+export default productsR;
