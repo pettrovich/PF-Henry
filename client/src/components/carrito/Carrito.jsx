@@ -3,6 +3,7 @@ import { useSelector, connect } from 'react-redux';
 import { deleteProductCarrito } from '../../redux/actions/carritoA';
 import style from './assets/Carrito.module.css';
 import close from './assets/cross-close.svg';
+import noImage from './assets/no-image.jpg';
 
 function Carrito({ deleteProductCarrito }) {
     const products = useSelector((state) => state.carrito.productosCarrito);
@@ -20,7 +21,10 @@ function Carrito({ deleteProductCarrito }) {
                 <div className={style.products}>
                     {products.map(e => (
                         <div key={e.id} className={style.card}>
-                            <img src={e.image} alt='Imagen producto' width='50px' />
+                            <img src={e.image} className={style.cardImg} alt='Imagen producto' width='70px' onError={({ currentTarget }) => {
+                                currentTarget.onerror = null; // prevents looping
+                                currentTarget.src = `${noImage}`;
+                            }} />
                             <p>{e.name}</p>
                             <p>${e.price}</p>
                             <img className={style.cancelBtn} src={close} onClick={() => handleDelete(e)} alt='Close' />
