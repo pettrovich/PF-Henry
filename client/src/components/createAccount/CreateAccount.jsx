@@ -62,12 +62,6 @@ const CreateAccount = () => {
                     if (!valores.location){
                         errores.location = 'Por favor ingresa la Ubicacion'
                     }
-                    if (!valores.apartment){
-                        errores.apartment = 'Por favor ingresa Apartamento'
-                    }
-                    if (!valores.description){
-                        errores.description = 'Por favor ingresa una Description'
-                    }
                     return errores;
                 }}
                 onSubmit={(valores, {resetForm}) => {
@@ -84,7 +78,7 @@ const CreateAccount = () => {
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="name"
-                                           placeholder="ingrese Nombre"
+                                           placeholder="Ingrese nombre"
                                            id="name"
                                     />
                                 </div>
@@ -96,19 +90,19 @@ const CreateAccount = () => {
                                     <Field className="form-input"
                                            type="text"
                                            name="lastName"
-                                           placeholder="ingrese Apellido"
+                                           placeholder="Ingrese apellido"
                                            id="lastName"
                                     />
                                 </div>
                                 {touched.lastName && errors.lastName && <p className="form-p-error"> {errors.lastName}</p>}
                             </div>
                             <div className="form-grup">
-                                <label htmlFor="dni" className="form-label">Dni: </label>
+                                <label htmlFor="dni" className="form-label">DNI: </label>
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text"
                                            name="dni"
-                                           placeholder="ingrese Apellido"
+                                           placeholder="Ingrese DNI"
                                            id="dni"
                                     />
                                 </div>
@@ -132,7 +126,7 @@ const CreateAccount = () => {
                                     <Field className="form-input"
                                            type="text"
                                            name="celphone"
-                                           placeholder="ingrese Telefono"
+                                           placeholder="Ingrese telefono"
                                            id="celphone"
                                     />
                                 </div>
@@ -144,7 +138,7 @@ const CreateAccount = () => {
                                     <Field className="form-input"
                                            type="text"
                                            name="username"
-                                           placeholder="ingrese Username"
+                                           placeholder="Ingrese username"
                                            id="username"
                                     />
                                 </div>
@@ -156,7 +150,7 @@ const CreateAccount = () => {
                                     <Field className="form-input"
                                            type="password"
                                            name="password"
-                                           placeholder="ingrese Contraseña"
+                                           placeholder="Ingrese contraseña"
                                            id="password"
                                     />
                                 </div>
@@ -167,7 +161,7 @@ const CreateAccount = () => {
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="address"
-                                           placeholder="ingrese la Direccion"
+                                           placeholder="Ingrese la direccion"
                                            id="address"
                                     />
                                 </div>
@@ -178,7 +172,7 @@ const CreateAccount = () => {
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="number"
-                                           placeholder="ingrese el Numero"
+                                           placeholder="Ingrese el numero"
                                            id="number"
                                     />
                                 </div>
@@ -189,7 +183,7 @@ const CreateAccount = () => {
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="zipCode"
-                                           placeholder="Codigo Postal"
+                                           placeholder="Codigo postal"
                                            id="zipCode"
                                     />
                                 </div>
@@ -200,7 +194,7 @@ const CreateAccount = () => {
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="province"
-                                           placeholder="ingrese la provincia"
+                                           placeholder="Ingrese la provincia"
                                            id="province"
                                     />
                                 </div>
@@ -211,29 +205,29 @@ const CreateAccount = () => {
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="location"
-                                           placeholder="ingrese la Ubicacion"
+                                           placeholder="Ingrese la ubicacion"
                                            id="location"
                                     />
                                 </div>
                                 {touched.location && errors.location && <p className="form-p-error"> {errors.location}</p>}
                             </div>
                             <div className="form-grup">
-                                <label htmlFor="apartment" className="form-label">Apartamento: </label>
+                                <label htmlFor="apartment" className="form-label">Departamento: </label>
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="apartment"
-                                           placeholder="ingrese el numero Apartamento"
+                                           placeholder="Ingrese el numero del departamento"
                                            id="apartment"
                                     />
                                 </div>
                                 {touched.apartment && errors.apartment && <p className="form-p-error"> {errors.apartment}</p>}
                             </div>
                             <div className="form-grup">
-                                <label htmlFor="description" className="form-label">Description: </label>
+                                <label htmlFor="description" className="form-label">Descripcion: </label>
                                 <div className="form-input-grup">
                                     <Field className="form-input"
                                            type="text" name="description"
-                                           placeholder="ingrese la Descripcion"
+                                           placeholder="Ingrese la descripcion"
                                            id="description"
                                     />
                                 </div>

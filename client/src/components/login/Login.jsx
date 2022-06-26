@@ -7,7 +7,18 @@ const Login = () => {
     return (
         <div className="container-loggin">
             <div className="info-container">
-                <h1 className="title"> Inicia Sesión</h1>
+                <h1 className="title">INICIA SESION</h1>
+                <form className="inputs-container">
+                    <input className="input" type="text" placeholder="Ingrese el correo" />
+                    <input className="input" type="password" placeholder="Ingrese la contraseña" />
+                    <p>Olvido su contraseña? <span className="div-span">Click Aquí</span></p>
+                    <button className="btn">Iniciar sesión</button>
+                    <p>No tienes cuenta?
+                        <Link to="/createAccount">
+                            <span className="div-span"> Registrate</span>
+                        </Link>
+                    </p>
+                </form>
                 <div className="social-login">
                     <div className="red-social">
                         <img src={iconGoogle} alt="img google" />
@@ -18,18 +29,6 @@ const Login = () => {
                         <span>Facebook</span>
                     </div>
                 </div>
-                <p>O</p>
-                <form className="inputs-container">
-                    <input className="input" type="text" placeholder="ingrese el Correo" />
-                    <input className="input" type="password" placeholder="ingrese la Contraseña" />
-                    <p>Olvido su contraseña? <span className="div-span">Click Aquí</span></p>
-                    <button className="btn">Iniciar Sesión</button>
-                    <p>No tienes cuenta?
-                        <Link to="/createAccount">
-                            <span className="div-span"> Registrate</span>
-                        </Link>
-                    </p>
-                </form>
             </div>
         </div>
     );
