@@ -10,20 +10,20 @@ export default function CreateProduct() {
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
     const [input, setInput] = useState({
-        name: "", image: "", price: "", description: "", stock: "", categories: "",
+        name: "", image: "", price: "", description: "", stock: "", categories: "", discount: "", brand: "", freeShipping: "",
     })
 
     function validate(input) {
         let errors = {};
 
-        if (!input.name || !/^[a-z]+[A-Za-z0-9\s]+$/g.test(input.name)) { //como hacer desde el validate para que la primera sea mayuscula??
-            errors.name = 'Al menos dos caracteres el primero, letra minúscula.';
+        if (!input.name) {
+            errors.name = 'Coloca un nombre al producto.';
         }
         if (!input.image) {
             errors.image = 'Coloca una imagen al producto.';
         }
 
-        if (!input.price || !/^[1-9]\d*(\.\d+)?$/.test(input.price)) { //como llega el precio??
+        if (!input.price || !/^[1-9]\d*(\.\d+)?$/.test(input.price)) { 
             errors.price = 'Coloca un precio al producto mayor a 0.';
         }
         if (!input.description) {
@@ -32,8 +32,15 @@ export default function CreateProduct() {
         // if(!input.categories){ 
         //     errors.categories = 'Coloca una categoria al producto.';
         // }
-        if (!input.stock || !/^[0-9]\d*(\.\d+)?$/.test(input.stock)) { //se puede poner stock de cero??
+        if (!input.stock || !/^[0-9]\d*(\.\d+)?$/.test(input.stock)) { 
             errors.stock = 'Coloca un numero, cero o más.';
+        }
+        if (!input.brand) {
+            errors.brand = 'Coloca una marca al producto.';
+        }
+
+        if (!input.discount || !/^[0-9]\d*(\.\d+)?$/.test(input.discount)) { 
+            errors.discount = 'Coloca un numero, cero o más.';
         }
 
         return errors
@@ -47,6 +54,8 @@ export default function CreateProduct() {
             && !errors.hasOwnProperty("image")
             && !errors.hasOwnProperty("price")
             && !errors.hasOwnProperty("description")
+            && !errors.hasOwnProperty("brand")
+            && !errors.hasOwnProperty("discount")
             && input.categories !== "All"
             && input.categories
             && !errors.hasOwnProperty("stock")
@@ -60,6 +69,9 @@ export default function CreateProduct() {
                 description: "",
                 categories: "",
                 stock: "",
+                brand: "",
+                freeShipping: "",
+                discount: "",
             })
         }
         else {
@@ -82,7 +94,7 @@ export default function CreateProduct() {
         }));
         //console.log (input)
     }
-
+    
 
     function handleCheck(e) {
         if (e.target.value === "All") {
@@ -101,6 +113,23 @@ export default function CreateProduct() {
             })
         }
     }
+    function handlefreeShipping(e) {
+        if (e.target.value === "All") {
+            setErrors(validate({
+                ...input,
+                [e.target.name]: e.target.value
+
+            }));
+            //console.log (input)
+        }
+
+        else {
+            setInput({
+                ...input,
+                freeShipping: e.target.value
+            })
+        }
+    }
 
     return (
         <div>
@@ -108,6 +137,7 @@ export default function CreateProduct() {
             <form className={style.contenedor} onSubmit={(e) => handleSubmit(e)} >
                 <div>
                     <input
+                        className={style.input}
                         placeholder="Nombre del Producto: (*)"
                         autoComplete="off"
                         type="text"
@@ -118,7 +148,9 @@ export default function CreateProduct() {
                     {errors.name && (<p className={style.error}>{errors.name}</p>)}
                 </div>
                 <div><br />
-                    <input type="text"
+                    <input 
+                        className={style.input}
+                        type="text"
                         value={input.image}
                         autoComplete="off"
                         name='image'
@@ -129,6 +161,7 @@ export default function CreateProduct() {
 
                 <div><br />
                     <input
+                        className={style.input}
                         autoComplete="off"
                         type="number"
                         value={input.price}
@@ -141,6 +174,20 @@ export default function CreateProduct() {
 
                 <div><br />
                     <input
+                        className={style.input}
+                        autoComplete="off"
+                        type="number"
+                        value={input.discount}
+                        name='discount'
+                        placeholder="Descuentos del producto: (*)"
+                        onChange={(e) => handleChange(e)}
+                    />
+                    {errors.discount && (<p className={style.error}>{errors.discount}</p>)}
+                </div>
+
+                <div><br />
+                    <input
+                        className={style.input}
                         placeholder="Descripción del Producto: (*)"
                         autoComplete="off"
                         type="text"
@@ -153,6 +200,7 @@ export default function CreateProduct() {
 
                 <div><br />
                     <input
+                        className={style.input}
                         autoComplete="off"
                         type="number"
                         value={input.stock}
@@ -163,7 +211,27 @@ export default function CreateProduct() {
                     {errors.stock && (<p className={style.error}>{errors.stock}</p>)}<br />
                 </div>
 
+                <div><br />
+                    <input
+                        className={style.input}
+                        autoComplete="off"
+                        type="text"
+                        value={input.brand}
+                        name='brand'
+                        placeholder="Marca del producto: (*)"
+                        onChange={(e) => handleChange(e)}
+                    />
+                    {errors.brand && (<p className={style.error}>{errors.brand}</p>)}<br />
+                </div>
+
                 <br />
+                <select onChange={e => handlefreeShipping(e)} className={style.categorias} >
+
+                <option value="All">¿Envio gratis?</option>
+
+                <option value="false">No</option>
+                <option value="true">Si</option>
+                </select> <br /><br />
 
 
                 <select onChange={e => handleCheck(e)} className={style.categorias} >
