@@ -1,4 +1,4 @@
-const { Product } = require('../db')
+const { Product } = require('../../../db')
 
 const priceOrder = async (req, res) => {
     let priceOrder = req.params.priceOrder;
