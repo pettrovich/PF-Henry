@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { orderByPrice, getByCategory, rangoByPrice, byDiscount, byEnvios } from '../../redux/actions/productsA';
+import { orderByPrice, getByCategory, rangoByPrice, byDiscount, byEnvios, getAllProducts } from '../../redux/actions/productsA';
 import style from './assets/Filtrado.module.css';
 import BuscadorMarcas from "./BuscadorMarcas";
 
 
-function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount }) {
+function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount, getAllProducts }) {
     const [state, setState] = useState({
         price: '',
         categoria: '',
@@ -16,15 +16,28 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
     })
 
     useEffect(() => {
-        if (state.price.length > 2) orderByPrice(state.price)
         if (state.categoria.length > 2) getByCategory(state.categoria)
         if (state.rango.length > 2) rangoByPrice(state.rango)////////
         if (state.discount.length > 2) byDiscount(state.discount)////////
         if (state.envio.length > 2) byEnvios(state.envio)////////
+        setTimeout(() => {
+            if (state.price.length > 2) orderByPrice(state.price)
+        }, 500);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])
 
+    function resetStates() { // PROVISORIO PROVISORIO PROVISORIO PROVISORIO PROVISORIO PROVISORIO
+        setState({
+            price: '',
+            categoria: '',
+            rango: "",
+            discount: "",
+            envio: "",
+            marcas: ""
+        })
+        getAllProducts();
+    }
 
     return (
         <div>
@@ -97,9 +110,10 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
             </form>
             <div className={style.container}>
                 <BuscadorMarcas />
+                <button onClick={() => resetStates()}>Reset</button>
             </div>
         </div>
     )
 }
 
-export default connect(null, { orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount, })(Filtrado)
+export default connect(null, { orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount, getAllProducts })(Filtrado)
