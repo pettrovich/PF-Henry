@@ -2,6 +2,7 @@ import React from 'react';
 // import style from './assets/Paginado.module.css';
 // import leftArrow from './assets/left-arrow.svg'
 // import rightArrow from './assets/right-arrow.svg'
+import style from './assets/Paginado.module.css';
 
 export default function Paginado({ ITEMS_PER_PAGE, products, paginado, number }) {
     function goToNextPage() {
@@ -12,9 +13,9 @@ export default function Paginado({ ITEMS_PER_PAGE, products, paginado, number })
         paginado((pageNumber) => pageNumber - 1)
     }
 
-    const btn = document.querySelector('.btnNext');
+    const btn = document.querySelector('#btnNext');
     function lastPage() {
-        if (number >= Math.trunc((products / ITEMS_PER_PAGE))) btn.disabled = true;
+        if (number >= Math.round((products / ITEMS_PER_PAGE))) btn.disabled = true;
     }
 
     function enableButton() {
@@ -22,11 +23,11 @@ export default function Paginado({ ITEMS_PER_PAGE, products, paginado, number })
     }
 
     return (
-        <nav>
+        <nav className={style.container}>
             <ul>
-                <button onClick={() => goToPreviousPage() & enableButton()}> Prev  </button>
-                <button >{number}</button>
-                <button className='btnNext' onClick={() => goToNextPage() & lastPage()}> Next </button>
+                <button className={style.previous} onClick={() => goToPreviousPage() & enableButton()}> {'<'}  </button>
+                <button className={style.number}>{number}</button>
+                <button className={style.next} id='btnNext' onClick={() => goToNextPage() & lastPage()}> {'>'} </button>
             </ul>
         </nav>
     )

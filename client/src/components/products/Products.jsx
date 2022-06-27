@@ -34,7 +34,6 @@ function Products({ getAllProducts }) {
     return (
         <div className={style.body}>
             <div className={style.container}>
-                <h1>PRODUCTOS</h1>
                 <div className={style.containerFilter}><Filtrado /></div>
                 {/* <Link to='/createProduct'><button>Crear producto</button></Link> */}
                 <div className={style.containerCards}>
@@ -52,9 +51,9 @@ function Products({ getAllProducts }) {
                             />
                         )
                     })}
+                    <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} />
                 </div>
             </div>
-            <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} />
         </div >
     )
 }
