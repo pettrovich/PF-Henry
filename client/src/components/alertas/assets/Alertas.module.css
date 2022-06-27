@@ -12,6 +12,7 @@
     justify-content: space-around;
     align-items: center;
     color: white;
+    z-index: 2;
 }
 
 .error {
@@ -28,6 +29,7 @@
     justify-content: space-around;
     align-items: center;
     color: white;
+    z-index: 2;
 }
 
 .svgChecked {

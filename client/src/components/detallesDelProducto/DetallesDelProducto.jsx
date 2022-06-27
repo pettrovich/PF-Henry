@@ -1,16 +1,22 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { connect, useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { connect, useSelector, useDispatch } from 'react-redux'
 import style from './assets/DetallesDelProducto.module.css';
 import { getOneProduct } from '../../redux/actions/detailProductA';
-import noImage from './assets/no-image.jpg'
-
+import noImage from './assets/no-image.jpg';
+import { addProductCarrito } from '../../redux/actions/carritoA';
+import Alerta from '../alertas/Alerta';
 
 function Producto({ getOneProduct }) {
+    const dispatch = useDispatch();
+    const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
     const location = useLocation();
     const idProduct = location.pathname.substring(8, location.pathname.length);
-    const productDetail = useSelector((state) => state.detailProduct.product)
-    // console.log(idProduct)
+    const productDetail = useSelector((state) => state.detailProduct.product);
+    const [modal, setModal] = useState({
+        open: false,
+        type: ''
+    });
 
     useEffect(() => {
         getOneProduct(idProduct)
@@ -18,26 +24,77 @@ function Producto({ getOneProduct }) {
     }, [])
 
     function stockDisponible() {
-        if (productDetail.stock > 0) return (<p>Stock disponible</p>)
-        else return (<p> Stock no disponible </p>)
+        if (productDetail.stock > 0) return (<p className={style.stockDisponible}>Stock disponible</p>)
+        else return (<p className={style.stockNoDisponible}> Stock no disponible </p>)
+    }
+
+    function tipoEnvio() {
+        if (productDetail.freeShipping) return (<p className={style.envio}>Envio gratis</p>)
+        else return (<p className={style.envio}>Calcule su envio <Link to='/'>aquí</Link></p>)
+    }
+
+    function descuento() {
+        if (productDetail.discount > 0) {
+            let oferta = (productDetail.discount / 100) * productDetail.price
+            return (
+                <div>
+                    <p className={style.antes}>ANTES: ${productDetail.price}</p>
+                    <p className={style.despues}>AHORA: ${productDetail.price - oferta} <span className={style.green}>%{productDetail.discount} OFF</span></p>
+                </div>
+            )
+        }
+        else return (<p className={style.despues}>${productDetail.price}</p>)
+    }
+
+    function handleCarrito() {
+        const check = productsInCarrito.some(e => e.id === productDetail.id);
+        if (check) return setModal({ ...modal, open: true, type: 'error' })
+        else {
+            dispatch(addProductCarrito([{
+                id: productDetail.id,
+                name: productDetail.name,
+                image: productDetail.image,
+                price: productDetail.price,
+                stock: productDetail.stock
+            }]))
+            setModal({ ...modal, open: true, type: 'success' })
+        }
     }
 
     return (
-        <div className={style.body}>
-            <div className={style.productCard}>
-                <img src={productDetail.image} className={style.cardImg} alt='Imagen producto' onError={({ currentTarget }) => {
-                    currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = `${noImage}`;
-                }} />
-                <div className={style.subContainer}>
-                    <h1 className={style.nombreProducto}>{productDetail.name}</h1>
-                    <p className={style.descripcion}>{productDetail.description}</p>
-                    {stockDisponible()}
-                    <p className={style.precio}>${productDetail.price}</p>
-                    <br />
+        <>
+            <div className={style.body}>
+                <p className={style.categories}><Link to='/products'>Productos</Link> {'>'} <Link to='/products'>{productDetail.categories}</Link> </p>
+
+                <div className={style.productCard}>
+                    <img src={productDetail.image} className={style.cardImg} alt='Imagen producto' onError={({ currentTarget }) => {
+                        currentTarget.onerror = null; // prevents looping
+                        currentTarget.src = `${noImage}`;
+                    }} />
+                    <div className={style.container}>
+                        <h1 className={style.nombreProducto}>{productDetail.name}</h1>
+                        <div className={style.subContainer}>
+                            {stockDisponible()}
+                        </div>
+                        <div className={style.subContainer}>
+                            {tipoEnvio()}
+                        </div>
+                        <div className={style.subContainer}>
+                            {descuento()}
+                        </div>
+                        <div>
+                        </div>
+                        <p className={style.descripcion}>{productDetail.description}</p>
+                        <button onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
+                    </div>
                 </div>
             </div>
-        </div>
+            {
+                (modal.open)
+                    ? <Alerta setOpenModal={setModal} type={modal.type} />
+                    : <></>
+            }
+        </>
     )
 }
 

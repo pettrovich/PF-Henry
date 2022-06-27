@@ -52,11 +52,6 @@ function ProductCard({ name, image, price, description, category, stock, id, add
 
     return (
         <>
-            {
-                (modal.open)
-                    ? <Alerta setOpenModal={setModal} type={modal.type} />
-                    : <></>
-            }
             <div id={id} className={style.card}>
                 <img src={image} className={style.cardImg} alt='Imagen producto' onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
@@ -84,6 +79,11 @@ function ProductCard({ name, image, price, description, category, stock, id, add
                     </div>
                 </div>
             </div >
+            {
+                (modal.open)
+                    ? <Alerta setOpenModal={setModal} type={modal.type} />
+                    : <></>
+            }
         </>
     )
 }
