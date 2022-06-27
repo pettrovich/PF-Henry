@@ -1,4 +1,4 @@
-const {User} = require('../db');
+const {User} = require('../../../db');
 
 async function createUser (name, lastName, dni, email, celphone, username, password, isAdmin, userAddress) {
     if (!(name && lastName && dni && email && celphone && username && password))

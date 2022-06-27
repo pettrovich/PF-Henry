@@ -1,4 +1,4 @@
-const {Address} = require('../db');
+const {Address} = require('../../../db');
 
 async function createAddress (address, number, zipCode, province, location, apartment, description) {
     if (!(address && zipCode && province))
