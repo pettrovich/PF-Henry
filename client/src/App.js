@@ -23,7 +23,7 @@ function App() {
         <Route path="createProduct" element={<CreateProduct />} />
         <Route path="login" element={<Login />} />
         <Route path="/createAccount" element={<CreateAccount />} />
-        <Route path="/username/:username" component={<PerfilDelUsuario />} />
+        <Route path="/username/:username" element={<PerfilDelUsuario />} />
         <Route path="/favoritos" element={<Favoritos />} />
       </Routes>
     </div>
