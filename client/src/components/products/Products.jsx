@@ -5,7 +5,6 @@ import { getAllProducts } from '../../redux/actions/productsA';
 import style from './assets/Products.module.css';
 import Filtrado from './Filtrado';
 import Paginado from './Paginado';
-// import { Link } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -35,7 +34,6 @@ function Products({ getAllProducts }) {
     return (
         <div className={style.body}>
             <div className={style.container}>
-                <h1>Products</h1>
                 <div className={style.containerFilter}><Filtrado /></div>
                 {/* <Link to='/createProduct'><button>Crear producto</button></Link> */}
                 <div className={style.containerCards}>
@@ -49,12 +47,13 @@ function Products({ getAllProducts }) {
                                 category={e.category}
                                 image={e.image}
                                 description={e.description}
+                                stock={e.stock}
                             />
                         )
                     })}
+                    <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} />
                 </div>
             </div>
-            <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} />
         </div >
     )
 }

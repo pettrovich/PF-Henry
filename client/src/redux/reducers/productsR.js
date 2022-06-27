@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, ORDER_PRICE, FILTER_CATEGORY } from "../actions/productsA";
+import { GET_ALL_PRODUCTS, ORDER_PRICE_DESC, FILTER_CATEGORY, RANGO_PRICE, DISCOUNT, ENVIOS, GET_BRAND, ORDER_PRICE_ASC } from "../actions/productsA";
 import { GET_PRODUCT_BY_NAME } from '../actions/productName';
 
 const initialState = {
@@ -12,10 +12,15 @@ const productsR = (state = initialState, { type, payload }) => {
                 ...state,
                 products: payload
             }
-        case ORDER_PRICE:
+        case ORDER_PRICE_ASC:
             return {
                 ...state,
-                products: payload
+                products: (state.products.sort((a, b) => { return a.price - b.price })).map(e => e)
+            }
+        case ORDER_PRICE_DESC:
+            return {
+                ...state,
+                products: (state.products.sort((a, b) => { return a.price - b.price }).reverse()).map(e => e)
             }
         case GET_PRODUCT_BY_NAME:
             return {
@@ -27,7 +32,29 @@ const productsR = (state = initialState, { type, payload }) => {
                 ...state,
                 products: payload
             }
+        case RANGO_PRICE:
+            return {
+                ...state,
+                products: payload
+            }
 
+        case DISCOUNT:
+            return {
+                ...state,
+                products: payload
+            }
+
+        case ENVIOS:
+            return {
+                ...state,
+                products: payload
+            }
+
+        case GET_BRAND:
+            return {
+                ...state,
+                products: payload
+            }
         default:
             return state;
     }

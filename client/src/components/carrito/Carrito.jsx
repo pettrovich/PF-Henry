@@ -1,36 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, connect } from 'react-redux';
-import { deleteProductCarrito } from '../../redux/actions/carritoA';
+import { resetTotal } from '../../redux/actions/carritoA';
 import style from './assets/Carrito.module.css';
-import close from './assets/cross-close.svg';
+import CarritoCards from './CarritoCards';
 
-function Carrito({ deleteProductCarrito }) {
-    const products = useSelector((state) => state.carrito.productosCarrito);
-    let total
-    if (products.length <= 0) total = 0
-    else total = Math.trunc(products.map(e => e.price).reduce((prevValue, currentValue) => prevValue + currentValue)) // Saca el total de los productos dentro del carrito
 
-    function handleDelete(e) {
-        deleteProductCarrito(e);
-    }
+function Carrito({ resetTotal }) {
+    const products = useSelector((state) => state.carrito);
+
+    // let total
+    // if (products.length <= 0) total = 0
+    // else total = Math.trunc(products.map(e => e.price).reduce((prevValue, currentValue) => prevValue + currentValue)) // Saca el total de los productos dentro del carrito
+
+    useEffect(() => {
+        return () => {
+            resetTotal()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
 
     return (
+
         <div className={style.body}>
             <div className={style.container}>
                 <div className={style.products}>
-                    {products.map(e => (
-                        <div key={e.id} className={style.card}>
-                            <img src={e.image} alt='Imagen producto' width='50px' />
-                            <p>{e.name}</p>
-                            <p>${e.price}</p>
-                            <img className={style.cancelBtn} src={close} onClick={() => handleDelete(e)} alt='Close' />
-                        </div>
-                    ))}
+                    {
+                        (products.productosCarrito.length === 0)
+                            ? <h1>No has agregado productos al carrito...</h1>
+                            : products.productosCarrito.map(e =>
+                            (
+                                < CarritoCards
+                                    key={e.id}
+                                    id={e.id}
+                                    name={e.name}
+                                    image={e.image}
+                                    price={e.price}
+                                    stock={e.stock}
+                                />
+                            ))}
                 </div>
                 <div className={style.containerTotal}>
                     <div className={style.cardTotal}>
                         <p>Total</p>
-                        <h2>${total}</h2>
+                        <h2>${products.totalCarrito}</h2>
                         <button className={style.comprarBtn}>Terminar compra</button>
                     </div>
                 </div>
@@ -40,4 +53,4 @@ function Carrito({ deleteProductCarrito }) {
 }
 
 
-export default connect(null, { deleteProductCarrito })(Carrito)
+export default connect(null, { resetTotal })(Carrito)

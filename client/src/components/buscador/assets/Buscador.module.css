@@ -30,3 +30,9 @@
         width: 19vw;
     }
 }
+
+@media only screen and (max-width: 680px) {
+    .search {
+        display: none !important;
+    }
+}
