@@ -8,7 +8,7 @@ import DetailProduct from './components/detallesDelProducto/DetallesDelProducto'
 import CreateProduct from './components/createProduct/CreateProduct';
 import Login from "./components/login/Login";
 import CreateAccount from "./components/createAccount/CreateAccount";
-import PerfilDelUsuario from "./components/PerfilDelUsuario/PerfilDelUsuario";
+import PerfilDelUsuario from "./components/perfilDelUsuario/PerfilDelUsuario";
 import Favoritos from './components/favoritos/Favoritos';
 
 function App() {
