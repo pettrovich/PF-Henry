@@ -106,16 +106,9 @@ svg {
 
 @media only screen and (max-width: 1669px) {
 
-    .btnDetail {
-        left: 20px;
+    .card {
+        height: 46vh;
     }
-
-    .favorite {
-        left: 90%;
-    }
-}
-
-@media only screen and (max-width: 1116px) {
 
     .btnDetail {
         left: 20px;
@@ -128,17 +121,40 @@ svg {
 
 @media only screen and (max-width: 1400px) {
     .card {
-        height: 100%;
+        height: 31%;
         width: 20vw;
         padding: 3px;
     }
 
 }
 
+@media only screen and (max-width: 1280px) {
+    .card {
+        height: 43vh;
+        width: 19vw;
+    }
+}
+
+@media only screen and (max-width: 1116px) {
+    .card {
+        height: 31%;
+        width: 30vw;
+        padding: 3px;
+    }
+
+    .btnDetail {
+        left: 20px;
+    }
+
+    .favorite {
+        left: 90%;
+    }
+}
+
 @media only screen and (max-width: 960px) {
     .card {
-        height: 100%;
-        width: 32vw;
+        height: 31%;
+        width: 30vw;
         padding: 3px;
     }
 
@@ -147,11 +163,10 @@ svg {
     }
 }
 
-@media only screen and (max-width: 715px) {
+@media only screen and (max-width: 768px) {
     .card {
-        height: 100%;
-        width: 45vw;
-        padding: 3px;
+        height: 31%;
+        width: 35vw;
     }
 
     .btnDetail {
@@ -161,14 +176,21 @@ svg {
 
 @media only screen and (max-width: 600px) {
     .card {
-        height: 100%;
+        height: 31%;
         width: 65vw;
+    }
+}
+
+@media only screen and (max-width: 563px) {
+    .card {
+        height: 16%;
+        width: 85vw;
     }
 }
 
 @media only screen and (max-width: 414px) {
     .card {
-        height: 100%;
-        width: 85vw;
+        height: 16%;
+        width: 100vw;
     }
 }
