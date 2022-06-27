@@ -31,9 +31,8 @@
 
 .productosVendidos {
     /* background-color: black; */
-    height: 350px;
-    border: solid;
-    border-width: 2px;
+    margin-bottom: 50px;
+    height: 400px;
     display: flex;
     border-radius: 7px;
 }
