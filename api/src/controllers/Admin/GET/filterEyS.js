@@ -1,5 +1,5 @@
 const { Op } = require('sequelize')
-const {Product} = require('../db')
+const {Product} = require('../../../db')
 
 const filterEyS = async (req, res) => {
     let filterEyS = req.params.filterEyS

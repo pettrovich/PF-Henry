@@ -1,4 +1,4 @@
-const {Product} = require('../db')
+const {Product} = require('../../../db')
 
 const filterDisabled = async (req, res) => {
     let filterDisabled = req.params.filterDisabled

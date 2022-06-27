@@ -7,6 +7,8 @@ import detailProduct from './reducers/detailProductR';
 import productoscreados from './reducers/createProductR';
 import users from './reducers/createUsers'
 import favoritos from './reducers/favoritosR';
+import PerfilDelUsuarioR from './reducers/PerfilDelUsuarioR';
+
 
 const reducer = combineReducers({
     carrito,
@@ -14,7 +16,8 @@ const reducer = combineReducers({
     detailProduct,
     productoscreados,
     users,
-    favoritos
+    favoritos,
+    PerfilDelUsuarioR,
 })
 
 export const store = createStore(

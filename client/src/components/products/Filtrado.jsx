@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { orderByPrice, getByCategory, rangoByPrice, byDiscount, byEnvios, getByMarcas } from '../../redux/actions/productsA';
+import { orderByPrice, getByCategory, rangoByPrice, byDiscount, byEnvios, getAllProducts } from '../../redux/actions/productsA';
 import style from './assets/Filtrado.module.css';
 import BuscadorMarcas from "./BuscadorMarcas";
 
 
-function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount }) {
+function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount, getAllProducts }) {
     const [state, setState] = useState({
         price: '',
         categoria: '',
@@ -16,28 +16,42 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
     })
 
     useEffect(() => {
-        if (state.price.length > 2) orderByPrice(state.price)
         if (state.categoria.length > 2) getByCategory(state.categoria)
         if (state.rango.length > 2) rangoByPrice(state.rango)////////
         if (state.discount.length > 2) byDiscount(state.discount)////////
         if (state.envio.length > 2) byEnvios(state.envio)////////
+        setTimeout(() => {
+            if (state.price.length > 2) orderByPrice(state.price)
+        }, 500);
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state])
 
+    function resetStates() { // PROVISORIO PROVISORIO PROVISORIO PROVISORIO PROVISORIO PROVISORIO
+        setState({
+            price: '',
+            categoria: '',
+            rango: "",
+            discount: "",
+            envio: "",
+            marcas: ""
+        })
+        getAllProducts();
+    }
 
     return (
         <div>
             <form className={style.container}>
+                <p>Ordenar productos</p>
                 <label htmlFor='asc/desc'>
-                    <select value={state.price} onChange={(e) => setState({ ...state, price: e.target.value })}>
+                    <select className={style.selectorForm} value={state.price} onChange={(e) => setState({ ...state, price: e.target.value })}>
                         <option value={''}>Precio</option>
-                        <option value='ASC'>[Ascendente]</option>
-                        <option value='DESC'>[Descendente]</option>
+                        <option value='ASC'>Ascendente</option>
+                        <option value='DESC'>Descendente</option>
                     </select>
                 </label>
                 <label htmlFor='categorias'>
-                    <select value={state.categoria} onChange={(e) => setState({ ...state, categoria: e.target.value })}>
+                    <select className={style.selectorForm} value={state.categoria} onChange={(e) => setState({ ...state, categoria: e.target.value })}>
                         <option value={''}>Categoría</option>
                         <option value='MotherBoard'>MotherBoard</option>
                         <option value='RAM'>RAM</option>
@@ -62,7 +76,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                 </label>
 
                 <label htmlFor='byEnvios'>
-                    <select value={state.envio} onChange={(e) => setState({ ...state, envio: e.target.value })}>
+                    <select className={style.selectorForm} value={state.envio} onChange={(e) => setState({ ...state, envio: e.target.value })}>
                         <option value={''}>Envíos</option>
                         <option value='false'>Envíos con costo</option>
                         <option value='true'>Envío Gratis</option>
@@ -71,7 +85,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
 
 
                 <label htmlFor='rangoPrecio'>
-                    <select value={state.rango} onChange={(e) => setState({ ...state, rango: e.target.value })}>
+                    <select className={style.selectorForm} value={state.rango} onChange={(e) => setState({ ...state, rango: e.target.value })}>
                         <option value={''}>Rango de precio</option>
                         <option value='-10mil'>-$10mil</option>
                         <option value='+10mil'>$10mil-$50mil</option>
@@ -81,7 +95,7 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
                 </label>
 
                 <label htmlFor='byDiscount'>
-                    <select value={state.discount} onChange={(e) => setState({ ...state, discount: e.target.value })}>
+                    <select className={style.selectorForm} value={state.discount} onChange={(e) => setState({ ...state, discount: e.target.value })}>
                         <option value={''}>Descuentos</option>
                         <option value='+05'>+5%</option>
                         <option value='+10'>+10%</option>
@@ -94,9 +108,12 @@ function Filtrado({ orderByPrice, getByCategory, rangoByPrice, byEnvios, byDisco
 
 
             </form>
-            <BuscadorMarcas />
+            <div className={style.container}>
+                <BuscadorMarcas />
+                <button onClick={() => resetStates()}>Reset</button>
+            </div>
         </div>
     )
 }
 
-export default connect(null, { orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount, })(Filtrado)
+export default connect(null, { orderByPrice, getByCategory, rangoByPrice, byEnvios, byDiscount, getAllProducts })(Filtrado)

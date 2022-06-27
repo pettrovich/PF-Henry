@@ -1,4 +1,4 @@
-const { Product } = require('../db')
+const { Product } = require('../../../db')
 const { Op } = require('sequelize')
 
 const filterPriceRange = async (req, res) => {

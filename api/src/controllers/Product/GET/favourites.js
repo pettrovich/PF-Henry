@@ -1,4 +1,4 @@
-const {Product, User} = require('../db');
+const {Product, User} = require('../../../db');
 
 async function getFavourites(username) {
     const where = {username};

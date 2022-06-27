@@ -1,7 +1,8 @@
-import { ADD_PRODUCT_CARRITO, DELETE_PRODUCT_CARRITO } from "../actions/carritoA";
+import { ADD_PRODUCT_CARRITO, DELETE_PRODUCT_CARRITO, INCREMENT_TOTAL, DECREMENT_TOTAL, RESET_TOTAL } from "../actions/carritoA";
 
 const initialState = {
     productosCarrito: [],
+    totalCarrito: 0
 }
 
 const carritoR = (state = initialState, { type, payload }) => {
@@ -14,7 +15,22 @@ const carritoR = (state = initialState, { type, payload }) => {
         case DELETE_PRODUCT_CARRITO:
             return {
                 ...state,
-                productosCarrito: state.productosCarrito.filter(e => e.name !== payload.name)
+                productosCarrito: state.productosCarrito.filter(e => e.id !== payload)
+            }
+        case INCREMENT_TOTAL:
+            return {
+                ...state,
+                totalCarrito: state.totalCarrito + payload
+            }
+        case DECREMENT_TOTAL:
+            return {
+                ...state,
+                totalCarrito: state.totalCarrito - payload
+            }
+        case RESET_TOTAL:
+            return {
+                ...state,
+                totalCarrito: 0
             }
 
         default:

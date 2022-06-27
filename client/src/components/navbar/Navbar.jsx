@@ -27,7 +27,7 @@ export default function Navbar() {
                 <p className={style.cantChanguito}>{number}</p>
             </span>
 
-            <Link to='/createProduct'><button className={style.btnCreateProduct}>Crear producto</button></Link>
+            {/* <Link to='/createProduct'><button className={style.btnCreateProduct}>Crear producto</button></Link> */}
         </div>
     )
 }

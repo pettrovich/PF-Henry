@@ -1,7 +1,7 @@
 const {Router} = require('express');
-const {addFavourite, getFavourites, removeFavourite} = require("../controllers/favourites");
-const {createAddress, getAddress, updateAddress} = require("../controllers/addresses");
-const {createUser, getAdminUsers, getNonAdminUsers, getUserByUsername,updateUser} = require("../controllers/users");
+const {addFavourite, getFavourites, removeFavourite} = require("../controllers/Product/GET/favourites");
+const {createAddress, getAddress, updateAddress} = require("../controllers/Address/GET/addresses");
+const {createUser, getAdminUsers, getNonAdminUsers, getUserByUsername,updateUser} = require("../controllers/User/GET/users");
 const router = Router();
 
 router.post('/', async (req,res) => {

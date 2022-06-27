@@ -1,4 +1,4 @@
-const { User, Address } = require('../db')
+const { User, Address } = require('../../../db')
 
 const userPost = async (req, res) => {
     

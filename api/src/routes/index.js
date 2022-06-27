@@ -1,23 +1,23 @@
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const {priceOrder} = require('../controllers/priceOrder')
-const {filterCategories} = require('../controllers/filterCategories')
-const {getProduct} = require("../controllers/getProductByName");
-const { createProduct } = require('../controllers/createProduct');
-const { updateProduct } = require('../controllers/updateProduct');
-const { getProductById } = require('../controllers/getProductById');
-const {userPost} = require('../controllers/userPost')
+const {priceOrder} = require('../controllers/Product/GET/priceOrder')
+const {filterCategories} = require('../controllers/Product/GET/filterCategories')
+const {getProduct} = require("../controllers/Product/GET/getProductByName");
+const { createProduct } = require('../controllers/Product/POST/createProduct');
+const { updateProduct } = require('../controllers/Product/PUT/updateProduct');
+const { getProductById } = require('../controllers/Product/GET/getProductById');
+const {userPost} = require('../controllers/User/POST/userPost')
 const usersRoute = require ('./users');
-const { adminProducts } = require('../controllers/adminProducts');
-const {filterShipping} = require('../controllers/filterShipping')
-const {filterBrand} = require('../controllers/filterBrand');
-const {filterStockProduct} = require('../controllers/filterStockProducts')
-const {filterDisabled} = require('../controllers/filterDisabled')
-const {filterEyS} = require('../controllers/filterEyS')
-const {filterPriceRange} = require('../controllers/filterPriceRange')
-const {filterDiscount} = require('../controllers/filterDiscount');
-const {adminProductsCounter} = require('../controllers/adminProductsCounter')
+const { adminProducts } = require('../controllers/Admin/GET/adminProducts');
+const {filterShipping} = require('../controllers/Product/GET/filterShipping')
+const {filterBrand} = require('../controllers/Product/GET/filterBrand');
+const {filterStockProduct} = require('../controllers/Admin/GET/filterStockProducts')
+const {filterDisabled} = require('../controllers/Admin/GET/filterDisabled')
+const {filterEyS} = require('../controllers/Admin/GET/filterEyS')
+const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange')
+const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
+const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter')
 
 
 const router = Router();

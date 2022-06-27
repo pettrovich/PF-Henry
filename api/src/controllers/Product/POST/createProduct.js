@@ -1,4 +1,4 @@
-const {Product} = require("../db")
+const {Product} = require("../../../db")
 
 const createProduct = async (req, res) => {
     const {name, image, price, description, categories, stock, disabled, freeShipping, brand, discount} = req.body

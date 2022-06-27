@@ -1,4 +1,4 @@
-const {Product} = require("../db")
+const {Product} = require("../../../db")
 
 const getProductById = async (req, res) => {
     const {idProduct} = req.params
