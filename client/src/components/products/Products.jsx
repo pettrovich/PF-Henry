@@ -5,7 +5,6 @@ import { getAllProducts } from '../../redux/actions/productsA';
 import style from './assets/Products.module.css';
 import Filtrado from './Filtrado';
 import Paginado from './Paginado';
-// import { Link } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -49,6 +48,7 @@ function Products({ getAllProducts }) {
                                 category={e.category}
                                 image={e.image}
                                 description={e.description}
+                                stock={e.stock}
                             />
                         )
                     })}
