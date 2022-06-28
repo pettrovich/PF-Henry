@@ -58,11 +58,18 @@ const CreateAccount = () => {
                     return errores;
 
                 }}
-                onSubmit={(valores, {resetForm}) => {
-                    dispatch(addUserDb(valores))
-                    alert('Su Registro ha sido exitoso')
-                    resetForm();
-                    setState(state = false)
+                onSubmit={async (valores, {resetForm}) => {
+                    const rta = await dispatch(addUserDb(valores))
+                    if (rta.data.length === 0) {
+                        alert('Su Registro ha sido exitoso')
+                        resetForm()
+                        setState(state = false)
+                    }else {
+                        const res = rta.data
+                        alert(res)
+                        resetForm();
+                        setState(state = false)
+                    }
                 }}
             >
                 {({values, touched, errors, handleChange,handleBlur}) => (
