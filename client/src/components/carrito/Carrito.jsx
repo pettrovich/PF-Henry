@@ -27,7 +27,7 @@ function Carrito({ resetTotal }) {
                 <div className={style.products}>
                     {
                         (products.productosCarrito.length === 0)
-                            ? <h1>No has agregado productos al carrito...</h1>
+                            ? <h1 className={style.title}>No has agregado productos al carrito...</h1>
                             : products.productosCarrito.map(e =>
                             (
                                 < CarritoCards
@@ -42,7 +42,7 @@ function Carrito({ resetTotal }) {
                 </div>
                 <div className={style.containerTotal}>
                     <div className={style.cardTotal}>
-                        <p>Total</p>
+                        <p className={style.total}>Total</p>
                         <h2>${products.totalCarrito}</h2>
                         <button className={style.comprarBtn}>Terminar compra</button>
                     </div>
