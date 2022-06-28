@@ -6,7 +6,7 @@ import style from './assets/Products.module.css';
 import Filtrado from './Filtrado';
 import Paginado from './Paginado';
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 9;
 
 function Products({ getAllProducts }) {
     const products = useSelector((state) => state.products.products);
@@ -51,9 +51,9 @@ function Products({ getAllProducts }) {
                             />
                         )
                     })}
-                    <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} />
                 </div>
             </div>
+            <Paginado ITEMS_PER_PAGE={ITEMS_PER_PAGE} products={products.length} paginado={paginado} number={currentPage} cantCards={products.length} />
         </div >
     )
 }
