@@ -1,4 +1,5 @@
 const { Router } = require('express');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/Product/GET/priceOrder')
@@ -18,15 +19,19 @@ const {filterEyS} = require('../controllers/Admin/GET/filterEyS')
 const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange')
 const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
 const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter')
+const {login} = require('../controllers/User/POST/login')
+const {getUserById} = require('../controllers/User/GET/getUserById');
+const verifyToken = require('../middlewares/verifyToken');
 
 
 const router = Router();
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.use("/users", usersRoute);
 
-router.post("/CreateProduct", createProduct)
+router.post("/CreateProduct", createProduct)  //verifyToken (Para inicio de sesion)
 
 router.get("/ProductDetail/:idProduct", getProductById)
 
@@ -57,6 +62,10 @@ router.get('/filterEyS/:filterEyS', filterEyS)
 router.get('/filterPriceRange/:filterPrice', filterPriceRange)
 
 router.get('/filterDiscount/:discount', filterDiscount)
+
+router.post('/login', login)
+
+router.get('/user', verifyToken , getUserById)
 
 
 

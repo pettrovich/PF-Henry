@@ -39,15 +39,17 @@ export default function PerfilDelUsuario(){
 return (
         
 <div>
-   {usuario.name?  
+   {usuario?  
      <div className = {style.DetailContainer}> 
         
-        {/* <h2 className = {style.DetailContainer}>{usuario[0].isAdmin ? "Perfil del Administrador"  : "Perfil del Usuario" }</h2> 
-        {/*Foto:  <img className = {style.foto} src = {usuario[0].image} alt = "" />*/}<h2 className = {style.usuario}>Usuario: {usuario.username}.</h2> 
-        <h2 className = {style.nombre}>Nombre: {usuario.name}. Apellido:  {usuario.lastName}. </h2>                
+        {/* <h2 className = {style.DetailContainer}>{usuario[0].isAdmin ? "Perfil del Administrador"  : "Perfil del Usuario" }</h2> */}
+        {usuario.image? <img className = {style.foto} src = {usuario.image} alt = "" /> : <img className = {style.foto} src = "https://w7.pngwing.com/pngs/527/663/png-transparent-logo-person-user-person-icon-rectangle-photography-computer-wallpaper.png" alt = "" />}
         
-        <h3 className = {style.datos}>Email:  {usuario.email}. </h3> {/* <h3>Contraseña:  {usuario[0].password}.</h3> */}
-        <h3 className = {style.datos}>DNI:   {usuario.dni}.  Telefono:  {usuario.celphone}.</h3> 
+        <h2 className = {style.usuario}>Usuario: {usuario.username}</h2> 
+        <h2 className = {style.nombre}>Bienvenido {usuario.name}  {usuario.lastName}. </h2>                
+        
+        <h3 className = {style.datos}>Email:  {usuario.email} </h3> {/* <h3>Contraseña:  {usuario[0].password}.</h3> */}
+        <h3 className = {style.datos}>DNI:   {usuario.dni}  Telefono:  {usuario.celphone}</h3> 
         {/*<h3 className = {style.h3}>Direccion: </h3> 
 
         <h4 className = {style.h4}>Calle: {usuario[0].address}.    Numero:  {usuario[0].number}. 
@@ -56,7 +58,11 @@ return (
         
         <h5 className = {style.h5}>  Descripcion: {usuario[0].description}.   </h5>  */}
 
-        <Link to = "/" > <button className = {style.volver}>Volver</button> </Link>   
+        <Link to = "/" > <button className = {style.volver}>Volver</button> </Link> 
+        <Link to = "/" > <button className = {style.volver}>Cambiar datos</button> </Link>  
+        <Link to = "/login" > <button className = {style.volver}>Cambiar de usuario</button> </Link>
+        <Link to = "/" > <button className = {style.volver}>Salir</button> </Link>
+        
     </div> 
       :  "Loading"} 
 </div>
