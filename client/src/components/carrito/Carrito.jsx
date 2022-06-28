@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, connect } from 'react-redux';
 import { resetTotal } from '../../redux/actions/carritoA';
+import { Link } from 'react-router-dom';
 import style from './assets/Carrito.module.css';
 import CarritoCards from './CarritoCards';
 
@@ -27,7 +28,10 @@ function Carrito({ resetTotal }) {
                 <div className={style.products}>
                     {
                         (products.productosCarrito.length === 0)
-                            ? <h1 className={style.title}>No has agregado productos al carrito...</h1>
+                            ?   <div> <br/> 
+                                    <h1 className={style.title}>No has agregado productos al carrito... </h1>
+                                    <Link to = "/products" > <button className = {style.verProductos}>Ver productos</button> </Link>
+                                </div> 
                             : products.productosCarrito.map(e =>
                             (
                                 < CarritoCards
