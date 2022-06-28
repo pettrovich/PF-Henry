@@ -15,7 +15,6 @@ module.exports = (sequelize) => {
     },
     dni: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         unique: true
     },
     email: {
@@ -28,20 +27,29 @@ module.exports = (sequelize) => {
       },
     celphone: {
         type: DataTypes.BIGINT,
-        allowNull: false
     },
     isAdmin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
     username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+      type: DataTypes.STRING,
+      unique: true,
+      validate: {
+        len: {
+          args: [3, 255],
+          mensaje: "El usuario tiene que tener 2 caracteres como minimo"
+        }
+      }
+   },
+    googleId: {
+    type: DataTypes.STRING,
+    },
+    picture: {
+    type: DataTypes.STRING,
     },
     password: {
         type: DataTypes.TEXT,
-        allowNull: false,
     }
   });
 };

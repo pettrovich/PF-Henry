@@ -12,7 +12,7 @@ export default function LandingPage() {
             <Carousel images={images} />
             <div className={style.container}>
                 <div className={style.section}>
-                    <p>Productos mas vendidos</p>
+                    <p className={style.title}>Productos mas vendidos</p>
                     <div className={style.productosVendidos}>
                         <CardsLanding
                             id={45}
@@ -36,7 +36,7 @@ export default function LandingPage() {
                             image={'https://images-na.ssl-images-amazon.com/images/I/51MsmHdYjnL._AC_SL1000_.jpg'}
                         />
                     </div>
-                    <p>Nuevos productos</p>
+                    <p className={style.title}>Nuevos productos</p>
                     <div className={style.productosVendidos}>
                         <CardsLanding
                             id={45}
@@ -60,7 +60,7 @@ export default function LandingPage() {
                             image={'https://images-na.ssl-images-amazon.com/images/I/51MsmHdYjnL._AC_SL1000_.jpg'}
                         />
                     </div>
-                    <p>Ofertas</p>
+                    <p className={style.title}>Ofertas</p>
                     <div className={style.productosVendidos}>
                         <CardsLanding
                             id={45}

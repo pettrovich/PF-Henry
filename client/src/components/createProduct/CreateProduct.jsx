@@ -185,7 +185,7 @@ export default function CreateProduct() {
                         type="number"
                         value={input.discount}
                         name='discount'
-                        placeholder="Descuentos del producto: (*)"
+                        placeholder="Descuentos:      %     (*)"
                         onChange={(e) => handleChange(e)}
                     />
                     {errors.discount && (<p className={style.error}>{errors.discount}</p>)}
@@ -194,7 +194,7 @@ export default function CreateProduct() {
                 <div><br />
                     <input
                         className={style.input}
-                        placeholder="Descripción del Producto: (*)"
+                        placeholder="Descripción: (*)"
                         autoComplete="off"
                         type="text"
                         value={input.description}
@@ -231,18 +231,18 @@ export default function CreateProduct() {
                 </div>
 
                 <br />
-                <select onChange={e => handlefreeShipping(e)} className={style.envio} >
+                <select onChange={e => handlefreeShipping(e)} value={input.freeShipping} className={style.envio} >
 
-                <option value="All">¿Envio gratis?</option>
+                <option value="All" hidden>¿Envio gratis?</option>
 
                 <option value="false">No</option>
                 <option value="true">Si</option>
                 </select> <br /><br />
 
 
-                <select onChange={e => handleCheck(e)} className={style.categorias} >
+                <select onChange={e => handleCheck(e)} value={input.categories} className={style.categorias} >
 
-                    <option value="All">Elige una categoria</option>
+                    <option value="All" hidden>Elige una categoria</option>
 
                     <option value="Auriculares">Auriculares</option>
                     <option value="Fuente de alimentación">Fuente de alimentación</option>
