@@ -9,7 +9,7 @@ import favoriteSelected from './assets/favorite-select.svg';
 import { addFavorite, removeFavorite } from '../../redux/actions/favoritosA';
 import Alerta from '../alertas/Alerta';
 
-function ProductCard({ name, image, price, description, category, stock, id, addProductCarrito, addFavorite, removeFavorite }) {
+function CardsDiscounts({ name, image, price, description, category, stock, id, addProductCarrito, addFavorite, removeFavorite }) {
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
     const productsInFavoritos = useSelector((state) => state.favoritos.productosFavoritos);
     const [isFavorite, setIsFavorite] = useState(false);
@@ -64,7 +64,7 @@ function ProductCard({ name, image, price, description, category, stock, id, add
 
 
                 <div className={style.footer}>
-                    <span className={style.textTitle}>${Math.trunc(price)}</span>
+                    <span className={style.textTitle}>${price}</span>
 
 
                     {/* {checkFavorite()} */}
@@ -91,4 +91,4 @@ function ProductCard({ name, image, price, description, category, stock, id, add
     )
 }
 
-export default connect(null, { addProductCarrito, addFavorite, removeFavorite })(ProductCard)
+export default connect(null, { addProductCarrito, addFavorite, removeFavorite })(CardsDiscounts)
