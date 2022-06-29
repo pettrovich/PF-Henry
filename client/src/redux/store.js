@@ -8,6 +8,10 @@ import productoscreados from './reducers/createProductR';
 import users from './reducers/createUsers'
 import favoritos from './reducers/favoritosR';
 import PerfilDelUsuarioR from './reducers/PerfilDelUsuarioR';
+import landingPageNewestR from './reducers/landingPageNewestR';
+import landingPageMostSelledR from './reducers/landingPageMostSelledR';
+import landingPageDiscountsR from './reducers/landingPageDiscountsR';
+
 
 
 const reducer = combineReducers({
@@ -18,6 +22,10 @@ const reducer = combineReducers({
     users,
     favoritos,
     PerfilDelUsuarioR,
+    landingPageNewestR,
+    landingPageMostSelledR,
+    landingPageDiscountsR,
+
 })
 
 export const store = createStore(
