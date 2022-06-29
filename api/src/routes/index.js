@@ -18,6 +18,8 @@ const {filterDisabled} = require('../controllers/Admin/GET/filterDisabled')
 const {filterEyS} = require('../controllers/Admin/GET/filterEyS')
 const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange')
 const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
+const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter');
+const { newestProducts } = require('../controllers/Product/GET/newestProducts');
 const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter')
 const {login} = require('../controllers/User/POST/login')
 const {getUserById} = require('../controllers/User/GET/getUserById');
@@ -63,10 +65,10 @@ router.get('/filterPriceRange/:filterPrice', filterPriceRange)
 
 router.get('/filterDiscount/:discount', filterDiscount)
 
+router.get('/newestProducts', newestProducts)
+
 router.post('/login', login)
 
 router.get('/user', verifyToken , getUserById)
-
-
 
 module.exports = router;

@@ -35,7 +35,6 @@ function Products({ getAllProducts }) {
         <div className={style.body}>
             <div className={style.container}>
                 <div className={style.containerFilter}><Filtrado /></div>
-                {/* <Link to='/createProduct'><button>Crear producto</button></Link> */}
                 <div className={style.containerCards}>
                     {currentProducts.map(e => {
                         return (
