@@ -10,6 +10,7 @@ import Login from "./components/login/Login";
 import CreateAccount from "./components/createAccount/CreateAccount";
 import PerfilDelUsuario from "./components/PerfilDelUsuario/PerfilDelUsuario";
 import Favoritos from './components/favoritos/Favoritos';
+import Dashboard from './components/dashboard/Dashboard';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/createAccount" element={<CreateAccount />} />
         <Route path="/username/:username" element={<PerfilDelUsuario />} />
         <Route path="/favoritos" element={<Favoritos />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );
