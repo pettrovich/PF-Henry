@@ -38,8 +38,8 @@ function Producto({ getOneProduct }) {
             let oferta = (productDetail.discount / 100) * productDetail.price
             return (
                 <div>
-                    <p className={style.antes}>ANTES: ${productDetail.price}</p>
-                    <p className={style.despues}>AHORA: ${productDetail.price - oferta} <span className={style.green}>%{productDetail.discount} OFF</span></p>
+                    <p className={style.antes}>ANTES: ${(productDetail.price).toFixed(2)}</p>
+                    <p className={style.despues}>AHORA: ${(productDetail.price - oferta).toFixed(2)} <span className={style.green}>%{productDetail.discount} OFF</span></p>
                 </div>
             )
         }

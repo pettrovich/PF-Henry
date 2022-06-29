@@ -42,7 +42,7 @@ function Carrito({ resetTotal }) {
                 <div className={style.containerTotal}>
                     <div className={style.cardTotal}>
                         <p className={style.total}>Total</p>
-                        <h2>${products.totalCarrito}</h2>
+                        <h2>${products.totalCarrito.toFixed(2)}</h2>
                         <button className={style.comprarBtn}>Terminar compra</button>
                     </div>
                 </div>
