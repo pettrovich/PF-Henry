@@ -25,6 +25,8 @@ const {getUserById} = require('../controllers/User/GET/getUserById');
 const verifyToken = require('../middlewares/verifyToken');
 const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDiscountedProducts');
 const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
+const { payments } = require('../controllers/PaymentsMP/payments');
+const { suscription } = require('../controllers/PaymentsMP/suscription');
 
 
 const router = Router();
@@ -75,5 +77,9 @@ router.get('/bestSellingProducts', bestSellingProducts)
 router.post('/login', login)
 
 router.get('/user', verifyToken , getUserById)
+
+router.get('/payments', payments)
+
+router.get('/suscription', suscription)
 
 module.exports = router;

@@ -1,4 +1,4 @@
-const { User, Address } = require('../../../db')
+const { User, Address , Order} = require('../../../db')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
@@ -47,6 +47,13 @@ const userPost = async (req, res) => {
             username,
             password,
             isAdmin
+        }).then( user => {
+            Order.create({
+                status: "created",
+                price: 0,
+                quantity: 0,
+                userId: user.dataValues.id    
+            })
         })
         
         let newAddress = await Address.create({
