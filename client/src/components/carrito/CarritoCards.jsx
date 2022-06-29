@@ -54,7 +54,6 @@ function CarritoCards({ id, name, image, price, description, categories, stock, 
                 <p>{cantComprar}</p>
                 <button className={style.btn} onClick={incrementar}>+</button>
             </div>
-            {/* <img className={style.cancelBtn} onClick={() => handleDelete(e)} alt='Close' /> */}
             <img className={style.cancelBtn} src={close} onClick={() => handleDelete(id)} alt='Close' />
         </div>
     )
