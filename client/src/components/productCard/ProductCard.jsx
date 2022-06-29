@@ -64,7 +64,7 @@ function ProductCard({ name, image, price, description, category, stock, id, add
 
 
                 <div className={style.footer}>
-                    <span className={style.textTitle}>${price}</span>
+                    <span className={style.textTitle}>${Math.trunc(price)}</span>
 
 
                     {/* {checkFavorite()} */}

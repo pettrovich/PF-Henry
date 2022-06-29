@@ -47,7 +47,7 @@ function CarritoCards({ id, name, image, price, description, categories, stock, 
             </div>
             <div className={style.containerDetails}>
                 <p className={style.nameProduct}>{name}</p>
-                <p className={style.priceProduct}>${price}c/u</p>
+                <p className={style.priceProduct}>${price.toFixed(2)}c/u</p>
             </div>
             <div className={style.containerStock}>
                 <button className={style.btn} onClick={decrementar}>-</button>
