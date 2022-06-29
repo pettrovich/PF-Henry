@@ -18,15 +18,12 @@ const {filterDisabled} = require('../controllers/Admin/GET/filterDisabled')
 const {filterEyS} = require('../controllers/Admin/GET/filterEyS')
 const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange')
 const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
-<<<<<<< HEAD
 const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter');
 const { newestProducts } = require('../controllers/Product/GET/newestProducts');
-=======
 const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter')
 const {login} = require('../controllers/User/POST/login')
 const {getUserById} = require('../controllers/User/GET/getUserById');
 const verifyToken = require('../middlewares/verifyToken');
->>>>>>> 3abe57152d31b0b847183e2185ccc9dd26c1d2a3
 
 
 const router = Router();
