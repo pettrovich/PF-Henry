@@ -1,7 +1,7 @@
 import { ADD_PRODUCT_CARRITO, DELETE_PRODUCT_CARRITO, INCREMENT_TOTAL, DECREMENT_TOTAL, RESET_TOTAL } from "../actions/carritoA";
 
 const initialState = {
-    productosCarrito: [],
+    productosCarrito: (JSON.parse(localStorage.getItem('carrito')) === null) ? [] : JSON.parse(localStorage.getItem('carrito')),
     totalCarrito: 0
 }
 
@@ -15,7 +15,7 @@ const carritoR = (state = initialState, { type, payload }) => {
         case DELETE_PRODUCT_CARRITO:
             return {
                 ...state,
-                productosCarrito: state.productosCarrito.filter(e => e.id !== payload)
+                productosCarrito: state.productosCarrito = JSON.parse(localStorage.getItem('carrito'))
             }
         case INCREMENT_TOTAL:
             return {

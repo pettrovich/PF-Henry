@@ -1,6 +1,11 @@
-const { User, Address } = require('../../../db')
+const { User, Address , Order} = require('../../../db')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
+
 
 const userPost = async (req, res) => {
+
+    let password = bcrypt.hashSync(req.body.password, 10)
     
     let {
         name,
@@ -9,7 +14,6 @@ const userPost = async (req, res) => {
         email,
         celphone,
         username,
-        password,
         isAdmin,
         address,
         number,
@@ -43,6 +47,13 @@ const userPost = async (req, res) => {
             username,
             password,
             isAdmin
+        }).then( user => {
+            Order.create({
+                status: "created",
+                price: 0,
+                quantity: 0,
+                userId: user.dataValues.id    
+            })
         })
         
         let newAddress = await Address.create({
@@ -53,6 +64,15 @@ const userPost = async (req, res) => {
             location,
             apartment,
             description
+        }).then(u => {
+
+            let token = jwt.sign({ user: u }, "secret",{
+                expiresIn: "1h"
+            })
+            res.json({
+                user: u,
+                token: token
+            })
         })
         
         newUser.setAddress(newAddress)

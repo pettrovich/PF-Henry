@@ -119,3 +119,14 @@
     font-weight: 600;
     cursor: pointer;
 }
+.btn2 {
+    margin-left: 15px;
+    letter-spacing: 1px;
+    /* text-transform: uppercase; */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--button-bg);
+    cursor: pointer;
+    padding: 3px 45px;
+}

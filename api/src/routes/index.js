@@ -1,4 +1,5 @@
 const { Router } = require('express');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const {priceOrder} = require('../controllers/Product/GET/priceOrder')
@@ -17,16 +18,25 @@ const {filterDisabled} = require('../controllers/Admin/GET/filterDisabled')
 const {filterEyS} = require('../controllers/Admin/GET/filterEyS')
 const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange')
 const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
-const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter')
+const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter');
+const { newestProducts } = require('../controllers/Product/GET/newestProducts');
+const {login} = require('../controllers/User/POST/login')
+const {getUserById} = require('../controllers/User/GET/getUserById');
+const verifyToken = require('../middlewares/verifyToken');
+const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDiscountedProducts');
+const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
+const { payments } = require('../controllers/PaymentsMP/payments');
+const { suscription } = require('../controllers/PaymentsMP/suscription');
 
 
 const router = Router();
+
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.use("/users", usersRoute);
 
-router.post("/CreateProduct", createProduct)
+router.post("/CreateProduct", createProduct)  //verifyToken (Para inicio de sesion)
 
 router.get("/ProductDetail/:idProduct", getProductById)
 
@@ -58,6 +68,18 @@ router.get('/filterPriceRange/:filterPrice', filterPriceRange)
 
 router.get('/filterDiscount/:discount', filterDiscount)
 
+router.get('/newestProducts', newestProducts)
 
+router.get('/mostDiscountedProducts', mostDiscountedProducts)
+
+router.get('/bestSellingProducts', bestSellingProducts)
+
+router.post('/login', login)
+
+router.get('/user', verifyToken , getUserById)
+
+router.get('/payments', payments)
+
+router.get('/suscription', suscription)
 
 module.exports = router;
