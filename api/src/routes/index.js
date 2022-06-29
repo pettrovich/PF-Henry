@@ -24,6 +24,7 @@ const {login} = require('../controllers/User/POST/login')
 const {getUserById} = require('../controllers/User/GET/getUserById');
 const verifyToken = require('../middlewares/verifyToken');
 const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDiscountedProducts');
+const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
 
 
 const router = Router();
@@ -68,6 +69,8 @@ router.get('/filterDiscount/:discount', filterDiscount)
 router.get('/newestProducts', newestProducts)
 
 router.get('/mostDiscountedProducts', mostDiscountedProducts)
+
+router.get('/bestSellingProducts', bestSellingProducts)
 
 router.post('/login', login)
 
