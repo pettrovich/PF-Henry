@@ -22,7 +22,6 @@ export default function Favoritos() {
                                         category={e.category}
                                         image={e.image}
                                         description={e.description}
-                                        favorito={true}
                                     />
                                 )
                             })}
