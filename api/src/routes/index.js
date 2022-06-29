@@ -17,7 +17,8 @@ const {filterDisabled} = require('../controllers/Admin/GET/filterDisabled')
 const {filterEyS} = require('../controllers/Admin/GET/filterEyS')
 const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange')
 const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
-const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter')
+const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter');
+const { newestProducts } = require('../controllers/Product/GET/newestProducts');
 
 
 const router = Router();
@@ -58,6 +59,6 @@ router.get('/filterPriceRange/:filterPrice', filterPriceRange)
 
 router.get('/filterDiscount/:discount', filterDiscount)
 
-
+router.get('/newestProducts', newestProducts)
 
 module.exports = router;
