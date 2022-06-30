@@ -27,6 +27,8 @@ const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDisco
 const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
 const { payments } = require('../controllers/PaymentsMP/payments');
 const { suscription } = require('../controllers/PaymentsMP/suscription');
+const {createOrder, captureOrder, cancelOrder} = require('../controllers/PaymentsPP/payment.paypal')
+
 
 
 const router = Router();
@@ -81,5 +83,11 @@ router.get('/user', verifyToken , getUserById)
 router.get('/payments', payments)
 
 router.get('/suscription', suscription)
+
+router.post('/create-order', createOrder)
+
+router.get('/capture-order', captureOrder)
+
+router.get('/cancel-order', cancelOrder)
 
 module.exports = router;
