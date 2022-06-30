@@ -2,6 +2,7 @@ import React from "react";
 import { useState, } from "react";
 import style from './assets/Dashboard.module.css';
 import CreateProduct from "../createProduct/CreateProduct";
+import AdminProd from "./AdminProducts";
 
 
 const Dashboard = () => {
@@ -26,10 +27,8 @@ const Dashboard = () => {
                 {isShown && buttIndex === 1 && <CreateProduct />}
             </div>
             <div>
-                <button id={2} onClick={handleClick}>Products</button>
-                {isShown && buttIndex === 2 && <p>aqui vendrian los productos del admin</p>}
-                 
-                
+                <button id={2} onClick={handleClick}>Catalogo producto</button>
+                {isShown && buttIndex === 2 && <AdminProd />}
             </div>
         </div>
         
