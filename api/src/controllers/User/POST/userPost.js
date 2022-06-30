@@ -47,15 +47,7 @@ const userPost = async (req, res) => {
             username,
             password,
             isAdmin
-        }).then( user => {
-            Order.create({
-                status: "created",
-                price: 0,
-                quantity: 0,
-                userId: user.dataValues.id    
-            })
         })
-        
         let newAddress = await Address.create({
             address,
             number,
@@ -76,7 +68,7 @@ const userPost = async (req, res) => {
         })
         
         newUser.setAddress(newAddress)
-        res.send('Usuario creado exitosamente')
+
     }
 
     } catch (e) {
