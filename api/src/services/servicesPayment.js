@@ -22,8 +22,19 @@ class PaymentService {
         failure: "/failure",
         pending: "/pending",
         success: "/success"
+      },            
+  "shipments": {
+    cost: prod[0].cost,
+    free_shipping: prod[0].free,
+  },
+    "payer": {
+    "address": {
+        "zip_code": prod[0].zipcode,
+        "street_name": prod[0].streetname,
+        "street_number": prod[0].streetnumber
+    }
       }
-    };
+  };
 
     const payment = await axios.post(url, body, {
       headers: {
@@ -48,7 +59,7 @@ class PaymentService {
       },
       back_url: "https://google.com.ar",
       payer_email: "test_user_91448486@testuser.com"
-    };
+    }
 
     const suscription = await axios.post(url, body, {
       headers: {
