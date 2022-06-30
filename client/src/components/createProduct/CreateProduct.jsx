@@ -143,6 +143,7 @@ export default function CreateProduct() {
             <form className={style.contenedor} onSubmit={(e) => handleSubmit(e)} >
                 <div>
                     <input
+                        maxlength = "30"
                         className={style.input}
                         placeholder="Nombre del Producto: (*)"
                         autoComplete="off"
@@ -191,19 +192,7 @@ export default function CreateProduct() {
                     {errors.discount && (<p className={style.error}>{errors.discount}</p>)}
                 </div>
 
-                <div><br />
-                    <input
-                        className={style.input}
-                        placeholder="Descripción: (*)"
-                        autoComplete="off"
-                        type="text"
-                        value={input.description}
-                        name="description"
-                        onChange={(e) => handleChange(e)}
-                    />
-                    {errors.description && (<p className={style.error}>{errors.description}</p>)}
-                </div>
-
+                
                 <div><br />
                     <input
                         className={style.input}
@@ -228,6 +217,19 @@ export default function CreateProduct() {
                         onChange={(e) => handleChange(e)}
                     />
                     {errors.brand && (<p className={style.error}>{errors.brand}</p>)}<br />
+                </div>
+                <div><br />
+                    
+                        <textarea 
+                        className={style.input}
+                        placeholder="Descripción: (*)"
+                        // autoComplete="off"
+                        type="text"
+                        value={input.description}
+                        name="description"
+                        onChange={(e) => handleChange(e)}
+                    />
+                    {errors.description && (<p className={style.error}>{errors.description}</p>)}
                 </div>
 
                 <br />
