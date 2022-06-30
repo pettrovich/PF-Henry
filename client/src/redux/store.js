@@ -11,6 +11,7 @@ import PerfilDelUsuarioR from './reducers/PerfilDelUsuarioR';
 import landingPageNewestR from './reducers/landingPageNewestR';
 import landingPageMostSelledR from './reducers/landingPageMostSelledR';
 import landingPageDiscountsR from './reducers/landingPageDiscountsR';
+import adminProductsR from './reducers/adminProductsR';
 
 
 
@@ -25,6 +26,7 @@ const reducer = combineReducers({
     landingPageNewestR,
     landingPageMostSelledR,
     landingPageDiscountsR,
+    adminProductsR,
 
 })
 
