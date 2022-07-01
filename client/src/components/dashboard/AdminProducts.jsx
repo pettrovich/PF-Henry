@@ -30,7 +30,12 @@ export default function AdminProd() {
                         price={e.price}
                         stock={e.stock}
                         discount={e.discount}
-                        sold={e.amountSold}
+                        amountSold={e.amountSold}
+                        categories={e.categories}
+                        freeShipping={e.freeShipping}
+                        brand={e.brand}
+                        description={e.description}
+                        disabled={e.disabled}
                         
                     />
                     </Fragment>
