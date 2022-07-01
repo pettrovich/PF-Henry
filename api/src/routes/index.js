@@ -80,9 +80,9 @@ router.post('/login', login)
 
 router.get('/user', verifyToken , getUserById)
 
-router.get('/payments', payments)
+router.post('/payments', payments)
 
-router.get('/suscription', suscription)
+router.post('/suscription', suscription)
 
 router.post('/create-order', createOrder)
 
