@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function Card ({id, name, price, stock, discount, amountSold}){
+export default function Card ({id, name, price, stock, discount, amountSold, description, categories, freeShipping, brand, image, disabled}){
     return (
         <div >
 
@@ -10,16 +10,28 @@ export default function Card ({id, name, price, stock, discount, amountSold}){
             
             PRODUCTO: { name}. 
 
-            PRICE: {price}.
+            PRECIO: {price}.
 
             STOCK: {stock}.
 
-            DISCOUNT: {discount}.
+            DESCUENTO: {discount}.
 
-            SOLD: {amountSold}.
-         
-            </p>
-            <button>Edit product</button>
+            CANT. VENDIDA: {amountSold}.
+
+            CATEGORIAS: {categories}.
+
+            MARCA: {brand}.
+            
+            ¿ENVIO GRATIS? {freeShipping}.
+            
+            IMAGEN: {image}.
+
+            DESCRIPCIÓN: {description}.
+
+            DESACTIVADO: {disabled}.
+
+           </p>
+            <button>Editar productos</button>
                       
         </div>
     );
