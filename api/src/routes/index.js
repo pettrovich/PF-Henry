@@ -20,9 +20,6 @@ const {filterPriceRange} = require('../controllers/Product/GET/filterPriceRange'
 const {filterDiscount} = require('../controllers/Admin/GET/filterDiscount');
 const {adminProductsCounter} = require('../controllers/Admin/GET/adminProductsCounter');
 const { newestProducts } = require('../controllers/Product/GET/newestProducts');
-const {login} = require('../controllers/User/POST/login')
-const {getUserById} = require('../controllers/User/GET/getUserById');
-const verifyToken = require('../middlewares/verifyToken');
 const { mostDiscountedProducts } = require('../controllers/Product/GET/mostDiscountedProducts');
 const { bestSellingProducts } = require('../controllers/Product/GET/bestSellingProducts');
 const { payments } = require('../controllers/PaymentsMP/payments');
@@ -38,7 +35,7 @@ const router = Router();
 // Ejemplo: router.use('/auth', authRouter);
 router.use("/users", usersRoute);
 
-router.post("/CreateProduct", createProduct)  //verifyToken (Para inicio de sesion)
+router.post("/CreateProduct", createProduct)
 
 router.get("/ProductDetail/:idProduct", getProductById)
 
@@ -75,10 +72,6 @@ router.get('/newestProducts', newestProducts)
 router.get('/mostDiscountedProducts', mostDiscountedProducts)
 
 router.get('/bestSellingProducts', bestSellingProducts)
-
-router.post('/login', login)
-
-router.get('/user', verifyToken , getUserById)
 
 router.post('/payments', payments)
 
