@@ -14,7 +14,7 @@ export default function Navbar() {
 
     let number = productsCart.length;
 
-    const {user, isAuthenticated, loginWithRedirect} = useAuth0()
+    const { user, isAuthenticated, loginWithRedirect } = useAuth0()
 
     // user.picture
     return (
@@ -27,7 +27,7 @@ export default function Navbar() {
             <Buscador />
             {/* <NavLink to='/login'><button>Login</button></NavLink> */}
             <span className={style.containerNoti}>
-                {(isAuthenticated) ? <NavLink to='/profile'><img src={account} alt='MiAccount' className={style.account} /></NavLink> : <img onClick={() => {loginWithRedirect()}} src={account} alt='MiAccount' className={style.account} />}
+                {(isAuthenticated) ? <NavLink to='/profile'><img src={account} alt='MiAccount' className={style.account} /></NavLink> : <img onClick={() => { loginWithRedirect() }} src={account} alt='MiAccount' className={style.account} />}
                 <NavLink to='/carrito'><img src={shopCart} alt='Carrito' className={style.changuito} /></NavLink>
                 <span className={style.notiCantChanguito}></span>
                 <p className={style.cantChanguito}>{number}</p>
