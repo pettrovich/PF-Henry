@@ -9,7 +9,7 @@ import favoriteSelected from './assets/favorite-select.svg';
 import { addFavorite, removeFavorite } from '../../redux/actions/favoritosA';
 import Alerta from '../alertas/Alerta';
 
-function ProductCard({ name, image, price, description, category, stock, id, addProductCarrito, addFavorite, removeFavorite }) {
+function ProductCard({ name, image, price, description, category, stock, id, quantity, addProductCarrito, addFavorite, removeFavorite }) {
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
     const productsInFavoritos = useSelector((state) => state.favoritos.productosFavoritos);
     const [isFavorite, setIsFavorite] = useState(false);
@@ -34,7 +34,10 @@ function ProductCard({ name, image, price, description, category, stock, id, add
                 name: name,
                 image: image,
                 price: price,
-                stock: stock
+                stock: stock,
+                description: description,
+                category: category,
+                quantity: quantity
             })
             setModal({ ...modal, open: true, type: 'success' })
         }
