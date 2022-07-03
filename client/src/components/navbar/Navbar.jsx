@@ -5,7 +5,7 @@ import Buscador from '../buscador/Buscador'
 import style from './assets/Navbar.module.css';
 import shopCart from './assets/shop-cart.svg'
 import account from './assets/account-circle.svg'
-import Logout from '../logout/Logout'
+// import Logout from '../logout/Logout'
 import { useAuth0 } from "@auth0/auth0-react";
 // import Filtrado from '../products/Filtrado';
 
@@ -23,7 +23,7 @@ export default function Navbar() {
             <NavLink to='/'><div className={style.logo}>LOGO</div></NavLink>
             <NavLink to='/products' className={style.active}><p className={style.btnProducts}>PRODUCTOS</p></NavLink>
             <NavLink to='/favoritos' className={style.active}><p className={style.btnProducts}>FAVORITOS</p></NavLink>
-            <Logout />
+            {/* <Logout /> */}
             <Buscador />
             {/* <NavLink to='/login'><button>Login</button></NavLink> */}
             <span className={style.containerNoti}>
