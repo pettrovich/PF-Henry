@@ -8,6 +8,7 @@ import DetailProduct from './components/detallesDelProducto/DetallesDelProducto'
 import PerfilDelUsuario from "./components/perfilDelUsuario/PerfilDelUsuario";
 import Favoritos from './components/favoritos/Favoritos';
 import Dashboard from './components/dashboard/Dashboard';
+import Material_UI from './components/material_UI/Material_UI';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/profile" element={<PerfilDelUsuario />} />
         <Route path="/favoritos" element={<Favoritos />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/material" element={<Material_UI />} />
       </Routes>
     </div>
   );
