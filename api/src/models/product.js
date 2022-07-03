@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    image:{
+    image: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -45,6 +45,10 @@ module.exports = (sequelize) => {
     },
     amountSold: {
       type: DataTypes.INTEGER,
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 1
     }
   });
 };
