@@ -43,10 +43,11 @@ function Products({ getAllProducts }) {
                                 key={e.id}
                                 name={e.name}
                                 price={e.price}
-                                category={e.category}
+                                category={e.categories}
                                 image={e.image}
                                 description={e.description}
                                 stock={e.stock}
+                                quantity={e.quantity}
                             />
                         )
                     })}
