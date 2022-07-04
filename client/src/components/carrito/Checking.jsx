@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './assets/Checking.module.css';
 import { useSelector } from 'react-redux';
-// import axios from 'axios';
+import axios from 'axios';
 // import mercadoPagoLogo from './assets/mercado-pago-logo.png';
 // import paypalLogo from './assets/paypal-logo.png';
 import Paypal from '../captureOrder/Paypal';
@@ -44,22 +44,21 @@ export default function Checking() {
     }));
     console.log(data)
 
-    // async function handleConfirmOrder(paymentMethod) {
-    //     let data = (products.productosCarrito.map(e => {
-    //         return {
-    //             name: e.name,
-    //             description: e.description,
-    //             category: e.category,
-    //             quantity: e.quantity,
-    //             price: e.price,
-    //             cost: 500
-    //         }
-    //     }));
-    //     if (paymentMethod === 'mercadopago') {
-    //         const response = await axios.post('/payments', data);
-    //         console.log(response.data.init_point);
-    //         window.location.href = `${response.data.init_point}`;
-    //     }
+    async function handleConfirmOrder(paymentMethod) {
+        let mercadoPago = (products.productosCarrito.map(e => {
+            return {
+                name: e.name,
+                description: e.description,
+                category: e.category,
+                quantity: e.quantity,
+                price: e.price,
+                cost: 500
+            }
+        }));
+        const response = await axios.post('/payments', mercadoPago);
+        console.log(response.data.init_point);
+        window.location.href = `${response.data.init_point}`;
+    }
     // else if (paymentMethod === 'paypal') {
 
     //     let dataPaypal = data.map(e => {
@@ -99,6 +98,7 @@ export default function Checking() {
                                 <button onClick={() => handleCancelOrder()}>Cancelar orden</button>
                                 <h1>Pagar con:</h1>
                                 <div className={style.methodsPayment}>
+                                    <button onClick={handleConfirmOrder} >MercadoPago</button>
                                     <Paypal data={data} total={products.totalCarrito} setPago={setPago} />
                                 </div>
                             </div>
