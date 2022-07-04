@@ -6,7 +6,6 @@ import { getOneProduct } from '../../redux/actions/detailProductA';
 import noImage from './assets/no-image.jpg';
 import { addProductCarrito } from '../../redux/actions/carritoA';
 import Alerta from '../alertas/Alerta';
-import Alerta2 from '../alertas/Alerta2';
 
 function Producto({ getOneProduct }) {
     const dispatch = useDispatch();
@@ -17,7 +16,8 @@ function Producto({ getOneProduct }) {
     const [cantidad, setCantidad] = useState(1);
     const [modal, setModal] = useState({
         open: false,
-        type: ''
+        type: '',
+        text: ''
     });
 
     useEffect(() => {
@@ -52,7 +52,7 @@ function Producto({ getOneProduct }) {
 
     function handleCarrito() {
         const check = productsInCarrito.some(e => e.id === productDetail.id);
-        if (check) return setModal({ ...modal, open: true, type: 'error' })
+        if (check) return setModal({ ...modal, open: true, type: 'error', text: 'Producto ya en carrito' })
         else if (productDetail.stock < 1) document.getElementById('btnCarrito').disabled = true;
         else {
             dispatch(addProductCarrito({
@@ -65,7 +65,7 @@ function Producto({ getOneProduct }) {
                 category: productDetail.category,
                 quantity: cantidad
             }))
-            setModal({ ...modal, open: true, type: 'success' })
+            setModal({ ...modal, open: true, type: 'success', text: 'Producto agregado a carrito' })
         }
     }
 
@@ -104,18 +104,24 @@ function Producto({ getOneProduct }) {
                         <div>
                         </div>
                         <p className={style.descripcion}>{productDetail.description}</p>
-                        <div className={style.containerCantidad}>
-                            <button onClick={() => decrementarCantidad()}>-</button>
-                            <p>{cantidad}</p>
-                            <button onClick={() => incrementarCantidad()}>+</button>
-                        </div>
-                        <button id='btnCarrito' onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
+                        {
+                            (productDetail.stock === 0) ? <></>
+                                : <div className={style.containerCantidad}>
+                                    <button onClick={() => decrementarCantidad()}>-</button>
+                                    <p>{cantidad}</p>
+                                    <button onClick={() => incrementarCantidad()}>+</button>
+                                </div>}
+                        {
+                            (productDetail.stock === 0)
+                                ? <></>
+                                : <button id='btnCarrito' onClick={handleCarrito} className={style.button}>Agregar al carrito</button>
+                        }
                     </div>
                 </div>
             </div>
             {
                 (modal.open)
-                    ? <Alerta setOpenModal={setModal} type={modal.type} />
+                    ? <Alerta setOpenModal={setModal} type={modal.type} text={modal.text} />
                     : <></>
             }
         </>
