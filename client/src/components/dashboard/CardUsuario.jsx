@@ -13,9 +13,10 @@ export default function Card ({id, username, name, lastName, dni, email, celphon
             {/* DNI: {dni}.  */}
             {/* EMAIL: { email}.  */}
             {/* TELEFONO: { celphone}. */}
-            {/* Usuario Bloqueado: {banned}.
-            Administrador: {isAdmin}. */}
             </p>
+            {/* {banned? <p>Usuario Bloqueado. </p> : ""}
+            {isAdmin === true? <p>Administrador </p> : ""}
+             */}
                       
         </div>
     );
