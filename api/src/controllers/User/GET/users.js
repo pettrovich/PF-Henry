@@ -35,8 +35,8 @@ async function getUserByUsername(username) {
     return user;
 }
 
-async function updateUser(username,userData) {
-    const where = {username};
+async function updateUser(id,userData) {
+    const where = {id};
     let user =  await User.findOne({where});
     if (!user) throw new Error('El usuario no existe en la base de datos.');
     user.set(userData);

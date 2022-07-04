@@ -78,10 +78,11 @@ import { useAuth0 } from "@auth0/auth0-react";
 import style from "./PerfilDelUsuario.module.css";
 import { Link } from 'react-router-dom';
 import Logout from '../logout/Logout'
+import {useSelector} from "react-redux"
 
 export default function PerfilDelUsuario(){
     const {user, isAuthenticated, isLoading} = useAuth0()
-
+    const allUser = useSelector ((state) => state.DashboardUsersR.allUsers); 
     if(isLoading){
         return <p> Loading... </p>
     }
@@ -91,11 +92,16 @@ export default function PerfilDelUsuario(){
         <div className = {style.DetailContainer}>
             <img src={user.picture} alt={user.name} className = {style.foto}/>
             <h2 className = {style.nombre}>Bienvenido {user.name}!!</h2>
-            <p className = {style.datos}>Email: {user.email}</p>
+            {allUser.dni}
+            {user.email? <p className = {style.datos}>Email: {user.email}</p> : ""}
+            {allUser.dni? <p className = {style.datos}>DNI: {allUser.dni}</p> : ""}
+            {user.celphone? <p className = {style.datos}>Telefono: {user.celphone}</p> : ""}
+            {/* {user.isAdmin = true? <p className = {style.datos}> Perfil del Administrador {user.username} </p> : <p className = {style.datos}> Perfil del Usuario {user.username}</p>}    */}
+
 
 
             <Logout className = {style.volver}/>
-            <Link to = "/products" > <button className = {style.volver}>Ver productos</button> </Link> 
+            {/* <Link to = "/products" > <button className = {style.volver}>Ver productos</button> </Link>  */}
             {/* <Link to = "/login" > <button className = {style.volver}>Cambiar de usuario</button> </Link> */}
         </div>
         )

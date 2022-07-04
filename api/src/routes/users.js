@@ -109,11 +109,11 @@ router.post('/:username/removeFavourite', async (req,res) => {
     }
 });
 
-router.put('/:username', async (req,res) => {
-    const {username} = req.params;
+router.put('/:id', async (req,res) => {
+    const {id} = req.params;
     const userData = req.body;
     try {
-        const user = await updateUser(username,userData);
+        const user = await updateUser(id,userData);
         return res.json(user);
     }
     catch (err) {
