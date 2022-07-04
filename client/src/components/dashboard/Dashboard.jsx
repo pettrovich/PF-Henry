@@ -6,6 +6,7 @@ import AdminProd from "./AdminProducts";
 import DashboardUsers from './DashboardUsers';
 import DashboardHistoryShopping from './DashboardHistoryShopping';
 import DashboardHistorySearch from './DashboardHistorySearch';
+import Favoritos from "./FavoritosAdmin";
 
 
 const Dashboard = () => {
@@ -38,7 +39,7 @@ const Dashboard = () => {
                 {isShown && buttIndex === 3 && <DashboardUsers />}
             </div>
             
-            <div>
+            {/* <div>
                 <button id={4} onClick={handleClick} className={style.btn}>Historial de compra</button>
                 {isShown && buttIndex === 4 && <div><p className={style.provisorio}>Solo falta que el Back mande la ruta.. mientras tanto tenes los usuarios una vez mas {"-->"}</p><DashboardHistoryShopping /></div>}
             </div>
@@ -46,7 +47,18 @@ const Dashboard = () => {
             <div>
                 <button id={5} onClick={handleClick} className={style.btn}>Historial de busqueda</button>
                 {isShown && buttIndex === 5 && <div><p className={style.provisorio}>Solo falta que el Back mande la ruta.. mientras tanto tenes los usuarios una vez mas {"-->"}</p> <DashboardHistorySearch/></div>}
-            </div>
+            </div> */}
+            {/* <div>
+                <button id={6} onClick={handleClick} className={style.btn}>Poductos favoritos</button>
+                {isShown && buttIndex === 6 && <Favoritos/>}
+            </div> */}
+            
+            
+            
+
+            
+
+
         </div>
         
     )
