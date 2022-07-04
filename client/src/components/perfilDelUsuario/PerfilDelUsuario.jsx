@@ -75,20 +75,28 @@
 
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import style from "./PerfilDelUsuario.module.css";
+import { Link } from 'react-router-dom';
+import Logout from '../logout/Logout'
 
 export default function PerfilDelUsuario(){
     const {user, isAuthenticated, isLoading} = useAuth0()
 
     if(isLoading){
-        return <div> Loading... </div>
+        return <p> Loading... </p>
     }
 
     return (
         isAuthenticated && (
-        <div>
-            <img src={user.picture} alt={user.name} />
-            <h2>{user.name}</h2>
-            <p>Email: {user.email}</p>
+        <div className = {style.DetailContainer}>
+            <img src={user.picture} alt={user.name} className = {style.foto}/>
+            <h2 className = {style.nombre}>Bienvenido {user.name}!!</h2>
+            <p className = {style.datos}>Email: {user.email}</p>
+
+
+            <Logout className = {style.volver}/>
+            <Link to = "/products" > <button className = {style.volver}>Ver productos</button> </Link> 
+            {/* <Link to = "/login" > <button className = {style.volver}>Cambiar de usuario</button> </Link> */}
         </div>
         )
     )
