@@ -1,11 +1,16 @@
 const {Router} = require('express');
+const addAddress = require("../controllers/Address/POST/addAddress");
 const createUser = require("../controllers/User/POST/createUser");
+const getAddresses = require("../controllers/Address/GET/getAddresses");
 const getAdmins = require("../controllers/User/GET/getAdmins");
 const getBannedUsers = require("../controllers/User/GET/getBannedUsers");
 const getUserByEmail = require("../controllers/User/GET/getUserByEmail");
 const getUserById = require("../controllers/User/GET/getUserById");
 const getUsers = require("../controllers/User/GET/getUsers");
+const removeAddress = require("../controllers/Address/DELETE/removeAddress");
+const updateAddress = require("../controllers/Address/PUT/updateAddress");
 const updateUserInfo = require("../controllers/User/PUT/updateUserInfo");
+const setActiveAddress = require("../controllers/Address/PUT/setActiveAddress");
 const switchAdmin = require("../controllers/User/PUT/switchAdmin");
 const switchBan = require("../controllers/User/PUT/switchBan");
 // const { addFavourite, getFavourites, removeFavourite } = require("../controllers/Product/GET/favourites");
@@ -66,7 +71,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/info/:id', async (req, res) => {
+router.put('/:id/info', async (req, res) => {
     const {id} = req.params;
     const userData = req.body;
     try {
@@ -78,7 +83,7 @@ router.put('/info/:id', async (req, res) => {
     }
 });
 
-router.put('/switchAdmin/:id', async (req, res) => {
+router.put('/:id/switchAdmin', async (req, res) => {
     const {id} = req.params;
     try {
         const user = await switchAdmin(id);
@@ -89,7 +94,7 @@ router.put('/switchAdmin/:id', async (req, res) => {
     }
 });
 
-router.put('/switchBan/:id', async (req, res) => {
+router.put('/:id/switchBan', async (req, res) => {
     const {id} = req.params;
     try {
         const user = await switchBan(id);
@@ -100,18 +105,65 @@ router.put('/switchBan/:id', async (req, res) => {
     }
 });
 
-//******************* */
+router.post('/:userId/addresses', async (req, res) => {
+    const {userId} = req.params;
+    const addressData = req.body;
+    try {
+        const address = await addAddress(userId, addressData);
+        return res.json(address);
+    }
+    catch (err) {
+        return res.status(404).send(`No se pudo modificar la información de la dirección (${err})`);
+    }
+});
 
-// router.get('/:username/address', async (req, res) => {
-//     const { username } = req.params;
-//     try {
-//         const address = await getAddress(username);
-//         return res.json(address);
-//     }
-//     catch (err) {
-//         return res.status(404).send(`No se pudo cargar la información de la dirección (${err})`);
-//     }
-// });
+router.get('/:id/addresses', async (req, res) => {
+    const {id} = req.params;
+    try {
+        const addressList = await getAddresses(id);
+        return res.json(addressList);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo cargar la lista de direcciones (${err})`);
+    }
+});
+
+router.put('/:UserId/addresses/:id', async (req, res) => {
+    const {UserId, id} = req.params;
+    const addressData = req.body;
+    try {
+        const address = await updateAddress(UserId, id, addressData);
+        return res.json(address);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo modificar la información de la dirección (${err})`);
+    }
+});
+
+router.put('/:UserId/activeAddress/:id', async (req, res) => {
+    const {UserId, id} = req.params;
+    try {
+        const address = await setActiveAddress(UserId, id);
+        return res.json(address);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo modificar la dirección activa (${err})`);
+    }
+});
+
+router.delete('/:UserId/addresses/:id', async (req, res) => {
+    const {UserId, id} = req.params;
+    try {
+        // const favourites = await removeFavourite(username);
+        // return res.json(favourites);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo eliminar la dirección (${err})`);
+    }
+});
+
+
+//******************* */
 
 // router.get('/:username/favourites', async (req, res) => {
 //     const { username } = req.params;
@@ -160,18 +212,6 @@ router.put('/switchBan/:id', async (req, res) => {
 //     }
 //     catch (err) {
 //         return res.status(404).send(`No se pudo eliminar el producto de los favoritos (${err})`);
-//     }
-// });
-
-// router.put('/:username/address', async (req, res) => {
-//     const { username } = req.params;
-//     const addressData = req.body;
-//     try {
-//         const address = await updateAddress(username, addressData);
-//         return res.json(address);
-//     }
-//     catch (err) {
-//         return res.status(404).send(`No se pudo modificar la información de la dirección (${err})`);
 //     }
 // });
 
