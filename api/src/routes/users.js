@@ -1,21 +1,13 @@
 const { Router } = require('express');
-const { addFavourite, getFavourites, removeFavourite } = require("../controllers/Product/GET/favourites");
-const { createAddress, getAddress, updateAddress } = require("../controllers/Address/GET/addresses");
-const { createUser, getAdminUsers, getUsers, getUserByUsername, updateUser } = require("../controllers/User/GET/users");
+const getAdmins = require("../controllers/User/GET/getAdmins");
+const getBannedUsers = require("../controllers/User/GET/getBannedUsers");
+const getUserByEmail = require("../controllers/User/GET/getUserByEmail");
+const getUserById = require("../controllers/User/GET/getUserById");
+const getUsers = require("../controllers/User/GET/getUsers");
+// const { addFavourite, getFavourites, removeFavourite } = require("../controllers/Product/GET/favourites");
+// const { createAddress, getAddress, updateAddress } = require("../controllers/Address/GET/addresses");
+// const { createUser, updateUserInfo } = require("../controllers/User/GET/users");
 const router = Router();
-
-router.post('/', async (req, res) => {
-    const { address, number, zipCode, country, houseType } = req.body;
-    const { name, lastName, dni, email, celphone, username, password } = req.body;
-    try {
-        const userAddress = await createAddress(address, number, zipCode, province, location, apartment, description);
-        const user = await createUser(name, lastName, dni, email, celphone, username, password, false, userAddress);
-        return res.status(201).json(user);
-    }
-    catch (err) {
-        return res.status(404).send(`No se pudo crear el usuario (${err})`);
-    }
-});
 
 router.get('/', async (req, res) => {
     try {
@@ -23,30 +15,71 @@ router.get('/', async (req, res) => {
         return res.json(userList);
     }
     catch (err) {
-        return res.status(404).send(`No se pudo cargar la lista de usuarios (${err})`);
+        return res.status(500).send(`No se pudo cargar la lista de usuarios (${err})`);
     }
 });
 
 router.get('/admin', async (req, res) => {
     try {
-        const adminList = await getAdminUsers();
+        const adminList = await getAdmins();
         return res.json(adminList);
     }
     catch (err) {
-        return res.status(404).send(`No se pudo cargar la lista de usuarios (${err})`);
+        return res.status(500).send(`No se pudo cargar la lista de usuarios (${err})`);
     }
 });
 
-router.get('/:username', async (req, res) => {
-    const { username } = req.params;
+router.get('/banned', async (req, res) => {
     try {
-        const user = await getUserByUsername(username);
+        const bannedList = await getBannedUsers();
+        return res.json(bannedList);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo cargar la lista de usuarios (${err})`);
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    const {id} = req.params;
+    try {
+        const user = await getUserById(id);
         return res.json(user);
     }
     catch (err) {
-        return res.status(404).send(`No se pudo cargar la información del usuario (${err})`);
+        return res.status(500).send(`No se pudo cargar la información del usuario (${err})`);
     }
 });
+
+
+
+router.post('/', async (req, res) => {
+    const {name, email} = req.body;
+    try {
+        let user = await getUserByEmail(email);
+        if (user) return res.status(200).json(user);
+        user = await createUser(name, email);
+        return res.status(201).json(user);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo crear el usuario (${err})`);
+    }
+    // const { address, number, zipCode, country, houseType } = req.body;
+    // const userAddress = await createAddress(address, number, zipCode, province, location, apartment, description);
+});
+
+router.put('/userInfo/:id', async (req, res) => {
+    const {id} = req.params;
+    const userData = req.body;
+    try {
+        const user = await updateUserInfo(id, userData);
+        return res.json(user);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo modificar la información del usuario (${err})`);
+    }
+});
+
+//******************* */
 
 router.get('/:username/address', async (req, res) => {
     const { username } = req.params;
@@ -106,18 +139,6 @@ router.post('/:username/removeFavourite', async (req, res) => {
     }
     catch (err) {
         return res.status(404).send(`No se pudo eliminar el producto de los favoritos (${err})`);
-    }
-});
-
-router.put('/:id', async (req, res) => {
-    const { id } = req.params;
-    const userData = req.body;
-    try {
-        const user = await updateUser(id, userData);
-        return res.json(user);
-    }
-    catch (err) {
-        return res.status(404).send(`No se pudo modificar la información del usuario (${err})`);
     }
 });
 

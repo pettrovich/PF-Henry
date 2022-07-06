@@ -1,13 +1,13 @@
-const { User } = require('../../../db');
+const {User} = require('../../../db');
 
-async function createUser(name, lastName, dni, email, celphone, username, password, isAdmin, userAddress) {
-    if (!(name && lastName && dni && email && celphone && username && password))
-        return res.status(404).send('Falta enviar datos obligatorios del usuario');
-
-    const user = await User.create({ name, lastName, dni, email, celphone, username, password, isAdmin });
-    await user.setAddress(userAddress);
+async function createUser(name, email) {
+    if (!(name && email)) throw new Error('Falta enviar datos obligatorios del usuario');
+    const user = await User.create({name, email});
+    // await user.setAddress(userAddress);
     return await user.save();
 }
+
+// async function
 
 async function getAdminUsers() {
     const where = { isAdmin: true };
@@ -19,19 +19,7 @@ async function getAdminUsers() {
     return userList;
 }
 
-async function getUsers() {
-    const userList = await User.findAll();
-    return userList;
-}
 
-async function getUserByUsername(username) {
-    const where = { username };
-    const user = await User.findOne({
-        where
-    });
-    if (!user) throw new Error('El usuario no existe en la base de datos.');
-    return user;
-}
 
 async function updateUser(id, userData) {
     const where = { id };
@@ -51,8 +39,6 @@ async function deleteUser(username) {
 module.exports = {
     createUser,
     getAdminUsers,
-    getUsers,
-    getUserByUsername,
     updateUser,
     deleteUser
 };
