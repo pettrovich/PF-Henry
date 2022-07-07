@@ -44,7 +44,8 @@ const Dashboard = () => {
         <>
             {
                 (isAuthenticated && findedUser?.isAdmin)
-                    ? <div className={style.container}>
+                    ?
+                     <div className={style.container}>
                         <h1>Dashboard</h1>
                         <div>
                             <button id={1} onClick={handleClick} className={style.btn}>Crear productos</button>
