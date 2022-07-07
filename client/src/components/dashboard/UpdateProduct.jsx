@@ -2,24 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux'
 import style from './assets/UpdateProduct.module.css';
 import { UpdateProductA } from '../../redux/actions/DashboardUpdateProductA'; //   UpdateProductR.UpdateProduct
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import { getOneProduct } from '../../redux/actions/detailProductA';
 
 
 export default function UpdateProduct() {
  
+    const navigate = useNavigate ()
     const location = useLocation()
     let id = (location.pathname.substring(4,location.pathname.length)) 
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
 
     // const {id} = useParams()usar la productDetail/:ID
+    let update = useSelector ((state) => state.detailProduct.product); 
+    if (!update.name){
     dispatch(getOneProduct(id))
+    }
+    update = useSelector ((state) => state.detailProduct.product); 
 
-    const update = useSelector ((state) => state.detailProduct.product); 
+ 
     
-
-    
+      
     const [input, setInput] = useState({
         name: "", image: "", price: "", description: "", stock: "", categories: "", discount: "", brand: "", freeShipping: "",
     })
@@ -36,7 +40,7 @@ export default function UpdateProduct() {
         discount: update.discount,
         brand: update.brand,
         freeShipping: update.freeShipping,
-      })),[]
+      })),[update]
       )
   
     
@@ -46,16 +50,22 @@ export default function UpdateProduct() {
 
     function handleSubmit(e) {
         e.preventDefault()
+
+                
         if(input.name !== update.name
-            || input.dni !== update.dni
-            || input.picture !== update.picture
-            || input.celphone !== update.celphone
-            || input.username !== update.username
-  
+            || input.image !== update.image
+            || input.price !== update.price
+            || input.description !== update.description
+            || input.stock !== update.stock
+            || input.categories !== update.categories
+            || input.discount !== update.discount
+            || input.brand !== update.brand
+            || input.freeShipping !== update.freeShipping
          ){
             
         dispatch(UpdateProductA(id, input))
         alert("Producto modificado con exito")
+        navigate('/dashboard')
          }
         else {
             alert ("Debe modificar algún campo")
