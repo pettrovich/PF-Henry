@@ -16,7 +16,6 @@ const setActiveAddress = require("../controllers/Address/PUT/setActiveAddress");
 const switchAdmin = require("../controllers/User/PUT/switchAdmin");
 const switchBan = require("../controllers/User/PUT/switchBan");
 // const { addFavourite, getFavourites, removeFavourite } = require("../controllers/Product/GET/favourites");
-// const { createAddress, getAddress, updateAddress } = require("../controllers/Address/GET/addresses");
 const router = Router();
 
 router.get('/', async (req, res) => {
