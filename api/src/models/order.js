@@ -4,14 +4,6 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
 
     sequelize.define('Order', {
-        status:{  
-            type: DataTypes.ENUM('created', 'processing', 'cancelled', 'completed'),
-            allowNull: false
-        },
-        payment_id:{
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        },
         payment_status:{
             type: DataTypes.STRING,
             defaultValue: ""

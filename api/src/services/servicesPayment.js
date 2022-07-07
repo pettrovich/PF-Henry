@@ -6,10 +6,12 @@ class PaymentService {
     let allProducts = []
     prod.forEach(p => {
       let obj = {
+        "id": p.id,
         "title": p.name,
         "description": p.description,
         "category_id": p.category,
         "quantity": p.quantity,
+        "picture_url": p.image,
         "unit_price": p.price
       }
       allProducts.push(obj)
@@ -19,7 +21,7 @@ class PaymentService {
       payer_email: "test_user_91448486@testuser.com",
       items: allProducts ,
       back_urls: {
-        failure: "/failure",
+        failure: "https://pf-deployment.vercel.app/",
         pending: "/pending",
         success: "https://pf-deployment.vercel.app/"
       }, 
