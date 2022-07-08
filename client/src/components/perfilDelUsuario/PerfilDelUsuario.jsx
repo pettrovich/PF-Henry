@@ -84,7 +84,7 @@ export default function PerfilDelUsuario(){
                 <Grid container justify = "center"  sx={{width: '6200ch', my: "5%", mx: "35%", maxWidth: "100%" }}>     
         <List 
         
-            sx={{   maxWidth: "100%", bgcolor: 'gray ', borderRadius: "10px", color: "#FFC400 " , width: '100vh'}}
+            sx={{   maxWidth: "100%", bgcolor: 'gray ', borderRadius: "10px", color: "#FFC400 " , width: '100vh'}} 
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
@@ -153,8 +153,6 @@ export default function PerfilDelUsuario(){
                     </div>
 
 
-
-                    {/* <Link to = {"/loginData/" + usuario.id}> <button >Modificar datos</button> </Link> */}
                 </div>
 
                        
@@ -249,7 +247,12 @@ export default function PerfilDelUsuario(){
                 </ListItemButton>
             </List>
             </Collapse>
-
+            <div>
+                       
+            <Logout/>
+                
+        </div>
+           
 
         </List>
         </Grid>
