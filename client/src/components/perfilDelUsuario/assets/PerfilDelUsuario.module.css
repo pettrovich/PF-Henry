@@ -1,0 +1,47 @@
+.subTitulo{
+    color: #dee2e6 ;
+    
+}
+
+.modificar{
+    color: #FFC400 ;
+    text-decoration:none;
+    font-size: 12px;
+    /* border-color: red 10px; */
+}
+
+.foto{
+    border-radius:600px;
+    width: 60px;
+    height: auto;
+    
+}
+
+.fotoBtn{
+    border-radius:600px;
+    width: 30px;
+    height: auto;
+    
+}
+
+
+
+.volver {
+    background-color: rgba(255, 255, 255, 0.795);
+    display:inline-block;
+    cursor:pointer;
+    color: var(--navbar-bg-color);
+    font-family:Verdana;
+    font-size:14px;
+    font-weight:bold;
+    padding:4px 10px;
+    text-decoration:none;
+     margin-left: 1%; 
+
+    border-color: rgba(255, 255, 255, 0.795);
+}
+.volver:hover{
+    background-color: var(--navbar-bg-color);
+    color:rgba(255, 255, 255, 0.795);
+    border-color: rgba(255, 255, 255, 0.795);
+}
