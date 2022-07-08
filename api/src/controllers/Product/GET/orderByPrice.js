@@ -1,11 +1,12 @@
 const { Product } = require('../../../db')
 
-const priceOrder = async (req, res) => {
+const orderByPrice = async (req, res) => {
     let priceOrder = req.params.priceOrder;
     const allProducts = await Product.findAll()
 
     try {
-        if (priceOrder === 'ASC')
+        if (priceOrder === 'ASC') {
+
             allProducts.sort(function (a, b) {
                 if (a.price > b.price) {
                     return 1;
@@ -15,13 +16,13 @@ const priceOrder = async (req, res) => {
                 }
                 return 0;
             })
+        }
         res.send(allProducts)
     } catch (e) {
-        console.log(e)
+        res.send(e)
     }
 }
 
 module.exports = {
-    priceOrder
+    orderByPrice
 }
-
