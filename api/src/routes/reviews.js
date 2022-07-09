@@ -40,9 +40,8 @@ router.delete('/:id', async (req, res) => {
     const {id} = req.params;
     try {
         let rows = await deleteReview(id);
-        if(rows > 0) {
-            return res.status(204).json(` reseña ${id} eliminada`);
-        } else return res.send("No se pudo eliminar la reseña")
+
+        return res.status(204).json(`${rows} reseña eliminada`);
     }
     catch (err) {
         return res.status(500).send(`No se pudo eliminar la reseña (${err})`);
