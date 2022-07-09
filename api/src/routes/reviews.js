@@ -8,9 +8,13 @@ const getUserReviews = require("../controllers/Review/GET/getUserReviews");
 const getProductReviews = require("../controllers/Review/GET/getProductReviews");
 const router = Router();
 
-router.post('/user/:userId/product/:productId', async (req, res) => {
-    const {userId, productId} = req.params;
-    const reviewData = req.body;
+router.post('/Create', async (req, res) => {
+    const {userId, productId} = req.body;
+    const reviewData = {
+        score: req.body.score,
+        title: req.body.title,
+        text: req.body.text
+    }
     try {
         const review = await createReview(userId, productId, reviewData);
         return res.json(review);
@@ -36,14 +40,16 @@ router.delete('/:id', async (req, res) => {
     const {id} = req.params;
     try {
         let rows = await deleteReview(id);
-        return res.status(204).json(`${rows} reseña eliminada`);
+        if(rows > 0) {
+            return res.status(204).json(` reseña ${id} eliminada`);
+        } else return res.send("No se pudo eliminar la reseña")
     }
     catch (err) {
-        return res.status(500).send(`No se pudo eliminar la dirección (${err})`);
+        return res.status(500).send(`No se pudo eliminar la reseña (${err})`);
     }
 });
 
-router.get('/', async (req, res) => {
+router.get('/admin', async (req, res) => {
     try {
         const reviewList = await getReviews();
         return res.json(reviewList);
@@ -64,8 +70,8 @@ router.get('/product/:productId', async (req, res) => {
     }
 });
 
-router.get('/product/:productId/user/:userId', async (req, res) => {
-    const {productId, userId} = req.params;
+router.get('/User_Products', async (req, res) => {
+    const {productId, userId} = req.body;
     try {
         const review = await getReview(productId, userId);
         return res.json(review);
@@ -78,7 +84,7 @@ router.get('/product/:productId/user/:userId', async (req, res) => {
 router.get('/user/:userId', async (req, res) => {
     const {userId} = req.params;
     try {
-        const reviewList = await getUserReviews(userId, userId);
+        const reviewList = await getUserReviews(userId);
         return res.json(reviewList);
     }
     catch (err) {

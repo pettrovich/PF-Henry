@@ -45,7 +45,7 @@ export default function BasicGrid() {
     const dispatch = useDispatch();
 
     const [state, setState] = useState({
-        categoria: 'null',
+        categoria: '',
         envio: '',
         marcas: '',
         minimo: 0,
