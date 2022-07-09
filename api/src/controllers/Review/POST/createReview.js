@@ -13,7 +13,7 @@ async function createReview (userId, productId, reviewData) {
     const newReview = await Review.create({score, title, text});
     user.addReview(newReview);
     product.addReview(newReview);
-    return newAddress;
+    return newReview;
 }
 
 module.exports = createReview;

@@ -47,7 +47,7 @@ Order.belongsToMany(User, {through: "User_Order"})
 User.belongsToMany(Order, {through: "User_Order"})
 
 User.hasMany(Review, {onDelete: 'CASCADE'});
-User.hasMany(Product, {onDelete: 'CASCADE'});
+Product.hasMany(Review,  {onDelete: 'CASCADE'});
 Review.belongsTo(User);
 Review.belongsTo(Product);
 
