@@ -120,8 +120,8 @@ export default function BasicCard({ id, name, price, categories, image, descript
                                 {
                                     (discount > 0)
                                         ? <>
-                                            <Typography variant="h6" style={{ textAlign: 'left' }} gutterBottom component="div">${price.toFixed(2)}</Typography>
-                                            <Div style={{ textAlign: 'left', marginLeft: 6, marginTop: 0, padding: 0, textDecoration: 'line-through', color: 'gray' }}>${precioConDescuento.toFixed(2)}</Div>
+                                            <Typography variant="h6" style={{ textAlign: 'left' }} gutterBottom component="div">${precioConDescuento.toFixed(2)}</Typography>
+                                            <Div style={{ textAlign: 'left', marginLeft: 6, marginTop: 0, padding: 0, textDecoration: 'line-through', color: 'gray' }}>${price.toFixed(2)}</Div>
                                         </>
                                         : <>
                                             <Typography variant="h6" style={{ textAlign: 'left' }} gutterBottom component="div">${price.toFixed(2)}</Typography>
