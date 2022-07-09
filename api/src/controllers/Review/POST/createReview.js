@@ -2,11 +2,9 @@ const {Product, Review, User} = require('../../../db');
 
 async function createReview (userId, productId, reviewData) {
     const {score, title, text} = reviewData; 
-    let where = {id: userId};
-    let user = await User.findOne({where});
+    let user = await User.findByPk(userId);
     if (!user) throw new Error('El usuario no existe en la base de datos.');
-    where = {id: productId};
-    let product = await Product.findOne({where});
+    let product = await Product.findByPk(productId);
     if (!product) throw new Error('El producto no existe en la base de datos.');
     if (!(score && title))
         throw new Error('Falta enviar datos obligatorios de la reseña');
