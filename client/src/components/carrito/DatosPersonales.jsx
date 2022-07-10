@@ -69,7 +69,7 @@ export default function LoginData() {
     return (
         <div style={{ width: '100%', display: 'flex', marginLeft: 40 }}>
             <form onSubmit={(e) => handleSubmit(e)} >
-                <Box sx={{ '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, width: '62ch', my: "5%", mx: "35%", maxWidth: "100%", bgcolor: 'white', borderRadius: "10px" }}>
+                <Box sx={{ '& .MuiTextField-root': { m: 1, width: '90%', color: "white" }, width: '100%', my: "5%", mx: "35%", maxWidth: "100%", bgcolor: 'white', borderRadius: "10px" }}>
                     <div >
                         <div sx={{ display: 'flex' }}>
                             <TextField
@@ -98,6 +98,21 @@ export default function LoginData() {
                                     shrink: true,
                                 }}
                             />
+                            <div>
+                                <TextField
+                                    id="outlined-number"
+                                    label="DNI"
+                                    htmlFor="dni"
+                                    value={input.dni}
+                                    onChange={(e) => handleChange(e)}
+                                    name="dni"
+                                    type="number"
+                                    defaultValue={usuario.dni ? "" : "Ingrese un DNI"}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
                         </div>
                         <div style={{ display: 'flex' }}>
                             <TextField
@@ -122,21 +137,6 @@ export default function LoginData() {
                                 name="celphone"
                                 defaultValue={usuario.celphone ? "" : "Ingrese un telefono"}
                                 type="number"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                id="outlined-number"
-                                label="DNI"
-                                htmlFor="dni"
-                                value={input.dni}
-                                onChange={(e) => handleChange(e)}
-                                name="dni"
-                                type="number"
-                                defaultValue={usuario.dni ? "" : "Ingrese un DNI"}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}

@@ -4,43 +4,47 @@ import TextField from '@mui/material/TextField';
 
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { UpdateUserA } from '../../redux/actions/DashboardUpdateUserA'; //   UpdateProductR.UpdateProduct
+import { userAddressesA } from '../../redux/actions/userAddressesA'; //   UpdateProductR.UpdateProduct
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
-export default function LoginData() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+export default function LoginData({ adress }) {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    const { user } = useAuth0()
+    // console.log(adress)
+    // console.log(adress)
+    const { user } = useAuth0();
     const allUser = useSelector((state) => state.DashboardUsersR.allUsers);
 
-    const usuario = allUser.find(u => u.email === user?.email)
-    const id = usuario?.id
+    const usuario = allUser.find(u => u.email === user?.email);
+    const id = usuario?.id;
 
-    const [input, setInput] = useState({ name: "", lastname: "", username: "", dni: "", celphone: "", picture: "", caracteristica: "" })
+    const [input, setInput] = useState({ street: "", number: "", zipCode: "", province: "", location: "", apartment: "", description: "" });
 
-    useEffect(() => (setInput({
-        name: usuario?.name,
-        username: usuario?.username,
-        dni: usuario?.dni,
-        celphone: usuario?.celphone,
-        picture: usuario?.picture,
+    useEffect(() => {
+        dispatch(userAddressesA(id));
+        setInput({
+            street: adress[0]?.street,
+            number: adress[0]?.number,
+            zipCode: adress[0]?.zipCode,
+            province: adress[0]?.province,
+            location: adress[0]?.location,
+        })
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    })), []
-    )
+    }, []
+    );
 
     function handleSubmit(e) {
         e.preventDefault()
-        if (input.name !== usuario?.name
-            || input.dni !== usuario?.dni
-            || input.picture !== usuario?.picture
-            || input.celphone !== usuario?.celphone
-            || input.username !== usuario?.username
+        if (input.street !== adress?.street
+            || input.number !== adress?.number
+            || input.zipCode !== adress?.zipCode
+            || input.province !== adress?.province
+            || input.location !== adress?.location
 
         ) {
-            dispatch(UpdateUserA(id, input))
             alert("Cambios realizados con exito")
             navigate('/')
         }
@@ -50,28 +54,27 @@ export default function LoginData() {
 
     }
 
-    function handleChange(e) {
-        e.preventDefault();
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value,
-        });
-    }
+    // function handleChange(e) {
+    //     e.preventDefault();
+    //     setInput({
+    //         ...input,
+    //         [e.target.name]: e.target.value,
+    //     });
+    // }
 
     return (
         <div style={{ width: '100%', display: 'flex', marginLeft: 40 }}>
             <form onSubmit={(e) => handleSubmit(e)} >
-                <Box sx={{ '& .MuiTextField-root': { m: 1, width: '60ch', color: "white" }, width: '62ch', my: "5%", mx: "35%", maxWidth: "100%", bgcolor: 'white', borderRadius: "10px" }}>
+                <Box sx={{ '& .MuiTextField-root': { m: 1, width: '90%', color: "white" }, width: '100%', my: "5%", mx: "35%", maxWidth: "100%", bgcolor: 'white', borderRadius: "10px" }}>
                     <div >
                         <div sx={{ display: 'flex' }}>
                             <TextField
                                 id="outlined-helperText"
                                 label='Provincia'
                                 htmlFor="name"
-                                value={input.name}
-                                name="name"
-                                onChange={(e) => handleChange(e)}
-                                defaultValue={usuario.name ? "" : "Ingrese un nombre"}
+                                value={input.province}
+                                onChange={(e) => setInput({ ...input, province: e.target.value })}
+                                defaultValue={adress.province ? "" : "Ingrese un nombre"}
                                 helperText=""
                                 InputLabelProps={{
                                     shrink: true,
@@ -81,9 +84,8 @@ export default function LoginData() {
                                 id="outlined-helperText"
                                 label='Ciudad'
                                 htmlFor="lastName"
-                                value={input.lastname}
-                                name="lastname"
-                                onChange={(e) => handleChange(e)}
+                                value={input.location}
+                                onChange={(e) => setInput({ ...input, location: e.target.value })}
                                 defaultValue=''
                                 helperText=""
                                 InputLabelProps={{
@@ -95,12 +97,10 @@ export default function LoginData() {
                             <TextField
                                 id="outlined-number"
                                 label="Calle"
-                                htmlFor="dni"
-                                value={input.dni}
-                                onChange={(e) => handleChange(e)}
-                                name="dni"
-                                type="number"
-                                defaultValue={usuario.dni ? "" : "Ingrese un DNI"}
+                                htmlFor="calle"
+                                value={input.street}
+                                onChange={(e) => setInput({ ...input, street: e.target.value })}
+                                defaultValue={adress.street ? "" : "Ingrese un DNI"}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
@@ -111,8 +111,8 @@ export default function LoginData() {
                                 id="outlined-number"
                                 label="Codigo postal"
                                 htmlFor="caracteristica"
-                                value={input.caracteristica}
-                                onChange={(e) => handleChange(e)}
+                                value={input.zipCode}
+                                onChange={(e) => setInput({ ...input, zipCode: e.target.value })}
                                 name="caracteristica"
                                 defaultValue=""
                                 type="number"
@@ -123,11 +123,10 @@ export default function LoginData() {
                             <TextField
                                 id="outlined-number"
                                 label="N° Calle"
-                                htmlFor="celphone"
-                                value={input.celphone}
-                                onChange={(e) => handleChange(e)}
-                                name="celphone"
-                                defaultValue={usuario.celphone ? "" : "Ingrese un telefono"}
+                                htmlFor="number"
+                                value={input.number}
+                                onChange={(e) => setInput({ ...input, number: e.target.value })}
+                                defaultValue={adress.number ? "" : "Ingrese un telefono"}
                                 type="number"
                                 InputLabelProps={{
                                     shrink: true,
