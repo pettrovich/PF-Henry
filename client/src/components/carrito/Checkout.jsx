@@ -47,6 +47,10 @@ export default function Checkout({ setCheckout }) {
     const { isAuthenticated } = useAuth0();
     const [value, setValue] = useState('mercadopago');
 
+    const [personalData, setPersonalData] = useState({ name: "", lastName: "", username: "", dni: "", celphone: "", caracteristica: "" })
+
+    const [addressData, setAddressData] = useState({ street: "", number: "", zipCode: "", province: "", location: "", apartment: "", description: "" });
+
     useEffect(() => {
         return () => {
             dispatch(resetTotal());
@@ -59,6 +63,9 @@ export default function Checkout({ setCheckout }) {
     };
 
     const handlePayment = async () => {
+        if (personalData.name?.length < 2 || personalData.lastName?.length < 2 || personalData.username?.length < 2 || personalData.dni?.length < 2 || personalData.celphone?.length < 2 || personalData.caracteristica?.length < 2) return alert('Faltan completar datos');
+        if (addressData.street?.length < 2 || addressData.number?.length < 2 || addressData.zipCode?.length < 2 || addressData.province?.length < 2 || addressData.location?.length < 2) return alert('Faltan completar datos');
+        // if (personalData.name.length < 2 && personalData.lastname.length < 2 && personalData.username.length < 2 && personalData.dni.length < 2 && personalData.celphone.length < 2 && personalData.caracteristica.length < 2) alert('Faltan completar datos');
         if (value === 'mercadopago') {
             let data = (products.productosCarrito.map(e => {
                 return {
@@ -108,8 +115,8 @@ export default function Checkout({ setCheckout }) {
                                             <Box sx={{ width: 1, borderBottom: 'solid', borderBottomWidth: 1, borderColor: '#e1e1e1', marginLeft: -0.4, marginTop: 0.5 }}>
                                                 < Grid container justifyContent='center' >
                                                     {/* < Grid item md={12} lg={12} xl={12} sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', overflow: 'hidden' }}> */}
-                                                    <Comprobaciones />
                                                     {/* </Grid > */}
+                                                    <Comprobaciones personalData={personalData} setPersonalData={setPersonalData} addressData={addressData} setAddressData={setAddressData} />
                                                 </Grid >
                                             </Box >
                                             <div style={{ display: 'flex' }}>

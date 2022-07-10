@@ -14,7 +14,7 @@ import DatosDireccion from './DatosDireccion';
 
 
 
-export default function Comprobaciones() {
+export default function Comprobaciones({ personalData, setPersonalData, addressData, setAddressData }) {
     const adress = useSelector((state) => state.userAddressesR.userAddresses);
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState(0);
@@ -32,13 +32,13 @@ export default function Comprobaciones() {
         {
             label: 'Datos personales',
             description: (<div>
-                <DatosPersonales />
+                <DatosPersonales personalData={personalData} setPersonalData={setPersonalData} />
             </div>),
         },
         {
             label: 'Configuración de envío',
             description: (<div>
-                <DatosDireccion adress={adress} />
+                <DatosDireccion adress={adress} addressData={addressData} setAddressData={setAddressData} />
             </div>),
         },
     ];
