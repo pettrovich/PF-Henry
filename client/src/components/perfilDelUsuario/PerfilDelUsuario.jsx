@@ -3,6 +3,7 @@ import {  useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userOrderA } from '../../redux/actions/userOrderA';
 import { userAddressesA } from '../../redux/actions/userAddressesA';
+import { getUserReviews } from '../../redux/actions/productReviewA';
 
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
@@ -31,24 +32,19 @@ import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
 
 
-
-
-
-
-
-
 export default function PerfilDelUsuario(){
     const {user, isAuthenticated, isLoading} = useAuth0()
     const allUser = useSelector ((state) => state.DashboardUsersR.allUsers);
     const addresses = useSelector ((state) => state.userAddressesR.userAddresses);
-    console.log(addresses);
+    const reviews = useSelector ((state) => state.productReviewR.userReviews);
+    /* console.log("Soy reviews", reviews); */
       
     const usuario = user && allUser.find  (u =>u.email === user.email)
-    console.log(usuario);
 
     const [open, setOpen] = React.useState(false);
     const [openA, setOpenA] = React.useState(false);
     const [openB, setOpenB] = React.useState(false);
+    const [openC, setOpenC] = React.useState(false);
 
     const handleClick = () => {
     setOpen(!open);
@@ -61,19 +57,23 @@ export default function PerfilDelUsuario(){
     const handleClickB = () => {
         setOpenB (!openB);
         };
+    const handleClickC = () => {
+        setOpenC (!openC);
+        };
 
     const dispatch = useDispatch();
     useEffect(() => {
         if(usuario){
             dispatch(userOrderA(usuario.id))
             dispatch(userAddressesA(usuario.id))
+            dispatch(getUserReviews(usuario.id))
         }
     }, [usuario])
 
 
 
     const order  = useSelector ((state) => state.userOrderR.userOrder); 
-    console.log("Soy order", order);
+    /* console.log("Soy order", order); */
 
 
     if(isLoading){
@@ -192,7 +192,7 @@ export default function PerfilDelUsuario(){
                             <Link to={`/updateAddress/${a.id}`}>Modificar dirección</Link>
                         </div>
                         )
-                    }):<p></p>}
+                    }):<p>No hay ninguna dirección</p>}
                     <Link to={"/createAddress"}>Agregar dirección</Link>
                 </div>
        
@@ -216,7 +216,7 @@ export default function PerfilDelUsuario(){
                 <div>
                     {(order.Orders && order.Orders[0])? order.Orders.map ((o, index) => 
                         <div key={index}>
-                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: <p>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</p>}</p>
+                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: <span>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</span>}</p>
                             
                             <Stack direction="row" spacing={2} fontSize = "small">
                             <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
@@ -233,6 +233,37 @@ export default function PerfilDelUsuario(){
                     
                     } 
                     
+                </div>
+       
+                </ListItemIcon>
+                <ListItemText primary="" />
+                </ListItemButton>
+            </List>
+            </Collapse>
+
+
+
+            <ListItemButton onClick={handleClickC}>
+            <ListItemIcon>
+                <LocalMallIcon  className= {style.subTitulo} fontSize = "large"/>
+            </ListItemIcon>
+            <ListItemText primary="Mis reseñas" />
+            {openC ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={openC} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+                <ListItemButton sx={{ pl: 4 }}>
+                <ListItemIcon>
+                <div>
+                    {reviews[0]? reviews.map((r, index) => {
+                        return(
+                            <div key={index}>
+                                <span>Nombre del producto: {r.Product.name} </span>
+                                <span>Título de la reseña: {r.title} </span>
+                                <span>Puntuación: {r.score} </span>
+                            </div>
+                        )
+                    }): <p>Aún no diste ninguna reseña</p>}
                 </div>
        
                 </ListItemIcon>

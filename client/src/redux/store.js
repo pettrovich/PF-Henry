@@ -17,6 +17,7 @@ import landingPage from './reducers/landingPageR';
 import userOrderR from './reducers/userOrderR';
 import userAddressesR from './reducers/userAddressesR';
 import adminOrdersR from './reducers/adminOrdersR';
+import productReviewR from './reducers/productReviewR';
 
 
 
@@ -36,7 +37,8 @@ const reducer = combineReducers({
     UpdateProductR,
     userOrderR,
     userAddressesR,
-    adminOrdersR
+    adminOrdersR,
+    productReviewR
 })
 
 export const store = createStore(
