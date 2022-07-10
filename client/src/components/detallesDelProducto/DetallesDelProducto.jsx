@@ -140,9 +140,9 @@ function Producto({ getOneProduct }) {
                     {allReviews? allReviews.map((r, index) => {
                         return(
                             <div key={index}>
-                                <span>{r.User.username} </span>
-                                <span>{r.title} </span>
-                                <span>{r.score} </span>
+                                <span>Usuario: {r.User.username} </span>
+                                <span>Título: {r.title} </span>
+                                <span>Puntuación {r.score} </span>
                                 <p>{r.text}</p>
                             </div>
                         )
