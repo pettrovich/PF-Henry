@@ -4,7 +4,7 @@ async function deleteReview (id) {
     const where = {id};
     let review = await Review.findByPk(id);
     if (!review) return 0;
-    await Review.destroy({ where });
+    return await Review.destroy({ where });
 }
 
 module.exports = deleteReview;
