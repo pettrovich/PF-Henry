@@ -2,6 +2,7 @@ import * as React from 'react';
 import {  useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userOrderA } from '../../redux/actions/userOrderA';
+import { userAddressesA } from '../../redux/actions/userAddressesA';
 
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
@@ -38,13 +39,16 @@ import Stack from '@mui/material/Stack';
 
 export default function PerfilDelUsuario(){
     const {user, isAuthenticated, isLoading} = useAuth0()
-    const allUser = useSelector ((state) => state.DashboardUsersR.allUsers); 
+    const allUser = useSelector ((state) => state.DashboardUsersR.allUsers);
+    const addresses = useSelector ((state) => state.userAddressesR.userAddresses);
+    console.log(addresses);
       
-    const usuario = user && allUser.find  (u =>u.email === user.email) 
+    const usuario = user && allUser.find  (u =>u.email === user.email)
+    console.log(usuario);
 
-    const [open, setOpen] = React.useState(true);
-    const [openA, setOpenA] = React.useState(true);
-    const [openB, setOpenB] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
+    const [openA, setOpenA] = React.useState(false);
+    const [openB, setOpenB] = React.useState(false);
 
     const handleClick = () => {
     setOpen(!open);
@@ -60,8 +64,11 @@ export default function PerfilDelUsuario(){
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(userOrderA(usuario.id))
-    }, [])
+        if(usuario){
+            dispatch(userOrderA(usuario.id))
+            dispatch(userAddressesA(usuario.id))
+        }
+    }, [usuario])
 
 
 
@@ -172,45 +179,21 @@ export default function PerfilDelUsuario(){
                 <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                 <div>
-                    <div>
-                       {usuario.street !== null? <p className= {style.subTitulo}>Calle: {usuario.street}</p> 
-                        : <p className= {style.subTitulo}>Complete su calle</p>}
-                    </div>  
-                    <div>
-                        {usuario.number !== null? <p className= {style.subTitulo}>Número: {usuario.number}</p> 
-                        : <p className= {style.subTitulo}>Complete su número</p>}
-                    </div>
-                    <div>
-                        {usuario.zipCode !== null? <p className= {style.subTitulo}>Código postal: {usuario.zipCode}</p> 
-                        : <p className= {style.subTitulo}>Complete su código postal:</p>}
-                    </div>
-                    <div>
-                       {usuario.province !== null? <p className= {style.subTitulo}>Provincia: {usuario.province}</p> 
-                        : <p className= {style.subTitulo}>Complete su provincia</p>}
-                    </div>  
-                    <div>
-                        {usuario.location !== null? <p className= {style.subTitulo}>Localidad: {usuario.location}</p> 
-                        : <p className= {style.subTitulo}>Complete su localidad</p>}
-                    </div>
-                    <div>
-                        {usuario.apartment !== null? <p className= {style.subTitulo}>Departamento: {usuario.apartment}</p> 
-                        : <p className= {style.subTitulo}>Complete su departamento</p>}
-                    </div>
-                    <div>
-                        {usuario.description !== null? <p className= {style.subTitulo}>Descripción: {usuario.description}</p> 
-                        : <p className= {style.subTitulo}>Agregue una descripción</p>}
-                    </div>
-                    <div>
-            
-                        <Stack direction="row" spacing={2} fontSize = "small">
-
-                        <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
-                            <Link className= {style.modificar} to = {"/loginAddress/" + usuario.id}> Modificar datos </Link>
-                        </Button>
-
-                        </Stack>
-                    </div>
-                   
+                    {addresses[0]? addresses.map(a => {
+                        return(
+                        <div key={a.id}>
+                            <span>Calle: {a.street} </span>
+                            <span>Numeración: {a.number} </span>
+                            <span>Provincia: {a.province} </span>
+                            <span>Código postal: {a.zipCode} </span>
+                            {a.description? <span>Descripción: {a.description} </span>: <span>Descripción no especificada </span>}
+                            {a.location? <span>Localidad: {a.location} </span>: <span>Localidad no especificada </span>}
+                            {a.apartment? <span>Deparatamento: {a.apartment} </span>: <span>Departamento no especificado </span>}
+                            <Link to={`/updateAddress/${a.id}`}>Modificar dirección</Link>
+                        </div>
+                        )
+                    }):<p></p>}
+                    <Link to={"/createAddress"}>Agregar dirección</Link>
                 </div>
        
                 </ListItemIcon>
@@ -231,9 +214,9 @@ export default function PerfilDelUsuario(){
                 <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                 <div>
-                    {(order.Orders && order.Orders[0])? order.Orders.map (o => 
-                        <div>
-                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <p>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</p>: <p>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</p>}</p>
+                    {(order.Orders && order.Orders[0])? order.Orders.map ((o, index) => 
+                        <div key={index}>
+                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: <p>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</p>}</p>
                             
                             <Stack direction="row" spacing={2} fontSize = "small">
                             <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
