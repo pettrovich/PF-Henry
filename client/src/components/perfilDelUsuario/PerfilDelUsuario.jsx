@@ -192,7 +192,7 @@ export default function PerfilDelUsuario(){
                             <Link to={`/updateAddress/${a.id}`}>Modificar dirección</Link>
                         </div>
                         )
-                    }):<p></p>}
+                    }):<p>No hay ninguna dirección</p>}
                     <Link to={"/createAddress"}>Agregar dirección</Link>
                 </div>
        
@@ -216,7 +216,7 @@ export default function PerfilDelUsuario(){
                 <div>
                     {(order.Orders && order.Orders[0])? order.Orders.map ((o, index) => 
                         <div key={index}>
-                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: <p>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</p>}</p>
+                            <p className= {style.subTitulo}>{o.payment_status === "approved"? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: <span>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</span>}</p>
                             
                             <Stack direction="row" spacing={2} fontSize = "small">
                             <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
@@ -255,9 +255,9 @@ export default function PerfilDelUsuario(){
                 <ListItemButton sx={{ pl: 4 }}>
                 <ListItemIcon>
                 <div>
-                    {reviews[0]? reviews.map(r => {
+                    {reviews[0]? reviews.map((r, index) => {
                         return(
-                            <div>
+                            <div key={index}>
                                 <span>Nombre del producto: {r.Product.name} </span>
                                 <span>Título de la reseña: {r.title} </span>
                                 <span>Puntuación: {r.score} </span>
