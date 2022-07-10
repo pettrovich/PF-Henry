@@ -39,7 +39,7 @@ const ColorButton2 = styled(Button)(({ theme }) => ({
     },
 }));
 
-export default function BasicCard({ id, name, price, categories, image, description, stock, quantity, discount }) {
+export default function BasicCard({ id, name, price, category, image, description, stock, quantity, discount }) {
     const productsInCarrito = useSelector((state) => state.carrito.productosCarrito);
     const dispatch = useDispatch();
 
@@ -84,7 +84,7 @@ export default function BasicCard({ id, name, price, categories, image, descript
                 price: price,
                 stock: stock,
                 description: description,
-                category: categories,
+                category: category,
                 quantity: quantity
             }))
             alert('Producto agregado a carrito')
