@@ -142,19 +142,19 @@ export default function PerfilDelUsuario(){
                 <ListItemIcon>
                 <div>
                    <div>
-                       {usuario.username !== null? <p className= {style.subTitulo}>Usuario: {usuario.username}</p> 
+                       {usuario?.username? <p className= {style.subTitulo}>Usuario: {usuario.username}</p> 
                         : <p className= {style.subTitulo}>Complete su usuario</p>}
                     </div>  
                     <div>
-                       {usuario.email !== null? <p className= {style.subTitulo}>Email: {usuario.email}</p> 
+                       {usuario?.email? <p className= {style.subTitulo}>Email: {usuario.email}</p> 
                         : <p className= {style.subTitulo}>Complete su email</p>}
                     </div> 
                     <div>
-                        {usuario.dni !== null? <p className= {style.subTitulo}>DNI: {usuario.dni}</p> 
+                        {usuario?.dni? <p className= {style.subTitulo}>DNI: {usuario.dni}</p> 
                         : <p className= {style.subTitulo}>Complete su DNI</p>}
                     </div>
                     <div>
-                        {usuario.celphone !== null? <p className= {style.subTitulo}>Telefono: {usuario.celphone}</p> 
+                        {usuario?.celphone? <p className= {style.subTitulo}>Telefono: {usuario.celphone}</p> 
                         : <p className= {style.subTitulo}>Complete su Telefono</p>}
                     </div>
 
