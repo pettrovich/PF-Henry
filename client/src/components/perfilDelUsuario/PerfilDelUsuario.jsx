@@ -30,7 +30,19 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import EditIcon from '@mui/icons-material/Edit';
 import Stack from '@mui/material/Stack';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
+import Rating from '@mui/material/Rating';
+import StarIcon from '@mui/icons-material/Star';
+import Box from '@mui/material/Box';
+
+const labels = {
+    1: 'Muy malo',
+    2: 'Malo',
+    3: 'Bueno',
+    4: 'Muy bueno',
+    5: 'Excelente',
+  };
 
 export default function PerfilDelUsuario(){
     const {user, isAuthenticated, isLoading} = useAuth0()
@@ -82,10 +94,10 @@ export default function PerfilDelUsuario(){
         return (
 
             isAuthenticated && (
-                <Grid container justify = "center"  sx={{width: '6200ch', my: "5%", mx: "35%", maxWidth: "100%" }}>     
+                <Grid container justify = "center"  sx={{width: '100%', my: "5%", mx: "20%", maxWidth: "100%" }}>     
         <List 
         
-            sx={{   maxWidth: "100%", bgcolor: 'gray ', borderRadius: "10px", color: "#FFC400 " , width: '100vh'}} 
+            sx={{   maxWidth: "100%", bgcolor: 'gray ', borderRadius: "10px", color: "#FFC400 " , width: '60%'}} 
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
@@ -101,7 +113,7 @@ export default function PerfilDelUsuario(){
                         {usuario.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>: <img className= {style.foto} src={user.picture} alt= ""/> } 
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText    primary= {<p >Bienvenido {usuario.name}!!</p>} secondary= {usuario.isAdmin === true? <p className= {style.subTitulo}> Perfil del Administrador:  {usuario.username} </p> : ""} />
+                    <ListItemText    primary= {<p > Bienvenido {usuario.name}!!</p>} secondary= {usuario.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                
@@ -182,18 +194,28 @@ export default function PerfilDelUsuario(){
                     {addresses[0]? addresses.map(a => {
                         return(
                         <div key={a.id}>
-                            <span>Calle: {a.street} </span>
-                            <span>Numeración: {a.number} </span>
-                            <span>Provincia: {a.province} </span>
-                            <span>Código postal: {a.zipCode} </span>
-                            {a.description? <span>Descripción: {a.description} </span>: <span>Descripción no especificada </span>}
-                            {a.location? <span>Localidad: {a.location} </span>: <span>Localidad no especificada </span>}
-                            {a.apartment? <span>Deparatamento: {a.apartment} </span>: <span>Departamento no especificado </span>}
-                            <Link to={`/updateAddress/${a.id}`}>Modificar dirección</Link>
+                            <spam className= {style.subTitulo}>Calle: {a.street}. </spam>
+                            <spam className= {style.subTitulo}>N°: {a.number}. </spam>
+                            <spam className= {style.subTitulo}>Pcia.: {a.province}. </spam>
+                            <spam className= {style.subTitulo}>CP.: {a.zipCode}.</spam>
+                            {a.location? <spam className= {style.subTitulo}>Loc.: {a.location} </spam>: <spam className= {style.subTitulo}> Loc.: no especificada </spam>}
+                            {a.apartment? <spam className= {style.subTitulo}>Depto.: {a.apartment} </spam>: <spam className= {style.subTitulo}>Depto.: no especificado </spam>}
+                            <br/>
+                            {a.description? <spam className= {style.subTitulo}>Descripción: {a.description} </spam>: <spam className= {style.subTitulo}>Descripción no especificada </spam>}
+                            <br/>
+                            <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+                            <Link className= {style.modificar} to={`/updateAddress/${a.id}`}>Modificar dirección</Link>
+                            </Button>
+                            
+                            
                         </div>
                         )
-                    }):<p>No hay ninguna dirección</p>}
-                    <Link to={"/createAddress"}>Agregar dirección</Link>
+                    }):<p className= {style.subTitulo}>No hay ninguna dirección</p>}
+
+                    <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+                    <Link className= {style.modificar} to={"/createAddress"}>Agregar dirección</Link>
+                    </Button>
+                    
                 </div>
        
                 </ListItemIcon>
@@ -245,7 +267,7 @@ export default function PerfilDelUsuario(){
 
             <ListItemButton onClick={handleClickC}>
             <ListItemIcon>
-                <LocalMallIcon  className= {style.subTitulo} fontSize = "large"/>
+                <StarBorderIcon  className= {style.subTitulo} fontSize = "large"/>
             </ListItemIcon>
             <ListItemText primary="Mis reseñas" />
             {openC ? <ExpandLess /> : <ExpandMore />}
@@ -258,12 +280,29 @@ export default function PerfilDelUsuario(){
                     {reviews[0]? reviews.map((r, index) => {
                         return(
                             <div key={index}>
-                                <span>Nombre del producto: {r.Product.name} </span>
-                                <span>Título de la reseña: {r.title} </span>
-                                <span>Puntuación: {r.score} </span>
+                                <spam className= {style.subTitulo}> Nombre del producto: {r.Product.name}</spam>
+                                <Box
+                                    sx={{
+                                    width: 200,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    }}
+                                    >
+                                    <Rating
+                                    name="text-feedback"
+                                    value={r.score}
+                                    readOnly
+                                    precision={1}
+                                    emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
+                                    />
+                                    <Box sx={{ ml: 2 }}>{labels[r.score]}</Box>
+                                </Box>
+                                {/* <p className= {style.subTitulo}> Nombre del producto: {r.Product.name} </p> */}
+                                {/* <p className= {style.subTitulo}> Título de la reseña: {r.title} </p> */}
+                                {/* <p className= {style.subTitulo}> Puntuación: {r.score} </p> */}
                             </div>
                         )
-                    }): <p>Aún no diste ninguna reseña</p>}
+                    }): <p className= {style.subTitulo}> Aún no diste ninguna reseña</p>}
                 </div>
        
                 </ListItemIcon>
