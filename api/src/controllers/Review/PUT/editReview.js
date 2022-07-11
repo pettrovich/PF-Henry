@@ -2,8 +2,7 @@ const {Review} = require('../../../db');
 
 async function editReview (id, reviewData) {
     const {score, title, text} = reviewData; 
-    const where = {id};
-    let review = await Review.findOne({where});
+    let review = await Review.findByPk(id);
     if (!review) throw new Error('La reseña no existe en la base de datos.');
     if (!(score && title))
         throw new Error('Falta enviar datos obligatorios');

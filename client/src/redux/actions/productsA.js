@@ -5,6 +5,7 @@ export const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS';
 export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 export const ORDER_PRICE_ASC = 'ORDER_PRICE_ASC';
 export const ORDER_PRICE_DESC = 'ORDER_PRICE_DESC';
+export const ORDER_ALPHA = 'ORDER_ALPHA';
 
 export const RANGO_PRICE = 'RANGO_PRICE';
 export const DISCOUNT = 'DISCOUNT';
@@ -17,14 +18,6 @@ export const getAllProducts = () => {
         return dispatch({ type: GET_ALL_PRODUCTS, payload: response })
     }
 }
-// export const orderByPrice = (data) => {
-//     return async function (dispatch) {
-//         let response;
-//         if (data === 'ASC') response = (await axios.get(`/order/${data}`)).data;
-//         if (data === 'DESC') response = ((await axios.get(`/order/ASC`)).data).reverse()
-//         return dispatch({ type: ORDER_PRICE, payload: response })
-//     }
-// }
 
 export const getByCategory = (data) => {
     return async function (dispatch) {
@@ -76,7 +69,11 @@ export function getbrand(payload) {
     }
 }
 
-export const orderByPrice = (data) => {
+export const order = (data) => {
     if (data === 'ASC') return { type: ORDER_PRICE_ASC, payload: null }
-    else return { type: ORDER_PRICE_DESC, payload: null }
+    else if (data === 'DESC') return { type: ORDER_PRICE_DESC, payload: null }
+    else return async function (dispatch) {
+        const response = (await axios.get(`/orders/${data}`)).data;
+        return dispatch({ type: ORDER_ALPHA, payload: response })
+    }
 }
