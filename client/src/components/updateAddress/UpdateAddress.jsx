@@ -60,7 +60,7 @@ export default function UpdateAddress() {
             if(usuario){
                 userId = usuario.id
                 dispatch(updateAddress(userId, input))
-                alert("Dirección agregada con éxito")
+                alert("Dirección modificada con éxito")
                 setInput({
                     street: "",
                     number: 0,
@@ -225,7 +225,7 @@ export default function UpdateAddress() {
             <Stack direction="row" spacing={2} >
 
             <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
-             Crear dirección
+            Modificar dirección
             </Button>
             </Stack>
                 
