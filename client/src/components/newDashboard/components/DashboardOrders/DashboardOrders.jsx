@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { adminOrders } from '../../../../redux/actions/adminOrdersA'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const DashboardOrders = () => {
 
@@ -13,7 +14,17 @@ const DashboardOrders = () => {
     },[dispatch]) 
     console.log(allOrders);
 
+    const { user, isAuthenticated } = useAuth0();
+    const users = useSelector((state) => state.DashboardUsersR.allUsers);
+    let findedUser;
+    if (isAuthenticated) {
+        findedUser = users.find(e => e.email === user.email)
+    }
+
   return (
+    <>
+    {
+    (isAuthenticated && findedUser?.isAdmin)?
     <div>
         {allOrders[0]? allOrders.map((o, index) => {
             return(
@@ -25,7 +36,9 @@ const DashboardOrders = () => {
                 </div>
             )
         }): <p>Aún no hay ordenes</p>}
-    </div>
+    </div> : <h1>No eres administrador</h1>
+    } 
+    </>
   )
 }
 
