@@ -5,6 +5,7 @@ import CardUsuario from '../../../dashboard/CardUsuario';
 import UpdateAdmin from '../../../dashboard/UpdateAdmin';
 import UpdateBanned from '../../../dashboard/UpdateBanned';
 import style from '../../../dashboard/assets/Dashboard.module.css';
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 export default function DashboardUsers() {
@@ -12,6 +13,11 @@ export default function DashboardUsers() {
     const dispatch = useDispatch()
     const allUser = useSelector ((state) => state.DashboardUsersR.allUsers);
     console.log("usuario", allUser)
+    const { user, isAuthenticated } = useAuth0();
+    let findedUser;
+    if (isAuthenticated) {
+        findedUser = allUser.find(e => e.email === user.email)
+    }
        
     useEffect(()=>{
         dispatch (DashboardUsersA())
@@ -30,6 +36,9 @@ export default function DashboardUsers() {
     };
 
     return (
+        <>
+        {
+            (isAuthenticated && findedUser?.isAdmin)?
         <div>
                      
             <div>    
@@ -62,9 +71,9 @@ export default function DashboardUsers() {
                 )
             })} 
             </div>
-
-
         </div>
-        
+        : <h1>No eres administrador</h1>
+        }
+    </>
     )
 }
