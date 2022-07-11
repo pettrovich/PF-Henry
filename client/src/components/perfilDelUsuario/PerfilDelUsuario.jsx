@@ -37,8 +37,8 @@ import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
 
 const labels = {
-    1: 'Muy malo',
-    2: 'Malo',
+    1: 'Malo',
+    2: 'Regular',
     3: 'Bueno',
     4: 'Muy bueno',
     5: 'Excelente',
@@ -97,11 +97,11 @@ export default function PerfilDelUsuario(){
                 <Grid container justify = "center"  sx={{width: '100%', my: "5%", mx: "20%", maxWidth: "100%" }}>     
         <List 
         
-            sx={{   maxWidth: "100%", bgcolor: 'gray ', borderRadius: "10px", color: "#FFC400 " , width: '60%'}} 
+            sx={{   maxWidth: "100%", bgcolor: '#fff', borderRadius: "10px", color: "#FFC400 " , width: '60%'}} 
             component="nav"
             aria-labelledby="nested-list-subheader"
             subheader={
-            <ListSubheader  sx={{mb: 5, width: '100%', maxWidth:  "100%", bgcolor: 'gray ', borderRadius: "10px", color: "#FFC400 " }} component="div" id="nested-list-subheader">
+            <ListSubheader  sx={{mb: 5, width: '100%', maxWidth:  "100%", bgcolor: '#fff ', borderRadius: "10px", color: "#FFC400 " }} component="div" id="nested-list-subheader">
                 <div >
                 <ListItem >
                     <ListItemAvatar  >
@@ -110,10 +110,10 @@ export default function PerfilDelUsuario(){
                          src="/static/images/avatar/1.jpg"
                          sx={{ width: 60, height: 60}}
                         >
-                        {usuario.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>: <img className= {style.foto} src={user.picture} alt= ""/> } 
+                        {usuario.picture? <img src={usuario.picture} className= {style.foto} alt= ""/>:  <AccountCircleIcon  className= {style.foto2} fontSize = "large"/>  } 
                         </Avatar>
                     </ListItemAvatar>
-                    <ListItemText    primary= {<p > Bienvenido {usuario.name}!!</p>} secondary= {usuario.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
+                    <ListItemText    primary= {<p > Bienvenido {usuario.name}!!</p>}secondary= {usuario.isAdmin === true? <p className= {style.subTitulo}> Administrador. </p> : ""} />
                     </ListItem>
                     <Divider variant="inset" component="li" />
                
@@ -126,7 +126,7 @@ export default function PerfilDelUsuario(){
             {/* <br/> */}
             <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-                <AccountCircleIcon  className= {style.subTitulo} fontSize = "large"/>
+                <AccountCircleIcon  className= {style.iconos} fontSize = "large"/>
             </ListItemIcon>
             <ListItemText primary="Mis datos" />
             
@@ -156,9 +156,9 @@ export default function PerfilDelUsuario(){
 
                     <div>
             
-                        <Stack direction="row" spacing={2} fontSize = "small">
+                        <Stack direction="row"  fontSize = "small">
 
-                        <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+                        <Button sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                             <Link className= {style.modificar} to = {"/loginData/" + usuario.id}> Modificar datos </Link>
                         </Button>
 
@@ -181,7 +181,7 @@ export default function PerfilDelUsuario(){
 
             <ListItemButton onClick={handleClickA}>
             <ListItemIcon>
-                <LocationOnIcon  className= {style.subTitulo} fontSize = "large"/>
+                <LocationOnIcon  className= {style.iconos} fontSize = "large"/>
             </ListItemIcon>
             <ListItemText primary="Dirección" />
             {openA ? <ExpandLess /> : <ExpandMore />}
@@ -193,7 +193,7 @@ export default function PerfilDelUsuario(){
                 <div>
                     {addresses[0]? addresses.map(a => {
                         return(
-                        <div key={a.id}>
+                        <div key={a.id}><br/>
                             <spam className= {style.subTitulo}>Calle: {a.street}. </spam>
                             <spam className= {style.subTitulo}>N°: {a.number}. </spam>
                             <spam className= {style.subTitulo}>Pcia.: {a.province}. </spam>
@@ -203,16 +203,16 @@ export default function PerfilDelUsuario(){
                             <br/>
                             {a.description? <spam className= {style.subTitulo}>Descripción: {a.description} </spam>: <spam className= {style.subTitulo}>Descripción no especificada </spam>}
                             <br/>
-                            <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
-                            <Link className= {style.modificar} to={`/updateAddress/${a.id}`}>Modificar dirección</Link>
+                            <Button sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+                            <Link className= {style.modificar} to={`/updateAddress/${a.id}`}>Modificar dirección.</Link>
                             </Button>
                             
                             
                         </div>
                         )
                     }):<p className= {style.subTitulo}>No hay ninguna dirección</p>}
-
-                    <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+                    <br/>
+                    <Button sx={{bgcolor:  "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                     <Link className= {style.modificar} to={"/createAddress"}>Agregar dirección</Link>
                     </Button>
                     
@@ -226,7 +226,7 @@ export default function PerfilDelUsuario(){
 
             <ListItemButton onClick={handleClickB}>
             <ListItemIcon>
-                <LocalMallIcon  className= {style.subTitulo} fontSize = "large"/>
+                <LocalMallIcon  className= {style.iconos} fontSize = "large"/>
             </ListItemIcon>
             <ListItemText primary="Mis compras" />
             {openB ? <ExpandLess /> : <ExpandMore />}
@@ -240,8 +240,8 @@ export default function PerfilDelUsuario(){
                         <div key={index}>
                             <p className= {style.subTitulo}>{o.payment_status === "approved"? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span>: <span>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</span>}</p>
                             
-                            <Stack direction="row" spacing={2} fontSize = "small">
-                            <Button className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+                            <Stack direction="row"  fontSize = "small">
+                            <Button sx={{bgcolor:  "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                             <Link className= {style.modificar} to = {"/orderDetail/" + o.merchant_order_id}> Ver detalles </Link>
                             </Button>
 
@@ -267,7 +267,7 @@ export default function PerfilDelUsuario(){
 
             <ListItemButton onClick={handleClickC}>
             <ListItemIcon>
-                <StarBorderIcon  className= {style.subTitulo} fontSize = "large"/>
+                <StarBorderIcon  className= {style.iconos} fontSize = "large"/>
             </ListItemIcon>
             <ListItemText primary="Mis reseñas" />
             {openC ? <ExpandLess /> : <ExpandMore />}
