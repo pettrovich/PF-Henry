@@ -9,13 +9,16 @@ import DashboardUsers from './DashboardUsers';
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { DashboardUsersA } from '../../redux/actions/DashboardUsersA';
-
+import { refresh } from '../../redux/actions/detailProductA';
+import DashboardOrders from "./DashboardOrders";
 
 
 const Dashboard = () => {
     const dispatch = useDispatch();
+    const detail = useSelector ((state) => state.detailProduct.product);
 
     useEffect(() => {
+        dispatch(refresh())
         dispatch(DashboardUsersA())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -25,9 +28,9 @@ const Dashboard = () => {
     const { user, isAuthenticated } = useAuth0();
     let findedUser;
     if (isAuthenticated) {
-        findedUser = users.filter(e => e.username === user.nickname).shift()
+        findedUser = users.find(e => e.email === user.email)
     }
-    console.log(findedUser)
+    // console.log(findedUser)
 
     const [isShown, setIsShown] = useState(false);
     const [buttIndex, setButtIndex] = useState(null);
@@ -44,7 +47,8 @@ const Dashboard = () => {
         <>
             {
                 (isAuthenticated && findedUser?.isAdmin)
-                    ? <div className={style.container}>
+                    ?
+                     <div className={style.container}>
                         <h1>Dashboard</h1>
                         <div>
                             <button id={1} onClick={handleClick} className={style.btn}>Crear productos</button>
@@ -58,7 +62,10 @@ const Dashboard = () => {
                             <button id={3} onClick={handleClick} className={style.btn}>Usuarios</button>
                             {isShown && buttIndex === 3 && <DashboardUsers />}
                         </div>
-
+                        <div>
+                            <button id={4} onClick={handleClick} className={style.btn}>Ordenes</button>
+                            {isShown && buttIndex === 4 && <DashboardOrders />}
+                        </div>
                         {/* <div>
                     <button id={4} onClick={handleClick} className={style.btn}>Historial de compra</button>
                     {isShown && buttIndex === 4 && <div><p className={style.provisorio}>Solo falta que el Back mande la ruta.. mientras tanto tenes los usuarios una vez mas {"-->"}</p><DashboardHistoryShopping /></div>}
