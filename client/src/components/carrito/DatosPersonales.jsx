@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -66,7 +66,7 @@ export default function LoginData({ personalData, setPersonalData }) {
                                 value={personalData.name}
                                 name="name"
                                 onChange={(e) => setPersonalData({ ...personalData, name: e.target.value })}
-                                defaultValue={usuario.name ? "" : "Ingrese un nombre"}
+                                defaultValue={usuario?.name}
                                 helperText=""
                                 InputLabelProps={{
                                     shrink: true,
@@ -94,7 +94,7 @@ export default function LoginData({ personalData, setPersonalData }) {
                                     onChange={(e) => setPersonalData({ ...personalData, dni: e.target.value })}
                                     name="dni"
                                     type="number"
-                                    defaultValue={usuario.dni ? "" : "Ingrese un DNI"}
+                                    defaultValue={usuario?.dni}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -122,7 +122,7 @@ export default function LoginData({ personalData, setPersonalData }) {
                                 value={personalData.celphone}
                                 onChange={(e) => setPersonalData({ ...personalData, celphone: e.target.value })}
                                 name="celphone"
-                                defaultValue={usuario.celphone ? "" : "Ingrese un telefono"}
+                                defaultValue={usuario?.celphone}
                                 type="number"
                                 InputLabelProps={{
                                     shrink: true,
