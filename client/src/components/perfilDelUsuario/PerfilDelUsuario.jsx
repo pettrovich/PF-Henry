@@ -163,7 +163,7 @@ export default function PerfilDelUsuario(){
                         <Stack direction="row"  fontSize = "small">
 
                         <Button sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
-                            <Link className= {style.modificar} to = {"/loginData/" + usuario.id}> Modificar datos </Link>
+                            <Link className= {style.modificar} to = {"/loginData/" + usuario?.id}> Modificar datos </Link>
                         </Button>
 
                         </Stack>
