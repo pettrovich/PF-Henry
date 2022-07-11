@@ -38,9 +38,13 @@ import Box from '@mui/material/Box';
 
 const labels = {
     1: 'Malo',
+    1.5: 'Regular',
     2: 'Regular',
+    2.5: 'Bueno',
     3: 'Bueno',
+    3.5: 'Muy bueno',
     4: 'Muy bueno',
+    4.5: 'Excelente',
     5: 'Excelente',
   };
 
