@@ -35,6 +35,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
+import  Loading  from '../loading/Loading.jsx';
 
 const labels = {
     1: 'Malo',
@@ -93,7 +94,7 @@ export default function PerfilDelUsuario(){
 
 
     if(isLoading){
-        return <p> Loading... </p>
+        return <Loading />
     }
         return (
 
