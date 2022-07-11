@@ -2,10 +2,18 @@ import React from 'react';
 import axios from 'axios';
 import { limpiarCarrito } from '../../redux/actions/carritoA';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 export default function PaypalForm({ data, total, setPago }) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     let paypalRef = React.useRef();
+
+    function converter(cantidad) {
+        let dolar = 0.0079;
+        let resultado = (cantidad * dolar).toFixed(2)
+        return resultado
+    }
 
     let dataPaypal = data.map(e => {
         return {
@@ -14,7 +22,7 @@ export default function PaypalForm({ data, total, setPago }) {
             quantity: e.quantity,
             unit_amount: {
                 currency_code: 'USD',
-                value: e.price
+                value: converter(e.price)
             }
         }
     });
@@ -33,11 +41,11 @@ export default function PaypalForm({ data, total, setPago }) {
                                 items: dataPaypal,
                                 amount: {
                                     currency_code: "USD",
-                                    value: total,
+                                    value: converter(total),
                                     breakdown: {
                                         item_total: {
                                             currency_code: "USD",
-                                            value: total
+                                            value: converter(total)
                                         }
                                     }
                                 }
@@ -46,13 +54,13 @@ export default function PaypalForm({ data, total, setPago }) {
                     });
                 },
                 onApprove: async (data, actions) => {
-                    // const order = await actions.order.capture();
+                    const order = await actions.order.capture();
                     dispatch(limpiarCarrito());
                     reducirStock.forEach(e => {
-                        axios.put(`/ProductDetail/${e.id}`, ({ stock: e.stock - e.quantity }))
+                        axios.put(`/ProductDetail/${e.id}`, ({ quantity: e.quantity }))
                     })
-                    // console.log(order);
-                    setPago('exitoso')
+                    console.log(order);
+                    navigate('/success');
                 },
                 onCancel: function (data, actions) {
                     console.log("Cancelaste la compra qlio");
