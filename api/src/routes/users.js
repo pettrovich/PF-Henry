@@ -14,7 +14,9 @@ const getRegularUsers = require("../controllers/User/GET/getRegularUsers");
 const getUsers = require("../controllers/User/GET/getUsers");
 const removeAddress = require("../controllers/Address/DELETE/removeAddress");
 const removeFavourite = require("../controllers/Favourite/DELETE/removeFavourite");
+const removeFromCart = require("../controllers/ShoppingCart/DELETE/removeFromCart");
 const updateAddress = require("../controllers/Address/PUT/updateAddress");
+const updateItemQuantity = require("../controllers/ShoppingCart/PUT/updateItemQuantity");
 const updateUser = require("../controllers/User/PUT/updateUser");
 const updateUserInfo = require("../controllers/User/PUT/updateUserInfo");
 const setActiveAddress = require("../controllers/Address/PUT/setActiveAddress");
@@ -243,7 +245,7 @@ router.delete('/:userId/removeFavourite', async (req, res) => {
         return res.json(favourites);
     }
     catch (err) {
-        return res.status(500).send(`No se pudo eliminar el producto de los favoritos (${err})`);
+        return res.status(500).send(`No se pudo quitar el producto de los favoritos (${err})`);
     }
 });
 
@@ -271,17 +273,29 @@ router.post('/:userId/addToCart/', async (req, res) => {
     }
 });
 
-// router.delete('/:username/removeFavourite', async (req, res) => {
-//     const {userId} = req.params;
-//     const {productId} = req.body;
-//     try {
-//         if (!productId) return res.status(500).send('No se seleccionó ningún producto');
-//         const favourites = await removeFavourite(userId, productId);
-//         return res.json(favourites);
-//     }
-//     catch (err) {
-//         return res.status(500).send(`No se pudo eliminar el producto de los favoritos (${err})`);
-//     }
-// });
+router.put('/:userId/updateCartItem', async (req, res) => {
+    const {userId} = req.params;
+    const {productId, quantity} = req.body;
+    try {
+        const shoppingCart = await updateItemQuantity(userId, productId, quantity);
+        return res.json(shoppingCart);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo modificar el carrito (${err})`);
+    }
+});
+
+router.delete('/:userId/removeFromCart', async (req, res) => {
+    const {userId} = req.params;
+    const {productId} = req.body;
+    try {
+        if (!productId) return res.status(500).send('No se seleccionó ningún producto');
+        const shoppingCart = await removeFromCart(userId, productId);
+        return res.json(shoppingCart);
+    }
+    catch (err) {
+        return res.status(500).send(`No se pudo sacar el producto del carrito (${err})`);
+    }
+});
 
 module.exports = router;
