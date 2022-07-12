@@ -1,6 +1,7 @@
 const {Router} = require('express');
 const addAddress = require("../controllers/Address/POST/addAddress");
 const addFavourite = require("../controllers/Favourite/POST/addFavourite");
+const addToCart = require("../controllers/ShoppingCart/POST/addToCart");
 const createUser = require("../controllers/User/POST/createUser");
 const getAddresses = require("../controllers/Address/GET/getAddresses");
 const getAdmins = require("../controllers/User/GET/getAdmins");
@@ -257,16 +258,18 @@ router.get('/:userId/shoppingCart', async (req, res) => {
         return res.status(500).send(`No se pudo cargar el carrito de compras (${err})`);
     }
 });
-// router.post('/:userId/addFavourite/', async (req, res) => {
-//     const {userId} = req.params; const {productId} = req.body;
-//     try {
-//         if (!productId) return res.status(500).send('No se seleccionó ningún producto');
-//         const favourites = await addFavourite(userId, productId);
-//         return res.json(favourites);
-//     } catch (err) {
-//         return res.status(500).send(`No se pudo agregar el producto a favoritos (${err})`);
-//     }
-// });
+
+router.post('/:userId/addToCart/', async (req, res) => {
+    const {userId} = req.params;
+    const {productId, quantity} = req.body;
+    try {
+        if (!productId || !quantity) return res.status(500).send('No se seleccionó ningún producto');
+        const shoppingCart = await addToCart(userId, productId, quantity);
+        return res.json(shoppingCart);
+    } catch (err) {
+        return res.status(500).send(`No se pudo agregar el producto al carrito (${err})`);
+    }
+});
 
 // router.delete('/:username/removeFavourite', async (req, res) => {
 //     const {userId} = req.params;
