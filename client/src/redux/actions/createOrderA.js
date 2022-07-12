@@ -9,6 +9,9 @@ export const getOrder = (orderId, userID, type) => {
             dispatch(createOrder(orderId, response.status, userID));
         }
     }
+    else if (type === 'pp') {
+        console.log('...')
+    }
 }
 
 const controlStock = (response) => {
