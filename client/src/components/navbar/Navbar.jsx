@@ -29,6 +29,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import StoreSharpIcon from '@mui/icons-material/StoreSharp';
 import { getProductByName } from "../../redux/actions/productName";
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+import { useSnackbar } from 'notistack';
 
 const theme = createTheme({
     palette: {
@@ -102,14 +103,16 @@ const StyledBadge2 = styled(Badge)(({ theme }) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+    const { enqueueSnackbar } = useSnackbar();
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useDispatch();
 
-    const [producto, setProducto] = useState();
+    const [producto, setProducto] = useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (producto.length < 1) return enqueueSnackbar('No has ingresado nada!', { variant: 'info' });
         if (location.pathname !== '/products') {
             navigate("/products")
         }
@@ -140,6 +143,7 @@ export default function PrimarySearchAppBar() {
     if (isAuthenticated) {
         let findedUser = users.find(e => e.email === user.email);
         (findedUser?.isAdmin) ? isAdmin = true : isAdmin = false;
+        localStorage.setItem('usuario', JSON.stringify(findedUser));
     }
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -328,6 +332,10 @@ export default function PrimarySearchAppBar() {
 
 
     if (location.pathname === '/dashboard') return (<></>)
+    if (location.pathname === '/orders') return (<></>)
+    if (location.pathname === '/adminProducts') return (<></>)
+    if (location.pathname === '/createproducts') return (<></>)
+    if (location.pathname === '/users') return (<></>)
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1 }}>
