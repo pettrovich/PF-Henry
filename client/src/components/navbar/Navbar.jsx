@@ -28,6 +28,18 @@ import PermIdentitySharpIcon from '@mui/icons-material/PermIdentitySharp';
 import { useLocation, useNavigate } from 'react-router-dom';
 import StoreSharpIcon from '@mui/icons-material/StoreSharp';
 import { getProductByName } from "../../redux/actions/productName";
+import { ThemeProvider, createTheme } from '@material-ui/core/styles';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: '#FFC400',
+        },
+        secondary: {
+            main: '#3a0ca3',
+        },
+    },
+});
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -76,12 +88,16 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
         right: 3,
         top: 5,
+        backgroundColor: '#FFC400',
+        color: 'black'
     },
 }));
 const StyledBadge2 = styled(Badge)(({ theme }) => ({
     '& .MuiBadge-badge': {
         right: 3,
         top: 2,
+        backgroundColor: '#FFC400',
+        color: 'black'
     },
 }));
 
@@ -151,69 +167,71 @@ export default function PrimarySearchAppBar() {
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            id={menuId}
-            keepMounted
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-            PaperProps={{
-                elevation: 0,
-                sx: {
-                    overflow: 'visible',
-                    filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                    mt: 0,
-                    '& .MuiAvatar-root': {
-                        // width: ,
-                        // height: 30,
-                        ml: 0,
-                        mr: 0,
+        <ThemeProvider theme={theme}>
+            <Menu
+                anchorEl={anchorEl}
+                id={menuId}
+                keepMounted
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+                PaperProps={{
+                    elevation: 0,
+                    sx: {
+                        overflow: 'visible',
+                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                        mt: 0,
+                        '& .MuiAvatar-root': {
+                            // width: ,
+                            // height: 30,
+                            ml: 0,
+                            mr: 0,
+                        },
+                        '&:before': {
+                            content: '""',
+                            display: 'block',
+                            position: 'absolute',
+                            top: 0,
+                            right: 20,
+                            width: 10,
+                            height: 10,
+                            bgcolor: 'background.paper',
+                            transform: 'translateY(-50%) rotate(45deg)',
+                            zIndex: 0,
+                        },
                     },
-                    '&:before': {
-                        content: '""',
-                        display: 'block',
-                        position: 'absolute',
-                        top: 0,
-                        right: 20,
-                        width: 10,
-                        height: 10,
-                        bgcolor: 'background.paper',
-                        transform: 'translateY(-50%) rotate(45deg)',
-                        zIndex: 0,
-                    },
-                },
-            }}
-            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-        >
-            <Link to='/profile' style={{ textDecoration: 'none', color: 'inherit' }}>
-                <MenuItem>
+                }}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+                <Link to='/profile' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <MenuItem>
+                        <ListItemIcon>
+                            <PermIdentitySharpIcon />
+                        </ListItemIcon>
+                        Perfil
+                    </MenuItem>
+                </Link>
+                <Divider />
+                {
+                    (isAdmin)
+                        ? <Link to='/dashboard' style={{ textDecoration: 'none', color: 'inherit' }}>
+                            <MenuItem>
+                                <ListItemIcon>
+                                    <FactCheckSharpIcon />
+                                </ListItemIcon>
+                                Dashboard
+                            </MenuItem>
+                        </Link>
+                        : <div></div>
+                }
+                <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
                     <ListItemIcon>
-                        <PermIdentitySharpIcon />
+                        <Logout fontSize="small" />
                     </ListItemIcon>
-                    Perfil
+                    Logout
                 </MenuItem>
-            </Link>
-            <Divider />
-            {
-                (isAdmin)
-                    ? <Link to='/dashboard' style={{ textDecoration: 'none', color: 'inherit' }}>
-                        <MenuItem>
-                            <ListItemIcon>
-                                <FactCheckSharpIcon />
-                            </ListItemIcon>
-                            Dashboard
-                        </MenuItem>
-                    </Link>
-                    : <></>
-            }
-            <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
-                <ListItemIcon>
-                    <Logout fontSize="small" />
-                </ListItemIcon>
-                Logout
-            </MenuItem>
-        </Menu >
+            </Menu >
+        </ThemeProvider>
     );
 
     const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -297,7 +315,7 @@ export default function PrimarySearchAppBar() {
                             Dashboard
                         </MenuItem>
                     </Link>
-                    : <></>
+                    : <div></div>
             }
             <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
                 <ListItemIcon>
@@ -311,31 +329,33 @@ export default function PrimarySearchAppBar() {
 
     if (location.pathname === '/dashboard') return (<></>)
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <div style={{ backgroundColor: '#3a0ca3', height: 30, display: 'flex', alignItems: 'center', borderBottom: 'solid', borderBottomWidth: 1.7, borderColor: '#495057' }}>
-                <Grid container spacing={2}>
-                    <Grid item xs={5} sm={4} md={4} lg={4} xl={4} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'center', display: { xs: 'none', md: 'unset' } }}>
-                        Necesitas ayuda? +54 123 456 789
-                    </Grid>
-                    <Grid item xs={0} sm={2.2} md={2} lg={4.9} xl={5} sx={{ color: '#ced4da', display: { xs: 'none', md: 'unset' } }}>
-                    </Grid>
-                    <Grid item xs={2} sm={2} md={2} lg={1.1} xl={1} sx={{ color: '#ced4da', fontSize: 14, cursor: 'pointer', display: { xs: 'none', md: 'unset' } }}>
-                        Sobre nosotros
-                    </Grid>
-                    <Grid item xs={1} sm={2} md={2} lg={1} xl={1} sx={{ color: '#ced4da', fontSize: 14, cursor: 'pointer', display: { xs: 'none', md: 'unset' } }}>
-                        Contactanos
-                    </Grid>
-                    <Grid item xs={1} sm={2} md={2} lg={1} xl={1} sx={{ color: '#ced4da', fontSize: 14, textAlign: 'left', cursor: 'pointer', marginLeft: -2, display: { xs: 'none', md: 'unset' } }}>
-                        FAQs
-                    </Grid>
-                </Grid>
-            </div>
-            <AppBar position="static" sx={{ backgroundColor: '#3a0ca3', paddingTop: 1.5 }}>
-                <Toolbar>
+        <ThemeProvider theme={theme}>
+            <Box sx={{ flexGrow: 1 }}>
+                <div style={{ backgroundColor: '#3a0ca3', height: 30, display: 'flex', alignItems: 'center', borderBottom: 'solid', borderBottomWidth: 1.7, borderColor: '#495057' }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={3} sm={5} md={1} lg={1} xl={1.5} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'center', display: 'flex' }}></Grid>
-                        <Grid item xs={9} sm={6} md={2} lg={2} xl={1.6} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'center', display: 'flex' }}>
-                            {/* <IconButton
+                        <Grid item xs={5} sm={4} md={4} lg={4} xl={4} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'center', display: { xs: 'none', md: 'unset' } }}>
+                            Necesitas ayuda? +54 123 456 789
+                        </Grid>
+                        <Grid item xs={0} sm={2.2} md={2} lg={4.9} xl={5} sx={{ color: '#ced4da', display: { xs: 'none', md: 'unset' } }}>
+                        </Grid>
+                        <Grid item xs={2} sm={2} md={2} lg={1.1} xl={1} sx={{ color: '#ced4da', fontSize: 14, cursor: 'pointer', display: { xs: 'none', md: 'unset' } }}>
+                            Sobre nosotros
+                        </Grid>
+                        <Grid item xs={1} sm={2} md={2} lg={1} xl={1} sx={{ color: '#ced4da', fontSize: 14, cursor: 'pointer', display: { xs: 'none', md: 'unset' } }}>
+                            <a href="https://api.whatsapp.com/send?phone=+5492616260059&text=HENTECH%20horario%20de%20atencion:%20Lunes%20a%20viernes%20de%209.30%20-%2019.00hs" style={{ textDecoration: 'none', color: 'inherit' }}>Contactanos</a>
+
+                        </Grid>
+                        <Grid item xs={1} sm={2} md={2} lg={1} xl={1} sx={{ color: '#ced4da', fontSize: 14, textAlign: 'left', cursor: 'pointer', marginLeft: -2, display: { xs: 'none', md: 'unset' } }}>
+                            FAQs
+                        </Grid>
+                    </Grid>
+                </div>
+                <AppBar position="static" sx={{ backgroundColor: '#3a0ca3', paddingTop: 1.5 }}>
+                    <Toolbar>
+                        <Grid container spacing={2}>
+                            <Grid item xs={3} sm={5} md={1} lg={1} xl={1.5} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'center', display: 'flex' }}></Grid>
+                            <Grid item xs={9} sm={6} md={2} lg={2} xl={1.6} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'center', display: 'flex' }}>
+                                {/* <IconButton
                         size="large"
                         edge="start"
                         color="inherit"
@@ -344,111 +364,114 @@ export default function PrimarySearchAppBar() {
                     >
                         <MenuIcon />
                     </IconButton> */}
-                            {/* <Link to='/' style={{ textDecoration: 'none' }}> */}
-                            <Typography
-                                variant="h6"
-                                noWrap
-                                href='/'
-                                component="a"
-                                sx={{
-                                    display: { sm: 'block' },
-                                    textDecoration: 'none',
-                                    fontFamily: 'monospace',
-                                    fontWeight: 700,
-                                    letterSpacing: '.3rem',
-                                    fontSize: 30,
-                                    color: '#ced4da',
-                                }}
-                            >
-                                HENTECH
-                            </Typography>
-                            {/* </Link> */}
-                        </Grid>
-                        <Grid item xs={0} sm={3} md={2} lg={2} xl={1.5} sx={{ color: 'white', fontSize: 13, marginLeft: 7, display: { xs: 'none', sm: 'none', md: 'unset' } }}>
-                            <Link to='/products' style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <Button key={'products'}>
-                                    Productos
-                                </Button>
-                            </Link>
-                        </Grid>
-                        <Grid item xs={0} sm={3.8} md={4} lg={4} xl={4} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'right', display: { xs: 'flex', md: 'none' } }}></Grid>
-                        <Grid item xs={9} sm={6} md={4} lg={4} xl={4} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'right', display: { sm: 'unset' } }}>
-                            <Search>
-                                <SearchIconWrapper>
-                                    <SearchIcon />
-                                </SearchIconWrapper>
-                                <form onSubmit={(e) => handleSubmit(e)}>
-                                    <StyledInputBase
-                                        value={producto}
-                                        onChange={(e) => handleInputChange(e)}
-                                        placeholder="Buscar producto..."
-                                        inputProps={{ 'aria-label': 'search' }}
-                                    />
-                                </form>
-                            </Search>
-                        </Grid>
-                        {/* <Box sx={{ flexGrow: 1 }} /> */}
-                        <Grid item xs={0} sm={1} md={2} lg={2} xl={1} sx={{ color: 'white' }}>
-                            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
-                                <Link to='/carrito' style={{ textDecoration: 'none', color: 'inherit' }}>
-                                    <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                                        <StyledBadge2 badgeContent={number} color="primary">
-                                            <ShoppingCartIcon sx={{ fontSize: 30 }} />
-                                        </StyledBadge2>
-                                    </IconButton>
+                                {/* <Link to='/' style={{ textDecoration: 'none' }}> */}
+                                <Typography
+                                    variant="h6"
+                                    noWrap
+                                    href='/'
+                                    component="a"
+                                    sx={{
+                                        display: { sm: 'block' },
+                                        textDecoration: 'none',
+                                        fontFamily: 'monospace',
+                                        fontWeight: 700,
+                                        letterSpacing: '.3rem',
+                                        fontSize: 30,
+                                        color: '#ced4da',
+                                    }}
+                                >
+                                    HENTECH
+                                </Typography>
+                                {/* </Link> */}
+                            </Grid>
+                            <Grid item xs={0} sm={3} md={2} lg={2} xl={1.5} sx={{ color: 'white', fontSize: 13, marginLeft: 7, display: { xs: 'none', sm: 'none', md: 'unset' } }}>
+                                <Link to='/products' style={{ textDecoration: 'none' }}>
+                                    <Button key={'products'} >
+                                        <div style={{ color: '#FFC400' }}>
+                                            Productos
+                                        </div>
+                                    </Button>
                                 </Link>
-                                <IconButton
-                                    size="large"
-                                    aria-label=""
-                                    color="inherit"
-                                >
-                                    <StyledBadge badgeContent={productosFavoritos.length} color="primary">
-                                        <Link to='/favoritos' style={{ textDecoration: 'none', color: 'inherit' }}> <FavoriteIcon sx={{ fontSize: 30, marginBottom: -0.5 }} /> </Link>
-                                    </StyledBadge>
-                                </IconButton>
-                                {
-                                    (isAuthenticated === false)
-                                        ? <IconButton
-                                            size="large"
-                                            aria-label="account of current user"
-                                            aria-controls={menuId}
-                                            aria-haspopup="true"
-                                            onClick={() => { loginWithRedirect() }}
-                                            color="inherit"
-                                        >
-                                            <AccountCircle sx={{ fontSize: 30 }} />
+                            </Grid>
+                            <Grid item xs={0} sm={3.8} md={4} lg={4} xl={4} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'right', display: { xs: 'flex', md: 'none' } }}></Grid>
+                            <Grid item xs={9} sm={6} md={4} lg={4} xl={4} sx={{ color: '#ced4da', fontSize: 13, textAlign: 'right', display: { sm: 'unset' } }}>
+                                <Search>
+                                    <SearchIconWrapper>
+                                        <SearchIcon />
+                                    </SearchIconWrapper>
+                                    <form onSubmit={(e) => handleSubmit(e)}>
+                                        <StyledInputBase
+                                            value={producto}
+                                            onChange={(e) => handleInputChange(e)}
+                                            placeholder="Buscar producto..."
+                                            inputProps={{ 'aria-label': 'search' }}
+                                        />
+                                    </form>
+                                </Search>
+                            </Grid>
+                            {/* <Box sx={{ flexGrow: 1 }} /> */}
+                            <Grid item xs={0} sm={1} md={2} lg={2} xl={1} sx={{ color: 'white' }}>
+                                <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center' }}>
+                                    <Link to='/carrito' style={{ textDecoration: 'none', color: 'inherit' }}>
+                                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+                                            <StyledBadge2 badgeContent={number} color="primary">
+                                                <ShoppingCartIcon sx={{ fontSize: 30 }} />
+                                            </StyledBadge2>
                                         </IconButton>
-                                        : <IconButton
-                                            size="large"
-                                            aria-label="account of current user"
-                                            aria-controls={menuId}
-                                            aria-haspopup="true"
-                                            onClick={handleProfileMenuOpen}
-                                            color="inherit"
-                                        >
-                                            <AccountCircle sx={{ fontSize: 30 }} />
-                                        </IconButton>}
-                            </Box>
+                                    </Link>
+                                    <IconButton
+                                        size="large"
+                                        aria-label=""
+                                        color="inherit"
+                                    >
+                                        <StyledBadge badgeContent={productosFavoritos.length} color="primary">
+                                            <Link to='/favoritos' style={{ textDecoration: 'none', color: 'inherit' }}> <FavoriteIcon sx={{ fontSize: 30, marginBottom: -0.5 }} /> </Link>
+                                        </StyledBadge>
+                                    </IconButton>
+                                    {
+                                        (isAuthenticated === false)
+                                            ? <IconButton
+                                                size="large"
+                                                aria-label="account of current user"
+                                                aria-controls={menuId}
+                                                aria-haspopup="true"
+                                                onClick={() => { loginWithRedirect() }}
+                                                color="inherit"
+                                            >
+                                                <AccountCircle sx={{ fontSize: 30 }} />
+                                            </IconButton>
+                                            : <IconButton
+                                                size="large"
+                                                aria-label="account of current user"
+                                                aria-controls={menuId}
+                                                aria-haspopup="true"
+                                                onClick={handleProfileMenuOpen}
+                                                color="inherit"
+                                            >
+                                                <AccountCircle sx={{ fontSize: 30 }} />
+                                            </IconButton>}
+                                </Box>
+                            </Grid>
+                            <Grid item xs={1} sm={1} md={6} lg={2} xl={1} sx={{ color: 'white' }}>
+                                <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                                    <IconButton
+                                        size="large"
+                                        aria-label="show more"
+                                        aria-controls={mobileMenuId}
+                                        aria-haspopup="true"
+                                        onClick={handleMobileMenuOpen}
+                                        color="inherit"
+                                    >
+                                        <MoreIcon />
+                                    </IconButton>
+                                </Box>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={1} sm={1} md={6} lg={2} xl={1} sx={{ color: 'white' }}>
-                            <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-                                <IconButton
-                                    size="large"
-                                    aria-label="show more"
-                                    aria-controls={mobileMenuId}
-                                    aria-haspopup="true"
-                                    onClick={handleMobileMenuOpen}
-                                    color="inherit"
-                                >
-                                    <MoreIcon />
-                                </IconButton>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Toolbar>
-            </AppBar>
-            {renderMobileMenu}
-            {renderMenu}
-        </Box >
+                    </Toolbar>
+                </AppBar>
+                {renderMobileMenu}
+                {renderMenu}
+            </Box >
+        </ThemeProvider>
     );
 }
