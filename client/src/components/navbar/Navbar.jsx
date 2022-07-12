@@ -143,6 +143,7 @@ export default function PrimarySearchAppBar() {
     if (isAuthenticated) {
         let findedUser = users.find(e => e.email === user.email);
         (findedUser?.isAdmin) ? isAdmin = true : isAdmin = false;
+        localStorage.setItem('usuario', JSON.stringify(findedUser));
     }
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -331,6 +332,10 @@ export default function PrimarySearchAppBar() {
 
 
     if (location.pathname === '/dashboard') return (<></>)
+    if (location.pathname === '/orders') return (<></>)
+    if (location.pathname === '/adminProducts') return (<></>)
+    if (location.pathname === '/createproducts') return (<></>)
+    if (location.pathname === '/users') return (<></>)
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1 }}>

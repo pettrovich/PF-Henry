@@ -1,27 +1,26 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { getOrder } from '../../redux/actions/createOrderA';
 import { useDispatch } from 'react-redux';
 import { limpiarCarrito } from '../../redux/actions/carritoA';
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Success() {
-    const users = useSelector((state) => state.DashboardUsersR.allUsers);
-    const { user } = useAuth0();
+    let orderIdPayPal = JSON.parse(localStorage.getItem('idOrderPP'));
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
 
-    let findedUser = users?.find(e => e?.email === user?.email);
 
     const queryParams = new URLSearchParams(window.location.search);
     const orderId = queryParams.get("merchant_order_id");
+    const payerId = queryParams.get("PayerID");
 
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (orderId?.length > 1) dispatch(getOrder(orderId, findedUser?.id));
+        if (orderId?.length > 1) dispatch(getOrder(orderId, usuario.id, 'mp'));
+        else if (payerId?.length > 1) dispatch(getOrder(orderIdPayPal, usuario.id, 'pp'));
         dispatch(limpiarCarrito());
         setTimeout(() => {
-            window.location.href = 'http://localhost:3000/';
+            window.location.href = 'https://deployment-ruddy.vercel.app/';
         }, 1500);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
