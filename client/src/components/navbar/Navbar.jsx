@@ -222,7 +222,7 @@ export default function PrimarySearchAppBar() {
                                 Dashboard
                             </MenuItem>
                         </Link>
-                        : <></>
+                        : <div></div>
                 }
                 <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
                     <ListItemIcon>
@@ -315,7 +315,7 @@ export default function PrimarySearchAppBar() {
                             Dashboard
                         </MenuItem>
                     </Link>
-                    : <></>
+                    : <div></div>
             }
             <MenuItem onClick={() => logout({ returnTo: window.location.origin })}>
                 <ListItemIcon>
