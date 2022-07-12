@@ -1,11 +1,13 @@
 
 import axios from 'axios';
 
-export const getOrder = (orderId, userID) => {
-    return async function (dispatch) {
-        const response = (await axios.get(`/orderMP?merchant_order_id=${orderId}`)).data;
-        dispatch(controlStock(response.items));
-        dispatch(createOrder(orderId, response.status, userID));
+export const getOrder = (orderId, userID, type) => {
+    if (type === 'mp') {
+        return async function (dispatch) {
+            const response = (await axios.get(`/orderMP?merchant_order_id=${orderId}`)).data;
+            dispatch(controlStock(response.items));
+            dispatch(createOrder(orderId, response.status, userID));
+        }
     }
 }
 
