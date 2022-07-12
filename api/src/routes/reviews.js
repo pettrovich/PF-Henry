@@ -69,7 +69,7 @@ router.get('/product/:productId', async (req, res) => {
     }
 });
 
-router.get('/User_Products', async (req, res) => {
+router.get('/UserProducts', async (req, res) => {
     const {productId, userId} = req.body;
     try {
         const review = await getReview(productId, userId);
