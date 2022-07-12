@@ -246,7 +246,7 @@ export default function PerfilDelUsuario() {
                                                 <p className={style.subTitulo}>{(o.payment_status === "approved" && o.merchant_order_id) ? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_order_id}</span> : (o.payment_status === "rejected" && o.merchant_order_id) ? <span>Estado de compra: rechazado. N° de transacción: {o.merchant_order_id}</span> : (o.payment_status === "APPROVED" && o.merchant_order_id) ? <span>Estado de compra: aprobado. N° de transacción: {o.merchant_id}</span> : (o.payment_status === "rejected" && o.merchant_order_id) ? <span>Estado de compra: rechazado. N° de transacción: {o.merchant_id}</span> : <span></span>}</p>
                                                 <Stack direction="row" fontSize="small">
                                                     <Button sx={{ bgcolor: "#dee2e6 ", borderRadius: "10px", color: '#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize="large" />}>
-                                                        <Link className={style.modificar} to={"/orderDetail/" + o.merchant_id}> Ver detalles </Link>
+                                                        <Link className={style.modificar} to={"/orderDetail/" + o.merchant_order_id}> Ver detalles </Link>
                                                     </Button>
 
                                                 </Stack>
