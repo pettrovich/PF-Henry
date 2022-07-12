@@ -6,6 +6,7 @@ const getAddresses = require("../controllers/Address/GET/getAddresses");
 const getAdmins = require("../controllers/User/GET/getAdmins");
 const getBannedUsers = require("../controllers/User/GET/getBannedUsers");
 const getFavourites = require("../controllers/Favourite/GET/getFavourites");
+const getShoppingCart = require("../controllers/ShoppingCart/GET/getShoppingCart");
 const getUserByEmail = require("../controllers/User/GET/getUserByEmail");
 const getUserById = require("../controllers/User/GET/getUserById");
 const getRegularUsers = require("../controllers/User/GET/getRegularUsers");
@@ -232,7 +233,7 @@ router.get('/:userId/favourites', async (req, res) => {
     }
 });
 
-router.delete('/:username/removeFavourite', async (req, res) => {
+router.delete('/:userId/removeFavourite', async (req, res) => {
     const {userId} = req.params;
     const {productId} = req.body;
     try {
@@ -244,5 +245,40 @@ router.delete('/:username/removeFavourite', async (req, res) => {
         return res.status(500).send(`No se pudo eliminar el producto de los favoritos (${err})`);
     }
 });
+
+// SHOPPING CART
+
+router.get('/:userId/shoppingCart', async (req, res) => {
+    const {userId} = req.params;
+    try {
+        const shoppingCart = await getShoppingCart(userId);
+        return res.json(shoppingCart);
+    } catch (err) {
+        return res.status(500).send(`No se pudo cargar el carrito de compras (${err})`);
+    }
+});
+// router.post('/:userId/addFavourite/', async (req, res) => {
+//     const {userId} = req.params; const {productId} = req.body;
+//     try {
+//         if (!productId) return res.status(500).send('No se seleccionó ningún producto');
+//         const favourites = await addFavourite(userId, productId);
+//         return res.json(favourites);
+//     } catch (err) {
+//         return res.status(500).send(`No se pudo agregar el producto a favoritos (${err})`);
+//     }
+// });
+
+// router.delete('/:username/removeFavourite', async (req, res) => {
+//     const {userId} = req.params;
+//     const {productId} = req.body;
+//     try {
+//         if (!productId) return res.status(500).send('No se seleccionó ningún producto');
+//         const favourites = await removeFavourite(userId, productId);
+//         return res.json(favourites);
+//     }
+//     catch (err) {
+//         return res.status(500).send(`No se pudo eliminar el producto de los favoritos (${err})`);
+//     }
+// });
 
 module.exports = router;
