@@ -5,7 +5,7 @@ const editReview = require("../controllers/Review/PUT/editReview");
 const getReview = require("../controllers/Review/GET/getReview");
 const getReviews = require("../controllers/Review/GET/getReviews");
 const getUserReviews = require("../controllers/Review/GET/getUserReviews");
-const getProductReviews = require("../controllers/Review/GET/getProductReviews");
+const {getProductReviews} = require("../controllers/Review/GET/getProductReviews");
 const router = Router();
 
 router.post('/Create', async (req, res) => {
