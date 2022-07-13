@@ -21,54 +21,6 @@ import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import Error404NotAdmin from "../../../error404/Error404NotAdmin"
 
 
-
-   //////FILTROS\\\\\\\
-
-   import Grid from '@mui/material/Grid';
-   import Typography from '@mui/material/Typography';
-   import Box from '@mui/material/Box';
-
-   import Ordenar from '../../../products/Ordenar';
-   // import ProductsCard from '../../../products/ProductsCard';
-   import Precio from '../../../products/Precio';
-   import Marcas from '../../../products/Marcas';
-   import Categorias from '../../../products/Categorias';
-   import Envio from '../../../products/Envio';
-   
-   import { getAllProducts, getByCategory, byEnvios, getbrand, rangoByPrice, order } from "../../../../redux/actions/productsA"
-   
-   const Item = styled(Paper)(({ theme }) => ({
-     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-     ...theme.typography.body2,
-     padding: theme.spacing(1),
-     textAlign: 'center',
-     color: theme.palette.text.secondary,
-     borderRadius: 0,
-   }));
-   
-   const Img = styled('img')({
-     margin: 'auto',
-     display: 'block',
-     maxWidth: '100%',
-     maxHeight: '100%',
-   });
-   
-   const ColorButton = styled(Button)(({ theme }) => ({
-     color: theme.palette.getContrastText('#FFC400'),
-     backgroundColor: '#FFC400',
-     '&:hover': {
-         backgroundColor: '#FFC400',
-     },
-   }));
-
- //////FILTROS\\\\\\\
-
-
-
-
-
-
-
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
      
@@ -106,60 +58,7 @@ export default function AdminProd() {
     }
 
 
-    //////FILTROS\\\\\\\
 
-    const [state, setState] = useState({
-      categoria: '',
-      envio: '',
-      marcas: '',
-      minimo: 0,
-      maximo: 0,
-      orden: '',
-
-  });
-
-  const [copystate, setCopyState] = useState({
-      categoria: '',
-  });
-
-  useEffect(() => {
-      dispatch(getAllProducts());
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
-  useEffect(() => {
-      if (state.categoria?.length > 2 && state.categoria !== copystate.categoria) { setCopyState({ ...copystate, categoria: state.categoria }); dispatch(getByCategory(state.categoria)); }
-      if (state.marcas?.length > 2) dispatch(getbrand(state.marcas));
-      if (state.minimo > 0) dispatch(rangoByPrice(state.minimo, state.maximo));
-      if (state.envio?.length > 2) {
-          setTimeout(() => {
-              dispatch(byEnvios(state.envio));
-          }, 500);
-      }
-      if (state.orden?.length > 2) {
-          setTimeout(() => {
-              dispatch(order(state.orden));
-          }, 100);
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state])
-
-  const products = useSelector((state) => state.products.products);
-  const productsCopy = useSelector((state) => state.products.productsCopy);
-  const cantProducts = useSelector((state) => state.products.totalProducts);
-  const [currentPage, setCurrentPage] = useState(1);
-
-    useEffect(() => {
-      setCurrentPage(1);
-  }, [products]);
-
-
-function cleanFilters() {
-  setState({ categoria: 'null', envio: null, marcas: '', minimo: 0, maximo: 0, orden: '' })
-  dispatch(getAllProducts());
-}
-
- //////FILTROS\\\\\\\
 
     return (
         <div>
@@ -167,46 +66,6 @@ function cleanFilters() {
         {
     (isAuthenticated && findedUser?.isAdmin)?
     <div>
-
-{/* //////////Filtros\\\\\\\\\\\\ */}
-    <Box sx={{ width: 1, marginTop: 3 }}>
-    <Grid container direction='column'>
-
-    <Grid item md={3} lg={2.3} xl={2}>
-        <Categorias setState={setState} state={state} total={cantProducts} />
-        <Item sx={{ marginTop: 3, display: 'flex', flexDirection: 'column' }} elevation={1}>
-            <Typography variant='overline'>Envío</Typography>
-            <div>
-                <Envio setState={setState} state={state} />
-            </div>
-        </Item>
-        <Item sx={{ marginTop: 3, display: 'flex', flexDirection: 'column' }} elevation={1}>
-            <Typography variant='overline'>Marcas</Typography>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                <Marcas productsCopy={productsCopy} setState={setState} state={state} />
-            </div>
-        </Item>
-        <Item sx={{ marginTop: 3, display: 'flex', flexDirection: 'column' }} elevation={1}>
-            <Typography variant='overline'>Precio</Typography>
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                <Precio setState={setState} state={state} />
-            </div>
-        </Item>
-        <Item sx={{ marginTop: 2, textAlign: 'right', borderBottom: '1px solid', borderColor: '#022335' }} elevation={1} >
-            <Ordenar setState={setState} state={state} />
-        </Item>
-        <div style={{ marginTop: 8, display: 'flex', flexDirection: 'column' }} elevation={1}>
-            <ColorButton onClick={() => cleanFilters()} variant='contained' disableElevation size='medium'>
-                Reiniciar filtros
-            </ColorButton>
-        </div>
-
-    </Grid>
-    </Grid>
-    </Box >
-
-{/* //////////Filtros\\\\\\\\\\\\ */}
-
 
     <TableContainer component={Paper} sx={{ mt: 2,}}>
       <Table sx={{ minWidth: 700, bgcolor: "#e5e5e5", color: "#3a0ca3" }} aria-label="customized table">
