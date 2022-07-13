@@ -336,6 +336,7 @@ export default function PrimarySearchAppBar() {
     if (location.pathname === '/adminProducts') return (<></>)
     if (location.pathname === '/createproducts') return (<></>)
     if (location.pathname === '/users') return (<></>)
+    if (location.pathname.length === 23) return (<></>)
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ flexGrow: 1 }}>
