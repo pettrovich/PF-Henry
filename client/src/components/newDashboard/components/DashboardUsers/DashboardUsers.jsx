@@ -25,7 +25,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
+import Error404NotAdmin from "../../../error404/Error404NotAdmin"
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -163,7 +163,7 @@ export default function DashboardUsers() {
 
       </Stack>
     </TableContainer>
-    </div> : <h1>No eres administrador</h1>
+    </div> : <Error404NotAdmin/>
 } 
 
 {/*         {

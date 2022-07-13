@@ -27,6 +27,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from "react-router-dom";
 
+import Error404NotAdmin from "../../../error404/Error404NotAdmin"
+
 export default function CreateProduct() {
    
     const dispatch = useDispatch()
@@ -394,7 +396,7 @@ export default function CreateProduct() {
     
             </form>
         </div>
-        : <h1>No eres administrador</h1>
+         : <Error404NotAdmin/>
         }
 </>
   );
