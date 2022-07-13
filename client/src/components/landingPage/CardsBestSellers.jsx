@@ -114,7 +114,7 @@ export default function MediaControlCard({ booleano, bestSellers }) {
                                 </div>
                             </CardContent>
                             <Box sx={{ display: 'flex', pl: 1, pb: 1, flexDirection: 'column', alignItems: 'flex-start' }}>
-                                <Rating name="read-only" value={value} readOnly size="small" sx={{ pb: 0.9 }} />
+                                <Rating name="read-only" value={bestSellers?.value} readOnly size="small" sx={{ pb: 0.9 }} />
                                 <div onClick={handleCarrito} style={{ marginBottom: -5 }}>
                                     <ColorButton size="small" color='primary' disableElevation variant="contained" >
                                         Comprar
