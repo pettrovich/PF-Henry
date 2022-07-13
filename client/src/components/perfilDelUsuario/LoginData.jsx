@@ -40,6 +40,9 @@ export default function LoginData() {
 
   let [state, setState] = useState(false);
   const [input, setInput] = useState({ name: "", username: "", dni: "", celphone:  "", picture: "" })
+  const [imageChosen, setImageChosen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState("");
 
   useEffect(()=>(setInput({
     name: usuario?.name,
@@ -76,7 +79,25 @@ export default function LoginData() {
       });
   }
 
+  async function uploadImage(e) {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('upload_preset','ecommerce');
+    setImageChosen(true);
+    setLoading(true);
 
+    const res = await fetch('https://api.cloudinary.com/v1_1/hentech/image/upload', {
+        method: 'POST',
+        body: data
+    });
+
+    const file = await res.json();
+
+    setImage(file.secure_url);
+    setLoading(false);
+    setInput({...input, picture: file.secure_url});
+  }
 
   if (idd == id){
 
@@ -167,7 +188,7 @@ export default function LoginData() {
                 value={input.picture}
                 onChange={(e) => handleChange(e)}  
                 name="picture"
-                defaultValue= {usuario.picture? "" : "Ingrese una foto por Url:"}
+                defaultValue= {usuario.picture ? "" : "Ingrese una foto"}
                 InputProps={{
                   shrink: true,
                   startAdornment: (
@@ -179,22 +200,27 @@ export default function LoginData() {
                 variant="standard"
               />
               
+              <input type="file" name="file" onChange={uploadImage}></input>
+              {
+                  imageChosen && (loading ? (<p>Cargando...</p>) : (<img src={image} style={{width:'50%'}} alt="Usuario"/>))
+              }
               </div>  
             </div>
             </Box>
-            <Stack direction="row" spacing={2} >
 
+            <Box sx={{ maxWidth: "100%"}}>
+            <Stack direction="row" spacing={2} >
             <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                 Modificar datos
             </Button>
             </Stack>
-            
+            <Link to= "/profile" className= {style.modificar}>
             <Stack direction="row" spacing={2} >
-            <Link to= "/profile" className= {style.modificar}><Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
                volver
-            </Button></Link> 
-
-            </Stack>
+            </Button>
+            </Stack></Link> 
+            </Box>
        
             </Box>
                 <br />
