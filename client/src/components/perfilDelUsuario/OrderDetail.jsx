@@ -10,7 +10,7 @@ import Paper from '@mui/material/Paper';
 
 import { Fragment, useEffect, useState } from 'react';
 import {useDispatch, useSelector} from "react-redux"
-import  {userDetail}  from '../../redux/actions/userOrderA';
+import  { userDetail }  from '../../redux/actions/userOrderA';
 import {useLocation} from "react-router-dom";
 
 import Button from '@mui/material/Button';
@@ -48,10 +48,10 @@ export default function DashboardUsers() {
     const dispatch = useDispatch()
 
     const location = useLocation()
-    let id = (location.pathname.substring(13,location.pathname.length)) 
+    let id = (location.pathname.substring(13,location.pathname.length))
 
     useEffect(()=>{
-        dispatch (userDetail(id))
+      dispatch (userDetail(id))
     },[dispatch])
 
     const list = useSelector ((state) => state.userOrderR.listOrder);
@@ -82,7 +82,7 @@ export default function DashboardUsers() {
               <StyledTableCell align="right">{i.quantity}</StyledTableCell>
               <StyledTableCell align="right">{i.unit_price}</StyledTableCell>
               <StyledTableCell align="right">{i.description}</StyledTableCell>
-              <StyledTableCell align="right">{list.status === "approved"? "Aprobado" : "Rechazado"}</StyledTableCell>
+              <StyledTableCell align="right">{(list.status === "approved" || list.status === "APPROVED")? "Aprobado" : "Rechazado"}</StyledTableCell>
             </StyledTableRow>
           ) : <Loading/>
         }
