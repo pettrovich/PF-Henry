@@ -19,6 +19,7 @@ import Stack from '@mui/material/Stack';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 import { Link } from 'react-router-dom'
 import  Loading  from '../loading/Loading.jsx';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -57,7 +58,13 @@ export default function DashboardUsers() {
     const list = useSelector ((state) => state.userOrderR.listOrder);
     console.log("usuario", list)
 
-  
+    const { user, isAuthenticated } = useAuth0();
+    const users = useSelector((state) => state.DashboardUsersR.allUsers);
+    let findedUser;
+    if (isAuthenticated) {
+        findedUser = users.find(e => e.email === user.email)
+    }
+
     
   return (
 
@@ -90,9 +97,15 @@ export default function DashboardUsers() {
       </Table>
 ;
       <Stack direction="row" spacing={2} >
-      <Link to= "/profile" ><Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+        {(findedUser && findedUser.isAdmin)? 
+      <Link to= "/dashboard" ><Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
         volver
-      </Button></Link> 
+      </Button></Link>
+      : 
+      <Link to= "/profile" ><Button sx={{ m: 1, width: '20ch', color: '#022335', bgcolor:'#dee2e6', borderColor:'#022335',  borderRadius: "5px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+      volver
+    </Button></Link>
+      }
 
       </Stack>
     </TableContainer>
