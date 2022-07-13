@@ -15,7 +15,7 @@ import  Loading  from '../../../loading/Loading';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
+import Error404NotAdmin from "../../../error404/Error404NotAdmin"
 
 
 
@@ -96,7 +96,7 @@ const DashboardOrders = () => {
 
       </Stack>
     </TableContainer>
-    </div> : <h1>No eres administrador</h1>
+    </div>  : <Error404NotAdmin/>
 } 
     </>
   )
