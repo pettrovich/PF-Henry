@@ -32,6 +32,9 @@ const { getAdminOrders } = require('../controllers/Order/GET/getAdminOrders');
 const { getUserOrders } = require('../controllers/Order/GET/getUserOrders');
 const {orderByPrice} = require('../controllers/Product/GET/orderByPrice')
 const {createOrderPP} = require('../controllers/Order/POST/createOrderPP')
+const {updateOrder} = require('../controllers/Admin/PUT/changeStatus')
+const {filterStatus} = require('../controllers/Admin/GET/filterStatus')
+
 
 const router = Router();
 
@@ -101,5 +104,9 @@ router.get('/order/:priceOrder', orderByPrice)
 router.get('/orderDetails/:order_id', orderDetails)
 
 router.post('/create-order-pp', createOrderPP)
+
+router.put('/updateStatus/:idOrder', updateOrder)
+
+router.get('/filterStatus/:status', filterStatus)
 
 module.exports = router;
