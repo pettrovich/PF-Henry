@@ -117,7 +117,7 @@ export default function BasicCard({ id, name, price, category, image, descriptio
                             </div>
                         </Typography>
                         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' }}>
-                            <Rating precision={0.5} name="read-only" value={averageScore} readOnly size="small" sx={{ marginTop: 5, marginBottom: 1 }} />
+                            <Rating name="read-only" value={averageScore} readOnly size="small" sx={{ marginTop: 5, marginBottom: 1 }} />
                             <div style={{ display: 'flex', alignItems: 'baseline' }}>
                                 {
                                     (discount > 0)
