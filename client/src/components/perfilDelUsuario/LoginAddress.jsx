@@ -18,13 +18,13 @@ import Stack from '@mui/material/Stack';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
+import { useSnackbar } from 'notistack';
 
 export default function LoginData() {
  
   const navigate = useNavigate ()
   const dispatch = useDispatch()
-
+  const { enqueueSnackbar } = useSnackbar();
   
   const {user, isAuthenticated, isLoading} = useAuth0()
   const allUser = useSelector ((state) => state.DashboardUsersR.allUsers); 
@@ -60,11 +60,13 @@ export default function LoginData() {
 
      ){
         dispatch(UpdateUserA(id, input))
-        alert ("Cambios realizados con exito")
-        window.location.href='http://localhost:3000/profile'
+        enqueueSnackbar('Cambios realizados con exito', { variant: 'success' });
+        setTimeout(() => {
+          window.location.href='http://localhost:3000/profile'
+      }, 1000);
       }
     else {
-        alert ("Debe modificar algún campo")
+      return enqueueSnackbar("Debe modificar algún campo", { variant: 'error' });
     }
     
   }

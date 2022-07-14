@@ -36,6 +36,8 @@ import Rating from '@mui/material/Rating';
 import StarIcon from '@mui/icons-material/Star';
 import Box from '@mui/material/Box';
 import  Loading  from '../loading/Loading.jsx';
+import DeleteIcon from '@mui/icons-material/Delete';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 const labels = {
     1: 'Malo',
@@ -213,7 +215,7 @@ export default function PerfilDelUsuario(){
                             <Button sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                             <Link className= {style.modificar}  to={`/updateAddress/${a.id}?street=${a.street}&number=${a.number}&province=${a.province}&zipCode=${a.zipCode}${a.location ? `&location=${a.location}` : ''}${a.apartment ? `&apartment=${a.apartment}` : ''}${a.description ? `&description=${a.description}` : ''}`}>Modificar</Link>
                             </Button>
-                            <Button className= {style.modificar} sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#1A2027' }} variant="outlined" startIcon={<EditIcon sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }}fontSize = "large"/>}
+                            <Button className= {style.modificar} sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#1A2027' }} variant="outlined" startIcon={<DeleteIcon sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }}fontSize = "large"/>}
                                     onClick={() => {
                                         dispatch(removeAddress(usuario.id, a.id))
                                         .then(() => 
@@ -221,7 +223,7 @@ export default function PerfilDelUsuario(){
                                         }}>Eliminar
                             </Button><br/>
                             { a.active ? <p></p> :
-                            <Button className= {style.modificar} sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#1A2027' }} variant="outlined" startIcon={<EditIcon sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }}fontSize = "large"/>}
+                            <Button className= {style.modificar} sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#1A2027' }} variant="outlined" startIcon={<LocalShippingIcon sx={{bgcolor: "#dee2e6 ",  borderRadius: "10px", color:'#FFC400 ' }}fontSize = "large"/>}
                             onClick={() => {
                                         console.log(usuario.id);
                                         dispatch(setActiveAddress(usuario.id, a.id))
