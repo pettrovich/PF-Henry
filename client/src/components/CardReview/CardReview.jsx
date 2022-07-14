@@ -8,7 +8,7 @@ const CardReview = ({ usuario, score, review}) => {
                 <p>{usuario}</p>
             </div>
             <div style={{marginLeft:'30px', display: 'inline-block', flexDirection: 'column', width: '25%', flexWrap: 'wrap', textAlign: 'left', justifyContent: 'center' }}>
-                <Rating name="read-only" precision={0.5} value={score} readOnly />
+                <Rating name="read-only" value={score} readOnly />
             </div>
             <div style={{ marginLeft:'10px', display: 'inline-block',padding:'5px', wordWrap: 'break-word', width: '45%',  justifyContent: 'center', alignItems: 'center' }}>
                 <p>{review}</p>
