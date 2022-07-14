@@ -18,7 +18,7 @@ import Stack from '@mui/material/Stack';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-
+import  Loading  from '../loading/Loading.jsx';
 
 export default function LoginData() {
  
@@ -64,7 +64,8 @@ export default function LoginData() {
      ){
         dispatch(UpdateUserA(id, input))
         alert ("Cambios realizados con exito")
-        navigate('/profile')}
+        window.location.href='http://localhost:3000/profile'
+      }
     else {
         alert ("Debe modificar algún campo")
     }
@@ -200,9 +201,10 @@ export default function LoginData() {
                 variant="standard"
               />
               
-              <input type="file" name="file" onChange={uploadImage}></input>
+              <input className={style.seleccionarArchivo} type="file" name="file" onChange={uploadImage} ></input>
+          
               {
-                  imageChosen && (loading ? (<p>Cargando...</p>) : (<img src={image} style={{width:'50%'}} alt="Usuario"/>))
+                  imageChosen && (!loading ?  (<img  className={style.seleccionarArchivo}src={image} style={{width:'50%'}} alt="Usuario"/>) : <Loading className={style.loading}/>)
               }
               </div>  
             </div>
@@ -210,7 +212,7 @@ export default function LoginData() {
 
             <Box sx={{ maxWidth: "100%"}}>
             <Stack direction="row" spacing={2} >
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit'  variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                 Modificar datos
             </Button>
             </Stack>
