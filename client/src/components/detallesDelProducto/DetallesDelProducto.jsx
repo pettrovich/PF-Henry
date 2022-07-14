@@ -187,13 +187,13 @@ function Producto({ getOneProduct }) {
                             }}>
                                 <Typography>Puntuacion Promedio</Typography>
                                 <Rating name="read-only" value={pro ? pro: 0} readOnly precision={0.5} />
+                                <p>{`(${productDetail.numReviews} Reseñas)`}</p>
                             </Box>
                             <Box sx={{
                                 textAlign:'right',
                                 marginRight: '10px'
                             }}>
-                                <p>{`(${productDetail.numReviews} Reseñas)`}</p>
-                                <Rating name="read-only" value={5} readOnly />
+                                {/* <Rating name="read-only" value={5} readOnly /> */}
                             </Box>
                             <div style={{
                                 position: 'relative',

@@ -128,7 +128,7 @@ export default function CardsLanding({ name, image, price, description, category
                 />
             </div>
             <CardContent>
-                <Rating name="read-only" value={value} readOnly size="small" />
+                <Rating name="read-only" precision={0.5} value={value} readOnly size="small" />
 
                 <Divider light />
             </CardContent>

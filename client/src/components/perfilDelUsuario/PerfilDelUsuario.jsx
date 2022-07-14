@@ -314,7 +314,7 @@ export default function PerfilDelUsuario(){
                                     name="text-feedback"
                                     value={r.score}
                                     readOnly
-                                    precision={1}
+                                    precision={0.5}
                                     emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
                                     />
                                     <Box sx={{ ml: 2 }}>{labels[r.score]}</Box>
