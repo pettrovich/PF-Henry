@@ -73,8 +73,8 @@ export default function UpdateAddress() {
             if(usuario){
                 userId = usuario.id
                 dispatch(updateAddress(userId, input))
-                alert("Dirección agregada con éxito")
-                navigate('/profile')
+                alert("Dirección modificada con éxito")
+                window.location.href='http://localhost:3000/profile'
             }
         }
         else {

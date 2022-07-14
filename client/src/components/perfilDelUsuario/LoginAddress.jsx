@@ -61,7 +61,8 @@ export default function LoginData() {
      ){
         dispatch(UpdateUserA(id, input))
         alert ("Cambios realizados con exito")
-        navigate('/')}
+        window.location.href='http://localhost:3000/profile'
+      }
     else {
         alert ("Debe modificar algún campo")
     }
@@ -184,17 +185,17 @@ export default function LoginData() {
             </Box>
             <Stack direction="row" spacing={2} >
 
-            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' className= {style.modificar} variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '70ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}} type='submit' variant="outlined" startIcon={<EditIcon fontSize = "large"/>}>
                 Modificar datos
             </Button>
             </Stack>
             
+            <Link to= "/profile" className= {style.modificar}>
             <Stack direction="row" spacing={2} >
-            <Link to= "/profile" className= {style.modificar}><Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
+            <Button sx={{ m: 1, width: '68ch', color: '#022335', bgcolor:'#fff', borderColor:'#022335',  borderRadius: "10px"}}   variant="outlined" startIcon={<KeyboardReturnIcon fontSize = "large"/>}>
                volver
-            </Button></Link> 
-
-            </Stack>
+            </Button>
+            </Stack></Link> 
        
             </Box>
                 <br />
